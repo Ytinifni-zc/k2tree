@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "__split_buffer": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "iosfwd": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "*.ipp": "cpp",
+        "__locale": "cpp",
+        "__hash_table": "cpp",
+        "hash_map": "cpp",
+        "hash_set": "cpp",
+        "forward_list": "cpp",
+        "initializer_list": "cpp",
+        "string_view": "cpp",
+        "algorithm": "cpp",
+        "fstream": "cpp",
+        "utility": "cpp",
+        "__string": "cpp"
+    }
+}

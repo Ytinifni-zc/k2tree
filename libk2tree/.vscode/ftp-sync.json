@@ -1,0 +1,25 @@
+{
+    "remotePath": "/home/zhaocheng/k2tree",
+    "host": "dell122",
+    "username": "zhaocheng",
+    "password": "zhcheng127",
+    "port": 22,
+    "secure": false,
+    "protocol": "sftp",
+    "uploadOnSave": false,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\.DS_Store",
+        "\\build"
+    ],
+    "generatedFiles": {
+        "uploadOnSave": false,
+        "extensionsToInclude": [],
+        "path": ""
+    }
+}
