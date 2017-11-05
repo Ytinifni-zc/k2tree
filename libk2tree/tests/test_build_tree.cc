@@ -9,6 +9,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <cassert>
+#include <cstdint>
 
 using std::ifstream;
 using std::ofstream;
@@ -23,12 +24,12 @@ const size_t k = 2;
 const size_t kL = 8;
 typedef bitset<kL*kL> leaf_bits;
 typedef bitset<k*k> submat;
-typedef unordered_map<int, leaf_bits> leaves;
-typedef unordered_map<int, submat> in_nodes;
-typedef unordered_set<int> level_1s;
+typedef unordered_map<int32_t, leaf_bits> leaves;
+typedef unordered_map<int32_t, submat> in_nodes;
+typedef unordered_set<int32_t> level_1s;
 
 template<class T>
-void hm_insert_bit(unordered_map<int, T> &hm, const size_t &n, const int &k, const int &u, const int &v) {
+void hm_insert_bit(unordered_map<int32_t, T> &hm, const size_t &n, const int &k, const int &u, const int &v) {
     int pos = (u/k)*(n/k) + v/k;
     T onehot = T(1)<<((u%k)*k + v%k);
 
@@ -39,13 +40,14 @@ void hm_insert_bit(unordered_map<int, T> &hm, const size_t &n, const int &k, con
 }
 
 template<class T>
-void write_to_bin(unordered_map<int, T> hm, const string& filename, level_1s &last_level) {
+void write_to_bin(unordered_map<int32_t, T> hm, const string& filename, level_1s &last_level) {
     map<int, T> _hm(hm.begin(), hm.end());
-    printf("Map converted.");
+    printf("Map converted.\n");
 
     ofstream out(filename, ofstream::binary);
 
     for (auto p: _hm) {
+        last_level.insert(p.first);
         int size = (int)ceil(((double)(p.second.size()))/8);
         out.write((char*) &p.second, size);
     }
@@ -137,5 +139,5 @@ TEST(Build, test1) {
     level_1s last_level;
     build_last_level_from_csv(filename, node_num, edge_num, path+"k2tree/", last_level);
     ASSERT_NE(last_level.size(), 0);
-    //build_internal(node_num, path, last_level);
+    build_internal(node_num, path, last_level);
 }
