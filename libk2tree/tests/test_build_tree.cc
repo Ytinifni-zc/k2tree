@@ -21,15 +21,18 @@ using std::vector;
 
 const size_t k = 2;
 const size_t kL = 8;
+
+const int submat_pos_size = 4;
+typedef bitset<26> submat_pos;
 typedef bitset<kL*kL> leaf_bits;
 typedef bitset<k*k> submat;
-typedef unordered_map<int, leaf_bits> leaves;
-typedef unordered_map<int, submat> in_nodes;
-typedef unordered_set<int> level_1s;
+typedef unordered_map<submat_pos, leaf_bits> leaves;
+typedef unordered_map<submat_pos, submat> in_nodes;
+typedef unordered_set<submat_pos> level_1s;
 
 template<class T>
-void hm_insert_bit(unordered_map<int, T> &hm, const size_t &n, const int &k, const int &u, const int &v) {
-    int pos = (u/k)*(n/k) + v/k;
+void hm_insert_bit(unordered_map<submat_pos, T> &hm, const size_t &n, const int &k, const int &u, const int &v) {
+    submat_pos pos = (u/k)*(n/k) + v/k;
     T onehot = T(1)<<((u%k)*k + v%k);
 
     if (hm.find(pos) == hm.end())
@@ -39,8 +42,13 @@ void hm_insert_bit(unordered_map<int, T> &hm, const size_t &n, const int &k, con
 }
 
 template<class T>
-void write_to_bin(unordered_map<int, T> hm, const string& filename, level_1s &last_level) {
-    map<int, T> _hm(hm.begin(), hm.end());
+void write_to_bin(unordered_map<submat_pos, T> hm, const string& filename, level_1s &last_level) {
+    struct cmp_by_submat_pos {
+        bool operator() (const submat_pos &k1, const submat_pos &k2) {
+            return k1.to_ulong() < k2.to_ulong();
+        }
+    };
+    map<submat_pos, T, cmp_by_submat_pos> _hm(hm.begin(), hm.end());
     printf("Map converted.");
 
     ofstream out(filename, ofstream::binary);
@@ -64,7 +72,7 @@ void build_last_level_from_csv(const string& filename, const size_t & node_num, 
     ifstream in(filename, ifstream::in);
     assert(in.fail() == false);
     int u = 0, v = 0;
-    int pos = 0;
+    submat_pos pos = 0;
     leaf_bits onehot = 0;
     size_t n_prime = (size_t) ceil((double)node_num/kL)*kL;
     double line_num = 0;
@@ -111,8 +119,8 @@ void build_internal(const size_t & node_num, string path, level_1s &last_level) 
         n_prime = ceil((double)n_prime/k)*k;
 
         for (auto last_pos : last_level) {
-            u = last_pos/n_prime;
-            v = last_pos%n_prime;
+            u = (int)last_pos.to_ulong()/n_prime;
+            v = (int)last_pos.to_ulong()%n_prime;
 
             hm_insert_bit<submat>(t_hm, n_prime, k, u, v);
         }
