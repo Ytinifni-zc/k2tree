@@ -14,4 +14,4 @@ find_library(libgd_LIBRARY
 
 set(libgd_PROCESS_INCLUDES LIBGD_INCLUDE_DIR)
 set(libgd_PROCESS_LIBS LIBGD_LIBRARY)
-libfind_process(libgd)
+#libfind_process(libgd)

@@ -1,0 +1,75 @@
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/infinity/Workspace/BDSA/k2tree/libk2tree
+-- The C compiler identification is AppleClang 9.0.0.9000038
+-- The CXX compiler identification is AppleClang 9.0.0.9000038
+-- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc
+-- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
+-- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found libcds2 
+-- Found PythonInterp: /Users/infinity/anaconda/bin/python (found version "2.7.13") 
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - found
+-- Found Threads: TRUE  
+-- Boost version: 1.63.0
+-- Found the following Boost libraries:
+--   system
+--   filesystem
+--   regex
+/Users/infinity/Workspace/BDSA/k2tree/libk2tree/tests
+[Test_srcs]: queries.cc;test_bitarray.cc;test_build_tree.cc;test_compressed_hybrid.cc;test_compressed_partition.cc;test_enron_dataset.cc;test_enron_partition.cc;test_k2tree.cc;test_k2treebuilder.cc;test_k2treepartition.cc;test_main.cc;test_read_tree.cc;test_twitter_dataset.cc;test_twitter_partition.cc;test_utils.cc;build_tree.h;queries.h
+[###]: queries.cc
+[###]: test_bitarray.cc
+[###]:Test_name - test_bitarray
+[###]: test_build_tree.cc
+[###]:Test_name - test_build_tree
+[###]: test_compressed_hybrid.cc
+[###]:Test_name - test_compressed_hybrid
+[###]: test_compressed_partition.cc
+[###]:Test_name - test_compressed_partition
+[###]: test_enron_dataset.cc
+[###]:Test_name - test_enron_dataset
+[###]: test_enron_partition.cc
+[###]:Test_name - test_enron_partition
+[###]: test_k2tree.cc
+[###]:Test_name - test_k2tree
+[###]: test_k2treebuilder.cc
+[###]:Test_name - test_k2treebuilder
+[###]: test_k2treepartition.cc
+[###]:Test_name - test_k2treepartition
+[###]: test_main.cc
+[###]: test_read_tree.cc
+[###]:Test_name - test_read_tree
+[###]: test_twitter_dataset.cc
+[###]:Test_name - test_twitter_dataset
+[###]: test_twitter_partition.cc
+[###]:Test_name - test_twitter_partition
+[###]: test_utils.cc
+[###]:Test_name - test_utils
+[###]: build_tree.h
+[###]:Test_name - build_tree
+[###]: queries.h
+-- Configuring done
+CMake Warning (dev):
+  Policy CMP0042 is not set: MACOSX_RPATH is enabled by default.  Run "cmake
+  --help-policy CMP0042" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+  MACOSX_RPATH is not specified for the following targets:
+
+   dacs
+   k2tree
+
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Generating done
+-- Build files have been written to: /Users/infinity/Workspace/BDSA/k2tree/libk2tree/cmake-build-debug

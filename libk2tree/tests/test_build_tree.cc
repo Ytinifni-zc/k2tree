@@ -1,66 +1,59 @@
 #include <gtest/gtest.h>
-#include <fstream>
-#include <unordered_map>
-#include <unordered_set>
-#include <map>
-#include <bitset>
-#include <cstdio>
-#include <vector>
-#include <cmath>
-#include <cstdlib>
-#include <cassert>
+#include "build_tree.h"
 
-using std::ifstream;
-using std::ofstream;
-using std::string;
-using std::unordered_map;
-using std::unordered_set;
-using std::map;
-using std::bitset;
-using std::vector;
 
-const size_t k = 2;
-const size_t kL = 8;
+unordered_map<pos_info, submat_pos, pos_info_hash> pre_pos_map;
 
-const int submat_pos_size = 4;
-typedef bitset<26> submat_pos;
-typedef bitset<kL*kL> leaf_bits;
-typedef bitset<k*k> submat;
-typedef unordered_map<submat_pos, leaf_bits> leaves;
-typedef unordered_map<submat_pos, submat> in_nodes;
-typedef unordered_set<submat_pos> level_1s;
+submat_pos get_pos(const int &u, const int &v, const int &level) {
+    if (level < 1) return submat_pos(0);
+    int k = k_level[level-1];
+    if (level == 1) return submat_pos(u%k*k+v%k);
+    struct pos_info pre_pos_info(u/k, v/k, level-1);
+    if (pre_pos_map.find(pre_pos_info) == pre_pos_map.end()) {
+        pre_pos_map.insert(std::make_pair(
+                pre_pos_info,
+                get_pos(u / k, v / k, level - 1)
+        ));
+    }
+    int pre_pos = pre_pos_map[pre_pos_info].to_ulong();
+    return submat_pos(
+            (pre_pos)*k*k+((u%k)*k+v%k)
+    );
+}
 
 template<class T>
-void hm_insert_bit(unordered_map<submat_pos, T> &hm, const size_t &n, const int &k, const int &u, const int &v) {
-    submat_pos pos = (u/k)*(n/k) + v/k;
-    T onehot = T(1)<<((u%k)*k + v%k);
+void hm_insert_bit(unordered_map<submat_pos, T> &hm, const size_t &n, const int &level, const int &u, const int &v, level_1s &last_level) {
+    int k = k_level[level-1];
+    submat_pos pos = get_pos(u/k, v/k, level-1);//(u/k)*(n/k) + v/k;
+    T onehot = T(1)<<(k*k-1-((u%k)*k + v%k));
 
-    if (hm.find(pos) == hm.end())
+    if (hm.find(pos) == hm.end()) {
         hm.insert(std::make_pair(pos, onehot));
+        last_level.insert(submat_info(u/k, v/k));
+    }
     else 
         hm[pos] |= onehot;
 }
 
 template<class T>
-void write_to_bin(unordered_map<submat_pos, T> hm, const string& filename, level_1s &last_level) {
+void write_to_bin(unordered_map<submat_pos, T> hm, const string& filename) {
     struct cmp_by_submat_pos {
         bool operator() (const submat_pos &k1, const submat_pos &k2) {
             return k1.to_ulong() < k2.to_ulong();
         }
     };
     map<submat_pos, T, cmp_by_submat_pos> _hm(hm.begin(), hm.end());
-    printf("Map converted.");
 
     ofstream out(filename, ofstream::binary);
 
     for (auto p: _hm) {
-        int size = (int)ceil(((double)(p.second.size()))/8);
+        int size = get_submat_size(p.second.size());
         out.write((char*) &p.second, size);
     }
     out.close();
 }
 
-void build_last_level_from_csv(const string& filename, const size_t & node_num, const size_t & edge_num, string path, level_1s &last_level) {
+void build_last_level_from_csv(const string& filename, const size_t & node_num, const size_t & edge_num, const string &path, level_1s &last_level) {
     // TODO 
     // 先把T、L写文件
     //const size_t bits = (size_t) ceil(log2(node_num));
@@ -68,9 +61,10 @@ void build_last_level_from_csv(const string& filename, const size_t & node_num, 
     //const int leaf_size = (int)ceil(((double)bits)/8);
     //const int leaf_bits_size = (int)ceil(((double)(kL*kL))/8);
     leaves last_hm;
+    int level = ceil(log(node_num/kL)/log(k))+1;
 
     ifstream in(filename, ifstream::in);
-    assert(in.fail() == false);
+    assert(!in.fail());
     int u = 0, v = 0;
     submat_pos pos = 0;
     leaf_bits onehot = 0;
@@ -83,10 +77,10 @@ void build_last_level_from_csv(const string& filename, const size_t & node_num, 
         u --;
         v --;
 
-        hm_insert_bit<leaf_bits>(last_hm, n_prime, kL, u, v); 
+        hm_insert_bit<leaf_bits>(last_hm, n_prime, level, u, v, last_level);
         if (!((size_t)line_num % 1000000)) {
             fprintf(stderr, "<%d, %d>\n", u, v);
-            fprintf(stderr, "%.2f\%\n", line_num/edge_num*100);
+            fprintf(stderr, "%.2f%\n", line_num/edge_num*100);
         }
         line_num++;
 
@@ -96,12 +90,12 @@ void build_last_level_from_csv(const string& filename, const size_t & node_num, 
     
     string l_filename = path + "L" + std::to_string(kL) + ".bin";
     printf("%s\n", l_filename.c_str());
-    write_to_bin<leaf_bits>(last_hm, l_filename, last_level);
+    write_to_bin<leaf_bits>(last_hm, l_filename);
 }
 
-void build_internal(const size_t & node_num, string path, level_1s &last_level) {
+void build_internal(const size_t & node_num, const string &path, level_1s &last_level) {
     
-    size_t current_level = (size_t)ceil(log(node_num/kL)/log(k));
+    int current_level = (int)ceil(log(node_num/kL)/log(k));
     //int current_k = k;
 
     // Internal submatrix size = k*k.
@@ -109,41 +103,63 @@ void build_internal(const size_t & node_num, string path, level_1s &last_level) 
     size_t current_pos = 0;
     submat current_onehot;
     int u = 0, v = 0;
-    int pos = 0;
-    leaf_bits onehot = 0;
     size_t n_prime = (size_t) ceil((double)node_num/kL)*kL;
+    int flag = true;
+    level_1s last_level2;
 
     while (current_level) {
         printf("Current_level: %d\n", current_level);
 
         n_prime = ceil((double)n_prime/k)*k;
 
-        for (auto last_pos : last_level) {
-            u = (int)last_pos.to_ulong()/n_prime;
-            v = (int)last_pos.to_ulong()%n_prime;
+        if (flag) {
+            for (auto last_pos : last_level) {
+                u = (int) last_pos.u.to_ulong();
+                v = (int) last_pos.v.to_ulong();
+                cout << "<" << u << ", " << v << ">" << endl;
 
-            hm_insert_bit<submat>(t_hm, n_prime, k, u, v);
+                hm_insert_bit<submat>(t_hm, n_prime, current_level, u, v, last_level2);
+            }
+
+            last_level.clear();
+        } else {
+            for (auto last_pos : last_level2) {
+                u = (int) last_pos.u.to_ulong();
+                v = (int) last_pos.v.to_ulong();
+                cout << "<" << u << ", " << v << ">" << endl;
+
+                hm_insert_bit<submat>(t_hm, n_prime, current_level, u, v, last_level);
+            }
+
+            last_level2.clear();
         }
 
-        last_level.clear();
-
         string t_filename = path + "T" + std::to_string(current_level) + ".bin";
-        write_to_bin<submat>(t_hm, t_filename, last_level);
+        write_to_bin<submat>(t_hm, t_filename);
         t_hm.clear();
 
         current_level --;
+        flag = !flag;
     }
 
 }
 
+/*
+TEST(Build, get_pos) {
+    ASSERT_EQ(get_pos(5, 3, 3), submat_pos(39));
+}
+ */
+
 TEST(Build, test1) {
 
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/";
-    const string filename = path + "twitter-2010.csv";
-    const size_t node_num = 41652230, edge_num = 1468365182;
+    const string path = "./";
+    //const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/";
+    const string filename = path + "test.csv";
+    const size_t node_num = 11, edge_num = 11;
+    //const size_t node_num = 41652230, edge_num = 1468365182;
 
     level_1s last_level;
     build_last_level_from_csv(filename, node_num, edge_num, path+"k2tree/", last_level);
     ASSERT_NE(last_level.size(), 0);
-    //build_internal(node_num, path, last_level);
+    build_internal(node_num, path+"k2tree/", last_level);
 }

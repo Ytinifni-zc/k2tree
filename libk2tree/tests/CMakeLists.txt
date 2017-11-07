@@ -6,7 +6,7 @@ target_link_libraries(test_libk2tree ${GTEST_LIBRARIES} rt gtest ${LIBK2TREE_NAM
 
 set(TEST_DIR ${PROJECT_SOURCE_DIR}/tests)
 message(${TEST_DIR})
-file(GLOB TEST_SRCS RELATIVE ${TEST_DIR} "*.cc")
+file(GLOB TEST_SRCS RELATIVE ${TEST_DIR} "*.cc" "*.h")
 message("[Test_srcs]: ${TEST_SRCS}")
 foreach(test ${TEST_SRCS})
     message("[###]: ${test}")
@@ -18,7 +18,7 @@ foreach(test ${TEST_SRCS})
             PROPERTIES
             RUNTIME_OUTPUT_DIRECTORY "${BUILD_DIR}/tests"
             )
-        target_link_libraries(${TEST_NAME} ${GTEST_LIBRARIES} ${COMMON_LIBRARIES} k2tree gd rt gtest ${LIBK2TREE_NAME} ${Boost_LIBRARIES} pthread boost_system boost_filesystem)
+        target_link_libraries(${TEST_NAME} ${GTEST_LIBRARIES} ${COMMON_LIBRARIES} k2tree rt gtest ${LIBK2TREE_NAME} ${Boost_LIBRARIES} pthread boost_system boost_filesystem)
         add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
     endif()
 endforeach()
