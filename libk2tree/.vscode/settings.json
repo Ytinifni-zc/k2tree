@@ -19,6 +19,7 @@
         "algorithm": "cpp",
         "fstream": "cpp",
         "utility": "cpp",
-        "__string": "cpp"
+        "__string": "cpp",
+        "unordered_set": "cpp"
     }
 }
