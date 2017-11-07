@@ -7,7 +7,7 @@
 #include <bitset>
 #include <cstdlib>
 #include <fstream>
-#include <stdio.h>
+#include <cstdio>
 #include <vector>
 #include <cmath>
 #include <cassert>
@@ -29,9 +29,7 @@ inline int get_submat_size(const size_t &k) {
 }
 
 const size_t k = 2;
-const size_t kL = 2;
-const int level = 3;
-const vector<int> k_level = {2, 2, 2, 2};
+const size_t kL = 8;
 
 typedef bitset<26> submat_pos;
 typedef bitset<kL*kL> leaf_bits;
@@ -71,6 +69,17 @@ struct pos_info_hash {
         return hash_fn(pi.si.u << 11) ^ hash_fn(pi.si.v) ^ hash_fn(pi.level<<17);
     }
 };
+unordered_map<pos_info, submat_pos, pos_info_hash> pre_pos_map;
 
-
+/*
+const string path = "/mnt/disk1/zhaocheng/dataset/enron/k2tree/";
+const string filename = path + "../enron.nohead.csv";
+const size_t node_num = 69244, edge_num = 276143;
+ */
+//    const string path = "./k2tree/";
+    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree/";
+//    const string filename = path + "../test.csv";
+    const string filename = path + "../twitter-2010.csv";
+//    const size_t node_num = 11, edge_num = 11;
+    const size_t node_num = 41652230, edge_num = 1468365182;
 #endif

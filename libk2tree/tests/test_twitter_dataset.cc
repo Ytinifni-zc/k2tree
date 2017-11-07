@@ -8,7 +8,6 @@
 #include <cassert>
 #include <cstdio>
 #include <cmath>
-#include <gd.h>
 #include "queries.h"
 
 #include <chrono>

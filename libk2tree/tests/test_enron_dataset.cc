@@ -6,7 +6,6 @@
 #include <gtest/gtest.h>
 #include <cassert>
 #include <cstdio>
-#include <gd.h>
 #include "queries.h"
 
 #include <chrono>

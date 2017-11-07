@@ -9,7 +9,6 @@
 #include <cstdio>
 #include <cmath>
 #include <cstring>
-#include <gd.h>
 #include "queries.h"
 
 #include <chrono>

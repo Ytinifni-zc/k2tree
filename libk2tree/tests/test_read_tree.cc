@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
-#include <dirent.h>
 #include "build_tree.h"
+
+vector<submat> T;
+vector<leaf_bits> L;
 
 unsigned long get_file_size(const char *path) {
     unsigned long filesize = -1;
@@ -10,6 +12,22 @@ unsigned long get_file_size(const char *path) {
     else
         filesize = statbuff.st_size;
     return filesize;
+}
+
+int get_T_num(const string &path) {
+    FILE *pp;
+    string cmd = "ls "+path+"T*.bin | wc -l";
+    pp = popen(cmd.c_str(), "r");
+    int ret = 0;
+    if (pp) {
+        char *line;
+        char buf[1000];
+        line = fgets(buf, sizeof buf, pp);
+        if (!line) return -1;
+        ret = atoi(line);
+        pclose(pp);
+    }
+    return ret;
 }
 
 void build_tree_from_bin(const string &path, vector<submat> &T, vector<leaf_bits> &L) {
@@ -26,6 +44,8 @@ void build_tree_from_bin(const string &path, vector<submat> &T, vector<leaf_bits
         L[i] = tmp;
     }
     fin.close();
+
+    int level = get_T_num(path);
 
     for (int i = 1; i <= level; ++i) {
         const char* t_file = (path + "T" + std::to_string(i) + ".bin").c_str();
@@ -46,18 +66,12 @@ void build_tree_from_bin(const string &path, vector<submat> &T, vector<leaf_bits
 }
 
 TEST(Read, read_tree) {
-
-    const string path = "./k2tree/";
-    //const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/";
-    const string filename = path + "test.csv";
-    const size_t node_num = 11, edge_num = 11;
-    //const size_t node_num = 41652230, edge_num = 1468365182;
-
-    vector<submat> T;
-    vector<leaf_bits> L;
-
     build_tree_from_bin(path, T, L);
+    ASSERT_NE(T.size(), 0);
+    ASSERT_NE(L.size(), 0);
+}
 
+TEST(Read, print_T_L) {
     for (auto t : T) {
         cout << t.to_string() << " ";
     }
