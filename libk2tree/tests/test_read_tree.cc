@@ -69,8 +69,11 @@ TEST(Read, read_tree) {
     build_tree_from_bin(path, T, L);
     ASSERT_NE(T.size(), 0);
     ASSERT_NE(L.size(), 0);
+    cout << T.capacity()*T[0].size() << "B" << endl;
+    cout << L.capacity()*L[0].size() << "B" << endl;
 }
 
+/*
 TEST(Read, print_T_L) {
     for (auto t : T) {
         cout << t.to_string() << " ";
@@ -81,3 +84,4 @@ TEST(Read, print_T_L) {
     }
     cout << endl;
 }
+ */
