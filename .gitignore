@@ -2,7 +2,9 @@
 .vscode/*
 .idea/*
 build/*
+_build/*
 .DS_Store
+cmake-build-debug/*
 
 # Prerequisites
 *.d
