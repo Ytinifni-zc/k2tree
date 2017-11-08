@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -std=c++11 -g  -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/test_read_tree.dir/test_read_tree.cc.o  -o ../../_build/tests/test_read_tree ../gtest/libgtestd.a ../gtest/libgtest_maind.a -lrt ../gtest/libgtestd.a ../src/libk2treed.dylib -lpthread 

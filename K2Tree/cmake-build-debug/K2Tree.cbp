@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="K2Tree"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake\;CMake Files\gtest\;CMake Files\gtest\cmake\;CMake Files\tests\;CMake Files\src\;CMake Files\tools\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest_main">
+				<Option output="/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 gtest_main"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest_main/fast">
+				<Option output="/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/libgtest_maind.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 gtest_main/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest">
+				<Option output="/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/libgtestd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 gtest"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gtest/fast">
+				<Option output="/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/libgtestd.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 gtest/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_read_tree">
+				<Option output="/Users/infinity/Workspace/K2Tree/_build/tests/test_read_tree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/src"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/tests"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 test_read_tree"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_read_tree/fast">
+				<Option output="/Users/infinity/Workspace/K2Tree/_build/tests/test_read_tree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/src"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/tests"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 test_read_tree/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_k2tree">
+				<Option output="/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/test_k2tree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/src"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/tests"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 test_k2tree"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_k2tree/fast">
+				<Option output="/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/test_k2tree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/src"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/tests"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 test_k2tree/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tests/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="k2tree">
+				<Option output="/Users/infinity/Workspace/K2Tree/cmake-build-debug/src/libk2treed.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/src"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 k2tree"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="k2tree/fast">
+				<Option output="/Users/infinity/Workspace/K2Tree/cmake-build-debug/src/libk2treed.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/src"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 k2tree/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="csv_convertor">
+				<Option output="/Users/infinity/Workspace/K2Tree/_build/tools/csv_convertor" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/src"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/tools"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 csv_convertor"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="csv_convertor/fast">
+				<Option output="/Users/infinity/Workspace/K2Tree/_build/tools/csv_convertor" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/src"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/tools"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 csv_convertor/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="csv2csr">
+				<Option output="/Users/infinity/Workspace/K2Tree/_build/tools/csv2csr" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/src"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/tools"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 csv2csr"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="csv2csr/fast">
+				<Option output="/Users/infinity/Workspace/K2Tree/_build/tools/csv2csr" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Users/infinity/Workspace/K2Tree/gtest/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/include"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/src"/>
+					<Add directory="/Users/infinity/Workspace/K2Tree/tools"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 csv2csr/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/infinity/Workspace/K2Tree/cmake-build-debug/tools/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/gtest/src/gtest-all.cc">
+			<Option target="gtest"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/gtest/src/gtest_main.cc">
+			<Option target="gtest_main"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/include/base.h">
+			<Option target="k2tree"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/include/build_tree.h">
+			<Option target="k2tree"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/include/k2tree.h">
+			<Option target="k2tree"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/include/utils/time.h">
+			<Option target="k2tree"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/src/k2tree.cc">
+			<Option target="k2tree"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/tests/test_main.cc">
+			<Option target="test_k2tree"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/tests/test_read_tree.cc">
+			<Option target="test_read_tree"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/tools/csv2csr.cc">
+			<Option target="csv2csr"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/tools/csv_convertor.cc">
+			<Option target="csv_convertor"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/cmake/gtest.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/gtest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\gtest\"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/gtest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\gtest\"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/gtest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\gtest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/gtest/cmake/internal_utils.cmake">
+			<Option virtualFolder="CMake Files\gtest\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/tests/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tests\"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+		<Unit filename="/Users/infinity/Workspace/K2Tree/tools/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\tools\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
