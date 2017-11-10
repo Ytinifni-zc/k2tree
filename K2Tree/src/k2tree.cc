@@ -1,7 +1,6 @@
 //
 // Created by inFinity on 2017/11/7.
 //
-
 #include <k2tree.h>
 #include <sys/stat.h>
 #include <iostream>
@@ -82,5 +81,6 @@ size_t k2tree::k2tree::rank(size_t pos) {
         std::cerr << "Position is bigger than k2tree." << std::endl;
         exit(1);
     }
+    ;
     return 0;
 }

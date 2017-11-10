@@ -3,14 +3,19 @@ project(K2Tree)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 include(gtest)
+#include(sdsl)
 
 set(K2TREE_NAME "k2tree")
 set(CMAKE_CXX_STANDARD 11)
 set(BUILD_DIR ${PROJECT_SOURCE_DIR}/_build)
 
 include_directories(${CMAKE_SOURCE_DIR}/gtest/include)
+include_directories(${CMAKE_SOURCE_DIR}/libsdsl/include)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/src)
+include_directories(${libsdsl_INCLUDE_DIRS})
+
+link_directories(${CMAKE_SOURCE_DIR}/libsdsl/lib)
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   # require at least gcc 4.8
