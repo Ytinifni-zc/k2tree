@@ -5,8 +5,10 @@
 #include <sdsl/coder_fibonacci.hpp>
 #include <sdsl/bit_vectors.hpp>
 #include <iostream>
+#include <utils/bit_vector.h>
 
 using namespace sdsl;
+using namespace k2tree;
 using std::cout;
 using std::endl;
 
@@ -18,6 +20,7 @@ TEST(vector_test, int_vector) {
     ASSERT_EQ(size_in_bytes(v), 17);
 }
 
+/*
 TEST(vector_test, int_vector2) {
     int_vector<> v(10*(1<<20));
     for (size_t i=0; i<10; ++i)
@@ -69,11 +72,16 @@ TEST(vector_test, bit_write_json) {
     sd_vector<> sdb(b);
     write_structure<JSON_FORMAT>(sdb, cout);
 }
+ */
 
 TEST(vector_test, bit_rank) {
     bit_vector b = bit_vector(8000, 0);
-    for (size_t i=0; i < b.size(); i+=100)
+    bit_vector c = bit_vector(8000, 0);
+    for (size_t i=0; i < b.size(); i+=100) {
         b[i] = 1;
+        c[i+1] = 1;
+    }
+    b |= c;
     rank_support_v<1> b_rank(&b);
     for (size_t i=0; i<=b.size(); i+= b.size()/4)
         cout << "(" << i << ", " << b_rank(i) << ") ";
@@ -138,4 +146,22 @@ TEST(vector_test, bit_compressed_select) {
     for (size_t i=1; i <= ones; ++i)
         cout << sdb_sel(i) << " ";
     cout << endl;
+}
+
+TEST(vector_test, build_bv) {
+    bit_vector b = {1,1,1,1,0,1,1};
+    bit_vector bb = utils::int2bit_vector(123, 7);
+    ASSERT_EQ(b, bb);
+
+    int ret = utils::bit_vector2int(b);
+    ASSERT_EQ(ret, 123);
+}
+
+TEST(vector_test, vector_bool) {
+    vector<bool> bv = {true, true, true, true, false, true, true};
+    vector<bool> bb = utils::int2vector_bool(123, 7);
+    ASSERT_TRUE(bv == bb);
+
+    int ret = utils::vector_bool2int(bv);
+    ASSERT_EQ(ret, 123);
 }

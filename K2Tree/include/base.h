@@ -15,12 +15,12 @@ namespace k2tree {
     using std::bitset;
     using std::string;
 
-    const size_t k = 2;
-    const size_t kL = 2;
-
-    typedef bitset<26> submat_pos;
-    typedef bitset<kL*kL> leaf_bits;
-    typedef bitset<k*k> submat;
+//    const size_t k = 2;
+//    const size_t kL = 2;
+//
+//    typedef bitset<26> submat_pos;
+//    typedef bitset<kL*kL> leaf_bits;
+//    typedef bitset<k*k> submat;
 }
 
 #endif //K2TREE_BASE_H

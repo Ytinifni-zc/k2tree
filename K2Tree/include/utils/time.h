@@ -2,39 +2,22 @@
 // Created by inFinity on 2017/11/8.
 //
 
-#ifndef K2TREE_TIME_H
-#define K2TREE_TIME_H
+#ifndef K2TREE_UTILS_TIME_H
+#define K2TREE_UTILS_TIME_H
 
-#include <chrono>
 #include <string>
-#include <iostream>
-#include <cassert>
 
 namespace k2tree {
     namespace utils {
+        /**
+         * Calculate runtime of a function
+         * @tparam L lambda expression
+         * @param lambda lambda expression
+         * @param unit computation unit. Must be ms or s.
+         */
         template<typename L>
-        void cost(L lambda, const std::string &unit="ms") {
-            /**
-             * Calculate runtime of a function
-             * @param lambda lambda expression
-             * @param unit computation unit. Must be ms or s.
-             * @return
-             */
-
-            assert(unit=="ms" || unit=="s");
-
-            auto start = std::chrono::system_clock::now();
-            lambda();
-            auto end = std::chrono::system_clock::now();
-
-            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end-start);
-            auto den = std::chrono::milliseconds::period::den;
-            if (unit == "s") den = std::chrono::microseconds::period::den;
-            std::cout << "[" << double(duration.count())
-                                *std::chrono::microseconds::period::num / den
-                      << unit << "]" << std::endl;
-        }
+        void cost(L lambda, const std::string &unit="ms");
     }
 }
 
-#endif //K2TREE_TIME_H
+#endif //K2TREE_UTILS_TIME_H

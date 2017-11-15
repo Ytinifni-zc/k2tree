@@ -1,7 +1,6 @@
 //
-// Created by inFinity on 2017/11/7.
+// Created by inFinity on 2017/11/14.
 //
-
 #include <k2tree.h>
 #include <cstdlib>
 #include <utils/time.h>
@@ -59,11 +58,20 @@ int main(int argc, char** argv) {
         }
     }
 
-    auto build_tree = [=]() {
-        k2tree::k2tree tree(k1, k2, k1_levels, kL, node_num, edge_num);
-        tree.build_from_edge_array_csv(filename, path);
+    auto read_bin = [=]() {
+        k2tree::k2tree kt(k1, k2, k1_levels, kL, node_num, edge_num, path);
+        std::cout << kt.T().size() << std::endl;
+        for (int i = 0; i < kt.T().size(); ++i) {
+            std::cout << kt.T()[i];
+        }
+        std::cout << std::endl;
+        std::cout << kt.L().size() << std::endl;
+        for (int i = 0; i < kt.L().size(); ++i) {
+            std::cout << kt.L()[i];
+        }
+        std::cout << std::endl;
     };
-    k2tree::utils::cost(build_tree);
+    k2tree::utils::cost(read_bin);
     return 0;
 
 }

@@ -31,7 +31,7 @@ else()
   message(WARNING "You are using an unsupported compiler! Compilation has only been tested with Clang and GCC.")
 endif()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ")#-Wall -Wconversion -Wsign-conversion")
 
 add_subdirectory(tests)

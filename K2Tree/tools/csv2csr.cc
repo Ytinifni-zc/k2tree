@@ -3,11 +3,13 @@
 //
 
 #include <utils/time.h>
+#include <cassert>
 #include <fstream>
 #include <vector>
 #include <bitset>
 #include <cmath>
 #include <cstdio>
+#include <utils/time.cc>
 
 using namespace std;
 
@@ -68,8 +70,9 @@ void build_csr_from_csv() {
 }
 
 int main() {
-    k2tree::utils::cost([](){
+    auto tmp = [](){
         build_csr_from_csv();
-    });
+    };
+    k2tree::utils::cost(tmp);
     return 0;
 }

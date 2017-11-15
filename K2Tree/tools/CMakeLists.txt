@@ -9,5 +9,6 @@ foreach(tool ${TOOLS_SRCS})
             PROPERTIES
             RUNTIME_OUTPUT_DIRECTORY "${BUILD_DIR}/tools"
             )
-    target_link_libraries(${TOOL_NAME} ${K2TREE_NAME})
+
+    target_link_libraries(${TOOL_NAME} ${K2TREE_NAME} sdsl divsufsort divsufsort64)
 endforeach()
