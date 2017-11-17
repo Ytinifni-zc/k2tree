@@ -8,6 +8,8 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <stdio.h>
+#include <stdlib.h>
 
 using std::ifstream;
 using std::ofstream;
@@ -36,6 +38,8 @@ void k2tree::k2tree::set_tree_unit() {
 
     int x = static_cast<int>(ceil(log(node_num_/pow(k1_, k1_levels_)/kL_)/log(k2_)));
     height_ = k1_levels_ + x + 1;
+
+    tree_bitmap_.resize(height_);
 
 //    uint64_t n_prime = static_cast<uint64_t>(pow(k1_, k1_levels_) * pow(k2_, x) * kL_);
 //submat_pos = static_cast<int>(ceil(log2(n_prime*n_prime/kL_/kL_)));
@@ -122,10 +126,10 @@ void k2tree::k2tree::L(bit_vector l) {
 }
 
 void k2tree::k2tree::build_from_edge_array_csv(const edge_array &edges) {
-
+    // TODO
 }
 
-void k2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string &path) {
+void k2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string &path, const int &write_flag) {
     pos_submat last_hm;
     int level = height_;
 
@@ -152,7 +156,18 @@ void k2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string
     in.close();
 
     string l_f = path + "L" + std::to_string(kL_) + ".bin";
-    write_to_bin(last_hm, l_f);
+    // TODO write_flag
+    switch (write_flag) {
+        case to_binary:
+            write_to_bin(last_hm, level-1, l_f);
+            break;
+        case to_memory:
+            write_to_memory(last_hm, level-1);
+            break;
+        default:
+            write_to_memory(last_hm, level-1);
+            break;
+    }
 
     level --;
     last_hm.clear();
@@ -173,8 +188,18 @@ void k2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string
             last_level2.clear();
         }
 
-        l_f = path + "T" + std::to_string(level) + ".bin";
-        write_to_bin(last_hm, l_f);
+        switch (write_flag) {
+            case to_binary:
+                l_f = path + "T" + std::to_string(level) + ".bin";
+                write_to_bin(last_hm, level-1, l_f);
+                break;
+            case to_memory:
+                write_to_memory(last_hm, level-1);
+                break;
+            default:
+                write_to_memory(last_hm, level-1);
+                break;
+        }
         last_hm.clear();
 
         level --;
@@ -228,24 +253,31 @@ void k2tree::k2tree::hm_insert_bit(pos_submat &hm, const int &level,
     }
 }
 
-void k2tree::k2tree::write_to_bin(const pos_submat &hm, const string &filename) {
+void k2tree::k2tree::write_to_bin(const pos_submat &hm, const int &level, const string &filename) {
+    assert(level >= 0 && level < height_);
     cout << filename << endl;
-    size_t submat_size = hm.begin()->second.size();
-    bit_vector tmp(hm.size()*submat_size);
-    map<submat_pos, bit_vector, cmp_by_submat_pos> _hm(hm.begin(), hm.end());
 
     ofstream out(filename, ofstream::binary);
+    write_to_memory(hm, level);
+    sdsl::store_to_file(tree_bitmap_[level], filename);
+    out.close();
+}
+
+void k2tree::k2tree::write_to_memory(const pos_submat &hm, const int &level) {
+    assert(level >= 0 && level < height_);
+    if (tree_bitmap_[level].size() > 0)
+        return;
+
+    size_t submat_size = hm.begin()->second.size();
+    tree_bitmap_[level].resize(hm.size()*submat_size);
+    map<submat_pos, bit_vector, cmp_by_submat_pos> _hm(hm.begin(), hm.end());
 
     size_t idx = 0;
     for (auto p: _hm) {
         for (auto b: p.second) {
-            cout << b;
-            tmp[idx++] = b;
+            tree_bitmap_[level][idx++] = b;
         }
-        cout << endl;
     }
-    sdsl::store_to_file(tmp, filename);
-    out.close();
 }
 
 

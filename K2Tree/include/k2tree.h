@@ -20,6 +20,9 @@ using std::unordered_map;
 using std::unordered_set;
 
 namespace k2tree {
+    const int to_binary = 0x1;
+    const int to_memory = 0x2;
+
     class k2tree {
     public:
         /**
@@ -149,6 +152,8 @@ namespace k2tree {
 
         }
 
+    protected:
+
         /**
          * Add one submatrix bit to hashmap and last_level hashset.
          * @param hm
@@ -160,7 +165,22 @@ namespace k2tree {
         void hm_insert_bit(pos_submat &hm, const int &level, const int &u, const int &v, level_1s &last_level);
         void hm_insert_bit(pos_submat &hm, const int &level, const submat_info &si, level_1s &last_level);
 
-        void write_to_bin(const pos_submat &hm, const string& filename);
+        /**
+         * Write T_ and L_ to binary file.
+         * @param hm Hash map in current level.
+         * @param level Store the given level bit_vector.
+         * @param filename Dst filename.
+         */
+        void write_to_bin(const pos_submat &hm, const int &level, const string& filename);
+
+        /**
+         * Convert hash map to bit_vector
+         * @param hm
+         * @param level Store the given level bit_vector.
+         */
+        void write_to_memory(const pos_submat &hm, const int &level);
+
+        size_t rank(size_t pos);
 
     public:
 
@@ -172,11 +192,11 @@ namespace k2tree {
          * Read edge array from csv and construct k2tree and write it to binary files.
          * @param csv_name Edge array file name.
          * @param path Path to store k2tree binary files.
+         * @param write_flag Determine writing T_ and L_ to binary file or to memory.
          */
-        void build_from_edge_array_csv(const string &csv_name, const string &path);
+        void build_from_edge_array_csv(const string &csv_name, const string &path, const int &write_flag);
 
-
-    private:
+    protected:
         int k1_;
         int k2_;
         int k1_levels_;
@@ -190,7 +210,8 @@ namespace k2tree {
         bit_vector T_;
         bit_vector L_;
 
-        size_t rank(size_t pos);
+        vector<bit_vector> tree_bitmap_;
+
     };
 }
 
