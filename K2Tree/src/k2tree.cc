@@ -17,13 +17,13 @@ using std::map;
 using std::cout;
 using std::endl;
 
-k2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, size_t edge_num_) :
+libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, size_t edge_num_) :
         k1_(k1_), k2_(k2_), k1_levels_(k1_levels_), kL_(kL_), node_num_(node_num_), edge_num_(edge_num_)
 {
     set_tree_unit();
 }
 
-k2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, size_t edge_num_,
+libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, size_t edge_num_,
                        const bit_vector &T_, const bit_vector &L_) : k1_(k1_), k2_(k2_), k1_levels_(k1_levels_),
                                                                      kL_(kL_), node_num_(node_num_),
                                                                      edge_num_(edge_num_), T_(T_), L_(L_)
@@ -31,7 +31,7 @@ k2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_nu
     set_tree_unit();
 }
 
-void k2tree::k2tree::set_tree_unit() {
+void libk2tree::k2tree::set_tree_unit() {
     leaf_bits = kL_*kL_;
     submat1 = k1_*k1_;
     submat2 = k2_*k2_;
@@ -71,7 +71,7 @@ int get_T_num(const string &path) {
     return ret;
 }
 
-k2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_,
+libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_,
                        size_t node_num_, size_t edge_num_, const string &path) :
         k1_(k1_), k2_(k2_), k1_levels_(k1_levels_), kL_(kL_),
         node_num_(node_num_), edge_num_(edge_num_)
@@ -109,27 +109,33 @@ k2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_,
     }
 }
 
-bit_vector k2tree::k2tree::T() {
+bit_vector libk2tree::k2tree::T() {
     return T_;
 }
 
-bit_vector k2tree::k2tree::L() {
+bit_vector libk2tree::k2tree::L() {
     return L_;
 }
 
-void k2tree::k2tree::T(bit_vector t) {
+vector<bit_vector> libk2tree::k2tree::tree_bitmap() {
+    return tree_bitmap_;
+}
+
+/*
+void libk2tree::k2tree::T(bit_vector t) {
     T_ = t;
 }
 
-void k2tree::k2tree::L(bit_vector l) {
+void libk2tree::k2tree::L(bit_vector l) {
     L_ = l;
 }
+ */
 
-void k2tree::k2tree::build_from_edge_array_csv(const edge_array &edges) {
+void libk2tree::k2tree::build_from_edge_array_csv(const edge_array &edges) {
     // TODO
 }
 
-void k2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string &path, const int &write_flag) {
+void libk2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string &path, const int &write_flag) {
     pos_submat last_hm;
     int level = height_;
 
@@ -139,15 +145,17 @@ void k2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string
     double line_num = 0;
     level_1s last_level, last_level2;
 
-    while (line_num <= edge_num_) {
+    while (line_num <= edge_num_ && !in.eof()) {
 
         in >> u >> v;
         u --; v--;
 
+        if (u == 58 && v == 0)
+            cout << u << " " << v << endl;
         hm_insert_bit(last_hm, level, u, v, last_level);
-        if (!((size_t)line_num % 1000000)) {
-            fprintf(stderr, "<%d, %d>\n", u, v);
-            fprintf(stderr, "%.2f%\n", line_num/edge_num_*100);
+        if (!((size_t)line_num % (edge_num_/100))) {
+            //fprintf(stderr, "<%d, %d>\n", u, v);
+            //fprintf(stderr, "%.1f%\n", line_num/edge_num_*100);
         }
         line_num++;
 
@@ -209,7 +217,7 @@ void k2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string
 
 }
 
-size_t k2tree::k2tree::rank(size_t pos) {
+size_t libk2tree::k2tree::rank(size_t pos) {
     if (pos >= T_.size()+L_.size()) {
         std::cerr << "Position is bigger than k2tree." << std::endl;
         exit(1);
@@ -218,7 +226,7 @@ size_t k2tree::k2tree::rank(size_t pos) {
     return 0;
 }
 
-void k2tree::k2tree::hm_insert_bit(pos_submat &hm, const int &level,
+void libk2tree::k2tree::hm_insert_bit(pos_submat &hm, const int &level,
                                    const submat_info &si, level_1s &last_level) {
     int k = which_k(level);
     int submat_size = which_submat(level);
@@ -236,7 +244,7 @@ void k2tree::k2tree::hm_insert_bit(pos_submat &hm, const int &level,
     }
 }
 
-void k2tree::k2tree::hm_insert_bit(pos_submat &hm, const int &level,
+void libk2tree::k2tree::hm_insert_bit(pos_submat &hm, const int &level,
                                    const int &u, const int &v, level_1s &last_level) {
     int k = which_k(level);
     int submat_size = which_submat(level);
@@ -253,7 +261,7 @@ void k2tree::k2tree::hm_insert_bit(pos_submat &hm, const int &level,
     }
 }
 
-void k2tree::k2tree::write_to_bin(const pos_submat &hm, const int &level, const string &filename) {
+void libk2tree::k2tree::write_to_bin(const pos_submat &hm, const int &level, const string &filename) {
     assert(level >= 0 && level < height_);
     cout << filename << endl;
 
@@ -263,7 +271,7 @@ void k2tree::k2tree::write_to_bin(const pos_submat &hm, const int &level, const 
     out.close();
 }
 
-void k2tree::k2tree::write_to_memory(const pos_submat &hm, const int &level) {
+void libk2tree::k2tree::write_to_memory(const pos_submat &hm, const int &level) {
     assert(level >= 0 && level < height_);
     if (tree_bitmap_[level].size() > 0)
         return;
@@ -280,6 +288,21 @@ void k2tree::k2tree::write_to_memory(const pos_submat &hm, const int &level) {
     }
 }
 
-
+void libk2tree::k2tree::merge_tree_bitmap() {
+    L_ = tree_bitmap_.back();
+    uint64_t T_size = 0;
+    for (int i = 0; i < height_-1; ++i) {
+        T_size += tree_bitmap_[i].size();
+    }
+    T_.resize(T_size);
+    int idx = 0;
+    for (int i = 0; i < height_-1; ++i) {
+        for (int j = 0; j < tree_bitmap_[i].size(); ++j) {
+            T_[idx++] = tree_bitmap_[i][j];
+        }
+    }
+    tree_bitmap_.clear();
+    tree_bitmap_.shrink_to_fit();
+}
 
 

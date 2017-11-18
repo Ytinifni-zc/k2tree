@@ -7,7 +7,7 @@
 
 #include <string>
 
-namespace k2tree {
+namespace libk2tree {
     namespace utils {
         /**
          * Calculate runtime of a function

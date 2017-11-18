@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
     std::tie(path, filename, node_num, edge_num, k1, k2, k1_levels, kL) = get_args(argc, argv);
 
     auto read_bin = [=]() {
-        k2tree::k2tree kt(k1, k2, k1_levels, kL, node_num, edge_num, path);
+        libk2tree::k2tree kt(k1, k2, k1_levels, kL, node_num, edge_num, path);
         std::cout << kt.T().size() << std::endl;
         for (int i = 0; i < kt.T().size(); ++i) {
             std::cout << kt.T()[i];
@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
         }
         std::cout << std::endl;
     };
-    k2tree::utils::cost(read_bin);
+    libk2tree::utils::cost(read_bin);
     return 0;
 
 }

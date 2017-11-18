@@ -14,7 +14,7 @@ using sdsl::bit_vector;
 using sdsl::osfstream;
 using std::vector;
 
-namespace k2tree {
+namespace libk2tree {
     namespace utils {
         /**
          * Build bit_vector from a integer value.

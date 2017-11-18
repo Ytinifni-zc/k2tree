@@ -13,13 +13,13 @@
 #include <utils/bit_vector.h>
 #include <sdsl/bit_vectors.hpp>
 
-using namespace k2tree;
+using namespace libk2tree;
 using std::bitset;
 using sdsl::bit_vector;
 using std::unordered_map;
 using std::unordered_set;
 
-namespace k2tree {
+namespace libk2tree {
     const int to_binary = 0x1;
     const int to_memory = 0x2;
 
@@ -62,10 +62,11 @@ namespace k2tree {
          */
         explicit k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, size_t edge_num_, const string &path);
 
-        void T(bit_vector t);
-        void L(bit_vector l);
+        //void T(bit_vector t);
+        //void L(bit_vector l);
         bit_vector T();
         bit_vector L();
+        vector<bit_vector> tree_bitmap();
 
     private:
         static const size_t __n = 26;
@@ -179,6 +180,11 @@ namespace k2tree {
          * @param level Store the given level bit_vector.
          */
         void write_to_memory(const pos_submat &hm, const int &level);
+
+        /**
+         * Merge each level's Tl to T_
+         */
+        void merge_tree_bitmap();
 
         size_t rank(size_t pos);
 

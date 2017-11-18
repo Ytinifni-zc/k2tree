@@ -2,13 +2,18 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
+      <config projectName="K2Tree" targetName="read_bin" />
       <config projectName="K2Tree" targetName="test_k2tree" />
       <config projectName="K2Tree" targetName="gtest_main" />
       <config projectName="K2Tree" targetName="test_read_tree" />
       <config projectName="K2Tree" targetName="k2tree" />
       <config projectName="K2Tree" targetName="gtest" />
       <config projectName="K2Tree" targetName="csv2csr" />
+      <config projectName="K2Tree" targetName="csv_partition" />
+      <config projectName="K2Tree" targetName="test_bit_vector" />
+      <config projectName="K2Tree" targetName="test_vector_bool" />
       <config projectName="K2Tree" targetName="csv_convertor" />
+      <config projectName="K2Tree" targetName="test_sdsl_k2tree" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -36,23 +41,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.47371218">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="build_tree.h" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/include/build_tree.h">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="816">
-                  <caret line="48" column="1" lean-forward="false" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
-                  <folding>
-                    <element signature="e#101#125#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="time.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/include/utils/time.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="408">
-                  <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+                <state relative-caret-position="414">
+                  <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
                   <folding>
                     <element signature="e#89#106#0" expanded="false" />
                     <element signature="e#222#234#0" expanded="false" />
@@ -61,13 +54,25 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="k2tree.cc" pinned="false" current-in-tab="true">
+          <file leaf-file-name="k2tree.cc" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/k2tree.cc">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1159">
-                  <caret line="83" column="5" lean-forward="true" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
+                <state relative-caret-position="18">
+                  <caret line="53" column="35" lean-forward="false" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
                   <folding>
                     <element signature="e#43#62#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="k2tree_partition.cc" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/k2tree_partition.cc">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="234">
+                  <caret line="15" column="37" lean-forward="false" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+                  <folding>
+                    <element signature="e#45#64#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -76,7 +81,7 @@
           <file leaf-file-name="test_read_tree.cc" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/tests/test_read_tree.cc">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
+                <state relative-caret-position="414">
                   <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
                   <folding>
                     <element signature="e#44#68#0" expanded="false" />
@@ -92,8 +97,8 @@
           <file leaf-file-name="k2tree.h" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/include/k2tree.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="493">
-                  <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+                <state relative-caret-position="378">
+                  <caret line="27" column="3" lean-forward="false" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
                   <folding />
                 </state>
               </provider>
@@ -102,7 +107,7 @@
           <file leaf-file-name="base.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/include/base.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
+                <state relative-caret-position="162">
                   <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
                   <folding />
                 </state>
@@ -114,9 +119,8 @@
     </splitter>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/k2tree.cc" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/include/k2tree.h" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/include/build_tree.h" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/k2tree.cc" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/tests/test_read_tree.cc" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -138,13 +142,15 @@
         <option value="$PROJECT_DIR$/cmake/gtest.cmake" />
         <option value="$PROJECT_DIR$/include/k2tree.h" />
         <option value="$PROJECT_DIR$/src/k2tree.cc" />
+        <option value="$PROJECT_DIR$/src/k2tree_partition.cc" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
-    <option name="width" value="2560" />
-    <option name="height" value="1418" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1855" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -268,6 +274,9 @@
     <configuration name="csv_convertor" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="K2Tree" TARGET_NAME="csv_convertor" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="K2Tree" RUN_TARGET_NAME="csv_convertor">
       <envs />
     </configuration>
+    <configuration name="csv_partition" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="K2Tree" TARGET_NAME="csv_partition" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="K2Tree" RUN_TARGET_NAME="csv_partition">
+      <envs />
+    </configuration>
     <configuration name="gtest" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="K2Tree" TARGET_NAME="gtest" CONFIG_NAME="Debug">
       <envs />
     </configuration>
@@ -277,21 +286,38 @@
     <configuration name="k2tree" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="K2Tree" TARGET_NAME="k2tree" CONFIG_NAME="Debug">
       <envs />
     </configuration>
+    <configuration name="read_bin" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="K2Tree" TARGET_NAME="read_bin" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="K2Tree" RUN_TARGET_NAME="read_bin">
+      <envs />
+    </configuration>
+    <configuration name="test_bit_vector" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="K2Tree" TARGET_NAME="test_bit_vector" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="K2Tree" RUN_TARGET_NAME="test_bit_vector">
+      <envs />
+    </configuration>
     <configuration name="test_k2tree" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="K2Tree" TARGET_NAME="test_k2tree" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="K2Tree" RUN_TARGET_NAME="test_k2tree">
       <envs />
     </configuration>
     <configuration name="test_read_tree" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="K2Tree" TARGET_NAME="test_read_tree" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="K2Tree" RUN_TARGET_NAME="test_read_tree">
       <envs />
     </configuration>
-    <list size="8">
+    <configuration name="test_sdsl_k2tree" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="K2Tree" TARGET_NAME="test_sdsl_k2tree" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="K2Tree" RUN_TARGET_NAME="test_sdsl_k2tree">
+      <envs />
+    </configuration>
+    <configuration name="test_vector_bool" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="K2Tree" TARGET_NAME="test_vector_bool" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="K2Tree" RUN_TARGET_NAME="test_vector_bool">
+      <envs />
+    </configuration>
+    <list size="13">
       <item index="0" class="java.lang.String" itemvalue="Application.Build All" />
       <item index="1" class="java.lang.String" itemvalue="Application.gtest" />
       <item index="2" class="java.lang.String" itemvalue="Application.gtest_main" />
       <item index="3" class="java.lang.String" itemvalue="Application.k2tree" />
-      <item index="4" class="java.lang.String" itemvalue="Application.test_k2tree" />
-      <item index="5" class="java.lang.String" itemvalue="Application.test_read_tree" />
-      <item index="6" class="java.lang.String" itemvalue="Application.csv2csr" />
-      <item index="7" class="java.lang.String" itemvalue="Application.csv_convertor" />
+      <item index="4" class="java.lang.String" itemvalue="Application.test_bit_vector" />
+      <item index="5" class="java.lang.String" itemvalue="Application.test_k2tree" />
+      <item index="6" class="java.lang.String" itemvalue="Application.test_read_tree" />
+      <item index="7" class="java.lang.String" itemvalue="Application.test_sdsl_k2tree" />
+      <item index="8" class="java.lang.String" itemvalue="Application.test_vector_bool" />
+      <item index="9" class="java.lang.String" itemvalue="Application.csv2csr" />
+      <item index="10" class="java.lang.String" itemvalue="Application.csv_convertor" />
+      <item index="11" class="java.lang.String" itemvalue="Application.csv_partition" />
+      <item index="12" class="java.lang.String" itemvalue="Application.read_bin" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -306,26 +332,28 @@
       <updated>1510037333204</updated>
       <workItem from="1510037334905" duration="19694000" />
       <workItem from="1510130091531" duration="1232000" />
+      <workItem from="1510986751972" duration="356000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20926000" />
+    <option name="totallyTimeSpent" value="21282000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="2560" height="1418" extended-state="0" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09610802" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.098396905" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32955405" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32955405" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947367" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30744338" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -346,16 +374,54 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/include/build_tree.h">
+    <entry file="file://$PROJECT_DIR$/include/utils/time.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="1" lean-forward="false" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
+        <state relative-caret-position="414">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
-            <element signature="e#101#125#0" expanded="false" />
+            <element signature="e#89#106#0" expanded="false" />
+            <element signature="e#222#234#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_read_tree.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#44#68#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/k2tree.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1494">
+          <caret line="83" column="5" lean-forward="true" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
+          <folding>
+            <element signature="e#43#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/k2tree.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/base.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/build_tree.h" />
     <entry file="file://$PROJECT_DIR$/include/utils/time.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -431,8 +497,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/utils/time.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="414">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
             <element signature="e#89#106#0" expanded="false" />
             <element signature="e#222#234#0" expanded="false" />
@@ -465,11 +531,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1547">
           <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
-          <folding>
-            <element signature="e#44#67#0" expanded="true" />
-            <element signature="e#769#778#0" expanded="true" />
-            <element signature="e#1252#1261#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -477,7 +539,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -495,19 +556,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/build_tree.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="1" lean-forward="false" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
-          <folding>
-            <element signature="e#101#125#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/include/build_tree.h" />
     <entry file="file://$PROJECT_DIR$/tests/test_read_tree.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
+        <state relative-caret-position="414">
           <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
             <element signature="e#44#68#0" expanded="false" />
@@ -517,27 +569,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/base.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
+        <state relative-caret-position="162">
           <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/k2tree.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="27" column="3" lean-forward="false" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/k2tree.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1159">
-          <caret line="83" column="5" lean-forward="true" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
+        <state relative-caret-position="18">
+          <caret line="53" column="35" lean-forward="false" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
           <folding>
             <element signature="e#43#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/k2tree.h">
+    <entry file="file://$PROJECT_DIR$/src/k2tree_partition.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="234">
+          <caret line="15" column="37" lean-forward="false" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <folding>
+            <element signature="e#45#64#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

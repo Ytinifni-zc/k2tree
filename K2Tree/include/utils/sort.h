@@ -11,7 +11,7 @@
 
 using std::min;
 
-namespace k2tree {
+namespace libk2tree {
     namespace sort {
         template<typename T> //整數或浮點數皆可使用,若要使用物件(class)時必須設定"小於"(<)的運算子功能
         void merge_sort(T arr[], int len) {

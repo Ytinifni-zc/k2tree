@@ -10,7 +10,7 @@
 #include <cstdlib>
 #include <string>
 
-namespace k2tree {
+namespace libk2tree {
     using std::vector;
     using std::bitset;
     using std::string;

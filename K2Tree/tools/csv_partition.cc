@@ -97,6 +97,6 @@ int main(int argc, char** argv) {
 
     };
 
-    k2tree::utils::cost(part);
+    libk2tree::utils::cost(part);
     return 0;
 }

@@ -8,7 +8,7 @@
 #include <cassert>
 
 template<typename L>
-void k2tree::utils::cost(L lambda, const std::string &unit) {
+void libk2tree::utils::cost(L lambda, const std::string &unit) {
 
     assert(unit=="ms" || unit=="s");
 

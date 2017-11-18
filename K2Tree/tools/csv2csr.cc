@@ -73,6 +73,6 @@ int main() {
     auto tmp = [](){
         build_csr_from_csv();
     };
-    k2tree::utils::cost(tmp);
+    libk2tree::utils::cost(tmp);
     return 0;
 }

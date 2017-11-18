@@ -8,7 +8,7 @@
 #include <utils/bit_vector.h>
 
 using namespace sdsl;
-using namespace k2tree;
+using namespace libk2tree;
 using std::cout;
 using std::endl;
 

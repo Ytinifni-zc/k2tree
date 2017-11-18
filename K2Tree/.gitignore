@@ -38,3 +38,4 @@ cmake-build-debug/*
 *.exe
 *.out
 *.app
+gtest/build/CMakeFiles/CMakeTmp/

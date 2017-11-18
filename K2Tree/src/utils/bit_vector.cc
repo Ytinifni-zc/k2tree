@@ -5,7 +5,7 @@
 #include <utils/bit_vector.h>
 #include <cassert>
 
-bit_vector k2tree::utils::int2bit_vector(const unsigned long long &num, const int &size) {
+bit_vector libk2tree::utils::int2bit_vector(const unsigned long long &num, const int &size) {
     assert (num < (1l<<size));
     bit_vector bv(size, 0);
     unsigned long long tmp = num;
@@ -15,7 +15,7 @@ bit_vector k2tree::utils::int2bit_vector(const unsigned long long &num, const in
     return bv;
 }
 
-unsigned long long k2tree::utils::bit_vector2int(const bit_vector &bv) {
+unsigned long long libk2tree::utils::bit_vector2int(const bit_vector &bv) {
     unsigned long long ret = 0;
     for (size_t i = 0; i < bv.size(); ++i) {
         ret <<= 1;
@@ -24,7 +24,7 @@ unsigned long long k2tree::utils::bit_vector2int(const bit_vector &bv) {
     return ret;
 }
 
-vector<bool> k2tree::utils::bit_vector2vector_bool(const bit_vector &bv) {
+vector<bool> libk2tree::utils::bit_vector2vector_bool(const bit_vector &bv) {
     const size_t size = bv.size();
     vector<bool> ret(size, false);
     for (size_t i = 0; i < size; ++i) {
@@ -33,7 +33,7 @@ vector<bool> k2tree::utils::bit_vector2vector_bool(const bit_vector &bv) {
     return ret;
 }
 
-unsigned long long k2tree::utils::vector_bool2int(const vector<bool> &vb) {
+unsigned long long libk2tree::utils::vector_bool2int(const vector<bool> &vb) {
     unsigned long long ret = 0;
     for (auto i : vb) {
         ret <<= 1;
@@ -42,7 +42,7 @@ unsigned long long k2tree::utils::vector_bool2int(const vector<bool> &vb) {
     return ret;
 }
 
-vector<bool> k2tree::utils::int2vector_bool(const unsigned long long &num, const int &size) {
+vector<bool> libk2tree::utils::int2vector_bool(const unsigned long long &num, const int &size) {
     assert (num < (1l<<size));
     vector<bool> vb(size, false);
     unsigned long long tmp = num;
@@ -52,7 +52,7 @@ vector<bool> k2tree::utils::int2vector_bool(const unsigned long long &num, const
     return vb;
 }
 
-void ::k2tree::utils::int2vector_bool(const unsigned long long &num, const int &size, vector<bool> &vb) {
+void ::libk2tree::utils::int2vector_bool(const unsigned long long &num, const int &size, vector<bool> &vb) {
     assert (num < (1l<<size));
     vb.resize(size, false);
     unsigned long long tmp = num;
@@ -61,7 +61,7 @@ void ::k2tree::utils::int2vector_bool(const unsigned long long &num, const int &
     }
 }
 
-bool k2tree::utils::store_to_file(const bit_vector& v, const std::string& file, bool is_append) {
+bool libk2tree::utils::store_to_file(const bit_vector& v, const std::string& file, bool is_append) {
     auto flag = std::ios::binary | std::ios::out;
     flag = (is_append) ? (flag | std::ios::app) : (flag | std::ios::trunc);
     osfstream out(file, flag);
