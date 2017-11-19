@@ -14,14 +14,17 @@
 #include <sdsl/bit_vectors.hpp>
 
 using namespace libk2tree;
+using namespace sdsl;
 using std::bitset;
-using sdsl::bit_vector;
 using std::unordered_map;
 using std::unordered_set;
 
 namespace libk2tree {
     const int to_binary = 0x1;
     const int to_memory = 0x2;
+
+    const int read_T_levels = 0x3;
+    const int read_T = 0x4;
 
     class k2tree {
     public:
@@ -57,10 +60,10 @@ namespace libk2tree {
          * @param k1_levels_
          * @param kL_
          * @param node_num_
-         * @param edge_num_
          * @param path Path of storing k2tree binary files.
+         * @param read_flag Constructing k2tree from Tl's bitmap vector or ONE T's bitmap.
          */
-        explicit k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, size_t edge_num_, const string &path);
+        explicit k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, const string &path, const int &read_flag=read_T_levels);
 
         //void T(bit_vector t);
         //void L(bit_vector l);
@@ -68,9 +71,11 @@ namespace libk2tree {
         bit_vector L();
         vector<bit_vector> tree_bitmap();
 
+        size_t edge_num();
+
     private:
-        static const size_t __n = 26;
-        static const size_t __p = 45;
+        static const size_t __n = 19;
+        static const size_t __p = 33;
         typedef bitset<__n> node_bits;
         typedef bitset<__p> submat_pos;
         int leaf_bits;
@@ -181,12 +186,15 @@ namespace libk2tree {
          */
         void write_to_memory(const pos_submat &hm, const int &level);
 
+    public:
         /**
          * Merge each level's Tl to T_
          */
         void merge_tree_bitmap();
 
         size_t rank(size_t pos);
+
+        void build_rank_support();
 
     public:
 
@@ -218,6 +226,9 @@ namespace libk2tree {
 
         vector<bit_vector> tree_bitmap_;
 
+    private:
+        rank_support_v<1> t_rank;
+        rank_support_v<1> l_rank;
     };
 }
 

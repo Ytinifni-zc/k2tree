@@ -8,8 +8,6 @@
 #include <iostream>
 #include <fstream>
 #include <map>
-#include <stdio.h>
-#include <stdlib.h>
 
 using std::ifstream;
 using std::ofstream;
@@ -72,41 +70,51 @@ int get_T_num(const string &path) {
 }
 
 libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_,
-                       size_t node_num_, size_t edge_num_, const string &path) :
+                       size_t node_num_, const string &path, const int &read_flag) :
         k1_(k1_), k2_(k2_), k1_levels_(k1_levels_), kL_(kL_),
-        node_num_(node_num_), edge_num_(edge_num_)
+        node_num_(node_num_)
 {
+    assert(read_flag == read_T || read_flag == read_T_levels);
     set_tree_unit();
-    const char* l_file = (path + "L" + std::to_string(kL_) + ".bin").c_str();
-    int l_filesize = get_file_size(l_file);
-    int l_submat_size = get_submat_size(leaf_bits);
-    cout << l_file << " " << l_filesize << " " << l_submat_size << endl;
-    sdsl::load_from_file(L_, l_file);
+    if (read_flag == libk2tree::read_T_levels) {
+        const char *l_file = (path + "L" + std::to_string(kL_) + ".bin").c_str();
+        int l_filesize = get_file_size(l_file);
+        int l_submat_size = get_submat_size(leaf_bits);
+        cout << l_file << " " << l_filesize << " " << l_submat_size << endl;
+        sdsl::load_from_file(L_, l_file);
 
-    int level = get_T_num(path);
+        int level = get_T_num(path);
 
-    vector<bit_vector> tmp_T(level);
-    for (int i = 1; i <= level; ++i) {
-        const char* t_file = (path + "T" + std::to_string(i) + ".bin").c_str();
-        int t_filesize = get_file_size(t_file);
-        int k = which_k(level);
-        int submat_size = which_submat(level);
-        int t_submat_size = get_submat_size(k*k);
-        cout << t_file << " " << t_filesize << " " << t_submat_size << endl;
+        vector<bit_vector> tmp_T(level);
+        for (int i = 1; i <= level; ++i) {
+            const char *t_file = (path + "T" + std::to_string(i) + ".bin").c_str();
+            int t_filesize = get_file_size(t_file);
+            int k = which_k(level);
+            int submat_size = which_submat(level);
+            int t_submat_size = get_submat_size(k * k);
+            cout << t_file << " " << t_filesize << " " << t_submat_size << endl;
 
-        sdsl::load_from_file(tmp_T[i-1], t_file);
-    }
-
-    int t_size = 0;
-    for (auto t: tmp_T)
-        t_size += t.size();
-    T_.resize(t_size);
-    int idx = 0;
-    for(int i = 0; i < level; ++i) {
-        for (auto b: tmp_T[i]) {
-            T_[idx++] = b;
+            sdsl::load_from_file(tmp_T[i - 1], t_file);
         }
+
+        int t_size = 0;
+        for (auto t: tmp_T)
+            t_size += t.size();
+        T_.resize(t_size);
+        int idx = 0;
+        for (int i = 0; i < level; ++i) {
+            for (auto b: tmp_T[i]) {
+                T_[idx++] = b;
+            }
+        }
+    } else {
+        const char *l_file = (path + "L.bin").c_str();
+        sdsl::load_from_file(L_, l_file);
+        const char *t_file = (path + "T.bin").c_str();
+        sdsl::load_from_file(T_, t_file);
     }
+    build_rank_support();
+    edge_num_ = l_rank(L_.size()-1);
 }
 
 bit_vector libk2tree::k2tree::T() {
@@ -119,6 +127,10 @@ bit_vector libk2tree::k2tree::L() {
 
 vector<bit_vector> libk2tree::k2tree::tree_bitmap() {
     return tree_bitmap_;
+}
+
+size_t k2tree::edge_num() {
+    return edge_num_;
 }
 
 /*
@@ -150,8 +162,6 @@ void libk2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const str
         in >> u >> v;
         u --; v--;
 
-        if (u == 58 && v == 0)
-            cout << u << " " << v << endl;
         hm_insert_bit(last_hm, level, u, v, last_level);
         if (!((size_t)line_num % (edge_num_/100))) {
             //fprintf(stderr, "<%d, %d>\n", u, v);
@@ -303,6 +313,12 @@ void libk2tree::k2tree::merge_tree_bitmap() {
     }
     tree_bitmap_.clear();
     tree_bitmap_.shrink_to_fit();
+}
+
+void k2tree::build_rank_support() {
+    assert(T_.size() != 0 && L_.size() != 0);
+    t_rank = rank_support_v<1>(&T_);
+    l_rank = rank_support_v<1>(&L_);
 }
 
 
