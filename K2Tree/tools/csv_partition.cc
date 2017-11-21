@@ -52,12 +52,12 @@ int main(int argc, char** argv) {
 
         int u, v;
         double line_num = 0;
-        int cell = static_cast<int>(ceil(
+        auto cell = static_cast<int>(ceil(
                 static_cast<double>(node_num) / k0)
         );
 
         int last_block_row = 0;
-        while (line_num <= edge_num) {
+        while (line_num < edge_num && !fin.eof()) {
 
             fin >> u >> v;
             u--;

@@ -2,8 +2,8 @@
 // Created by inFinity on 2017/11/7.
 //
 #include <k2tree.h>
-#include <sys/stat.h>
 #include <utils/sort.h>
+#include <utils/file.h>
 #include <sdsl/io.hpp>
 #include <iostream>
 #include <fstream>
@@ -39,18 +39,6 @@ void libk2tree::k2tree::set_tree_unit() {
 
     tree_bitmap_.resize(height_);
 
-//    uint64_t n_prime = static_cast<uint64_t>(pow(k1_, k1_levels_) * pow(k2_, x) * kL_);
-//submat_pos = static_cast<int>(ceil(log2(n_prime*n_prime/kL_/kL_)));
-}
-
-unsigned long get_file_size(const char *path) {
-    unsigned long filesize = -1;
-    struct stat statbuff;
-    if(stat(path, &statbuff) < 0)
-        return filesize;
-    else
-        filesize = statbuff.st_size;
-    return filesize;
 }
 
 int get_T_num(const string &path) {
@@ -78,7 +66,7 @@ libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_,
     set_tree_unit();
     if (read_flag == libk2tree::read_T_levels) {
         const char *l_file = (path + "L" + std::to_string(kL_) + ".bin").c_str();
-        int l_filesize = get_file_size(l_file);
+        long int l_filesize = utils::get_file_size(l_file);
         int l_submat_size = get_submat_size(leaf_bits);
         cout << l_file << " " << l_filesize << " " << l_submat_size << endl;
         sdsl::load_from_file(L_, l_file);
@@ -88,7 +76,7 @@ libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_,
         vector<bit_vector> tmp_T(level);
         for (int i = 1; i <= level; ++i) {
             const char *t_file = (path + "T" + std::to_string(i) + ".bin").c_str();
-            int t_filesize = get_file_size(t_file);
+            long int t_filesize = utils::get_file_size(t_file);
             int k = which_k(level);
             int submat_size = which_submat(level);
             int t_submat_size = get_submat_size(k * k);
@@ -108,9 +96,9 @@ libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_,
             }
         }
     } else {
-        const char *l_file = (path + "L.bin").c_str();
+        string l_file = path + "L.bin";
         sdsl::load_from_file(L_, l_file);
-        const char *t_file = (path + "T.bin").c_str();
+        string t_file = path + "T.bin";
         sdsl::load_from_file(T_, t_file);
     }
     build_rank_support();
@@ -133,16 +121,6 @@ size_t k2tree::edge_num() {
     return edge_num_;
 }
 
-/*
-void libk2tree::k2tree::T(bit_vector t) {
-    T_ = t;
-}
-
-void libk2tree::k2tree::L(bit_vector l) {
-    L_ = l;
-}
- */
-
 void libk2tree::k2tree::build_from_edge_array_csv(const edge_array &edges) {
     // TODO
 }
@@ -157,7 +135,7 @@ void libk2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const str
     double line_num = 0;
     level_1s last_level, last_level2;
 
-    while (line_num <= edge_num_ && !in.eof()) {
+    while (line_num < edge_num_ && !in.eof()) {
 
         in >> u >> v;
         u --; v--;
