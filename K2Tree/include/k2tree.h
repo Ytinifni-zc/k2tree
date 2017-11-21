@@ -20,11 +20,12 @@ using std::unordered_map;
 using std::unordered_set;
 
 namespace libk2tree {
-    const int to_binary = 0x1;
-    const int to_memory = 0x2;
+    const int to_binary = 0xba;
+    const int to_memory = 0xe0;
+    const int to_compact_binary = 0xcaca;
 
-    const int read_T_levels = 0x3;
-    const int read_T = 0x4;
+    const int read_T_levels = 0x1ead;
+    const int read_T = 0x2ead;
 
     class k2tree {
     public:

@@ -15,6 +15,9 @@ namespace libk2tree {
     using std::bitset;
     using std::string;
 
+    typedef unsigned char uchar;
+    typedef size_t uint;
+
 //    const size_t k = 2;
 //    const size_t kL = 2;
 //
