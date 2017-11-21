@@ -1,6 +1,7 @@
 # Project
 .vscode/*
 .idea/*
+.idea
 build/*
 _build/*
 .DS_Store
