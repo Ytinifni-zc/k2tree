@@ -2,20 +2,20 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="K2Tree" targetName="test_tree_partition" />
       <config projectName="K2Tree" targetName="k2tree" />
-      <config projectName="K2Tree" targetName="gtest" />
-      <config projectName="K2Tree" targetName="test_read_tree" />
-      <config projectName="K2Tree" targetName="csv2csr" />
-      <config projectName="K2Tree" targetName="test_vector_bool" />
-      <config projectName="K2Tree" targetName="read_bin" />
-      <config projectName="K2Tree" targetName="test_k2tree" />
-      <config projectName="K2Tree" targetName="gtest_main" />
       <config projectName="K2Tree" targetName="csv_partition" />
-      <config projectName="K2Tree" targetName="test_merge_level" />
       <config projectName="K2Tree" targetName="test_bit_vector" />
-      <config projectName="K2Tree" targetName="csv_convertor" />
+      <config projectName="K2Tree" targetName="csv2csr" />
+      <config projectName="K2Tree" targetName="test_tree_partition" />
+      <config projectName="K2Tree" targetName="gtest_main" />
       <config projectName="K2Tree" targetName="test_sdsl_k2tree" />
+      <config projectName="K2Tree" targetName="test_merge_level" />
+      <config projectName="K2Tree" targetName="gtest" />
+      <config projectName="K2Tree" targetName="read_bin" />
+      <config projectName="K2Tree" targetName="csv_convertor" />
+      <config projectName="K2Tree" targetName="test_vector_bool" />
+      <config projectName="K2Tree" targetName="test_k2tree" />
+      <config projectName="K2Tree" targetName="test_read_tree" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -25,7 +25,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="562a6379-5f41-40d1-945c-4dc7b6d1ca63" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/base.h" afterPath="$PROJECT_DIR$/include/base.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/k2tree.h" afterPath="$PROJECT_DIR$/include/k2tree.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/k2tree.cc" afterPath="$PROJECT_DIR$/src/k2tree.cc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/k2tree_partition.cc" afterPath="$PROJECT_DIR$/src/k2tree_partition.cc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/time.cc" afterPath="$PROJECT_DIR$/src/utils/time.cc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_read_tree.cc" afterPath="$PROJECT_DIR$/tests/test_read_tree.cc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/csv_convertor.cc" afterPath="$PROJECT_DIR$/tools/csv_convertor.cc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/csv_partition.cc" afterPath="$PROJECT_DIR$/tools/csv_partition.cc" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,11 +55,31 @@
       <file leaf-file-name="compressor.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/include/compression/compressor.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+            <state relative-caret-position="381">
+              <caret line="26" column="48" lean-forward="false" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
               <folding>
-                <element signature="e#857#882#0" expanded="true" />
+                <element signature="e#853#878#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hash.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/compression/hash.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="648">
+              <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utils.cc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/utils.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="21" column="38" lean-forward="false" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -60,16 +89,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="65" lean-forward="false" selection-start-line="0" selection-start-column="65" selection-end-line="0" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="43" lean-forward="true" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -341,24 +360,25 @@
       <workItem from="1511244982096" duration="1393000" />
       <workItem from="1511246669358" duration="869000" />
       <workItem from="1511247562218" duration="910000" />
-      <workItem from="1511248494084" duration="3162000" />
+      <workItem from="1511248494084" duration="1757000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65855000" />
+    <option name="totallyTimeSpent" value="64450000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="75" y="34" width="1857" height="1092" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14870094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32955405" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32948583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30640084" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3068063" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -396,32 +416,6 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -473,6 +467,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -669,9 +670,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-          <folding>
-            <element signature="e#89#106#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -702,6 +700,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/utils.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="38" lean-forward="false" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../../dell122/k2tree/include/compression/compressor.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -709,24 +715,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/utils/utils.h">
+    <entry file="file://$PROJECT_DIR$/src/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="40" lean-forward="false" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-          <folding>
-            <element signature="e#91#108#0" expanded="false" />
-            <element signature="e#522#534#0" expanded="false" />
-            <element signature="e#789#801#0" expanded="false" />
-            <element signature="e#1090#1102#0" expanded="false" />
-            <element signature="e#1429#1441#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/utils.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="38" lean-forward="false" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+        <state relative-caret-position="0">
+          <caret line="0" column="65" lean-forward="false" selection-start-line="0" selection-start-column="65" selection-end-line="0" selection-end-column="65" />
           <folding />
         </state>
       </provider>
@@ -739,28 +731,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CMakeLists.txt">
+    <entry file="file://$PROJECT_DIR$/include/utils/utils.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="65" lean-forward="false" selection-start-line="0" selection-start-column="65" selection-end-line="0" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="43" lean-forward="true" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
-          <folding />
+        <state relative-caret-position="468">
+          <caret line="26" column="40" lean-forward="false" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+          <folding>
+            <element signature="e#91#108#0" expanded="true" />
+            <element signature="e#522#534#0" expanded="true" />
+            <element signature="e#789#801#0" expanded="true" />
+            <element signature="e#1090#1102#0" expanded="true" />
+            <element signature="e#1429#1441#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/include/compression/compressor.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+        <state relative-caret-position="381">
+          <caret line="26" column="48" lean-forward="false" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
           <folding>
-            <element signature="e#857#882#0" expanded="true" />
+            <element signature="e#853#878#0" expanded="true" />
           </folding>
         </state>
       </provider>
