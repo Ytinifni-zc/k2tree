@@ -3,8 +3,6 @@
 //
 
 #include <gtest/gtest.h>
-#include <cstdlib>
-#include <string>
 #include <utils/file.h>
 extern "C" {
     #include <dacs.h>

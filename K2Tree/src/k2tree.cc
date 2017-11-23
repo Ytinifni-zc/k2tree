@@ -29,6 +29,16 @@ libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node
     set_tree_unit();
 }
 
+libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, size_t edge_num_,
+                       const bit_vector &T_) : k1_(k1_), k2_(k2_), k1_levels_(k1_levels_),
+                                                                     kL_(kL_), node_num_(node_num_),
+                                                                     edge_num_(edge_num_), T_(T_)
+{
+    set_tree_unit();
+}
+
+
+
 void libk2tree::k2tree::set_tree_unit() {
     leaf_bits = kL_*kL_;
     submat1 = k1_*k1_;
@@ -298,5 +308,4 @@ void k2tree::build_rank_support() {
     t_rank = rank_support_v<1>(&T_);
     l_rank = rank_support_v<1>(&L_);
 }
-
 

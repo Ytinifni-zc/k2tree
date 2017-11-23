@@ -12,12 +12,14 @@
 #include <stdint.h>
 #include <utils/bit_vector.h>
 #include <sdsl/bit_vectors.hpp>
+#include <memory>
 
 using namespace libk2tree;
 using namespace sdsl;
 using std::bitset;
 using std::unordered_map;
 using std::unordered_set;
+using std::shared_ptr;
 
 namespace libk2tree {
     const int to_binary = 0xba;
@@ -49,6 +51,18 @@ namespace libk2tree {
          * @param node_num_
          * @param edge_num_
          * @param T_
+         */
+        explicit k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, size_t edge_num_, const bit_vector &T_);
+
+        /**
+         * Constructor of the whole k2tree.
+         * @param k1_
+         * @param k2_
+         * @param k1_levels_
+         * @param kL_
+         * @param node_num_
+         * @param edge_num_
+         * @param T_
          * @param L_
          */
         explicit k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, size_t edge_num_, const bit_vector &T_,
@@ -66,6 +80,8 @@ namespace libk2tree {
          */
         explicit k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, const string &path, const int &read_flag=read_T_levels);
 
+
+    public:
         //void T(bit_vector t);
         //void L(bit_vector l);
         bit_vector T();
@@ -73,6 +89,38 @@ namespace libk2tree {
         vector<bit_vector> tree_bitmap();
 
         size_t edge_num();
+
+        size_t words_cnt() const {
+            return L_.size()/(kL_*kL_);
+        }
+
+        size_t words_size() const {
+            return static_cast<size_t>(ceil(static_cast<double>(kL_ * kL_) / 8));
+        }
+
+        /**
+         * Iterates over the words in the leaf level.
+         *
+         * @param fun Pointer to function, functor or lambda expecting a pointer to
+         * each word.
+         */
+        template <typename Function>
+        void words(Function fun) const {
+            size_t cnt = words_cnt();
+            uint size = words_size();
+
+            size_t bit = 0;
+            for (size_t i = 0; i < cnt; ++i) {
+                uchar *word = new uchar[size];
+                std::fill(word, word+size, 0);
+                for (uint j = 0; j < kL_*kL_; ++j, ++bit) {
+                    if (L_[bit])
+                        word[j/8] |= (uchar) (1<<(j%8));
+                }
+                fun(word);
+                delete[] word;
+            }
+        }
 
     private:
         static const size_t __n = 19;

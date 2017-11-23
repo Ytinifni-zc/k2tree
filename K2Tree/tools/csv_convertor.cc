@@ -7,6 +7,7 @@
 #include <utils/time.h>
 #include <iostream>
 #include <utils/time.cc>
+#include <utils/bit_vector.h>
 #include "config.h"
 
 int main(int argc, char** argv) {
@@ -16,7 +17,8 @@ int main(int argc, char** argv) {
     size_t node_num, edge_num;
     int k1, k2, k1_levels, kL;
 
-    std::tie(path, filename, node_num, edge_num, k1, k2, k1_levels, kL) = get_args(argc, argv);
+    std::tie(path, filename, node_num, edge_num, k1, k2, k1_levels, kL) =
+            get_args(argc, argv);
 
     auto build_tree = [=]() {
         libk2tree::k2tree tree(k1, k2, k1_levels, kL, node_num, edge_num);
@@ -32,6 +34,12 @@ int main(int argc, char** argv) {
         sdsl::rrr_vector<> rrr_l(tree.L());
         sdsl::store_to_file(rrr_t, path+"T_rrr.bin");
         sdsl::store_to_file(rrr_l, path+"L_rrr.bin");
+
+        FTRep* listRep;
+        //libk2tree::utils::bit_vector2FTRep(tree.L(), kL*kL, listRep);
+        libk2tree::utils::bit_vector2int_bin(tree.L(), kL*kL, path+"L_int.bin");
+        const char * ft_path = (path + "L_FTR.bin").c_str();
+        //saveFT(listRep, const_cast<char *>(ft_path));
 
     };
     libk2tree::utils::cost(build_tree);

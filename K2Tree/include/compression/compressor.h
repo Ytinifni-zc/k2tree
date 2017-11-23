@@ -31,13 +31,13 @@ namespace compression {
 template<class K2Tree, class Fun>
 void FreqVoc(const K2Tree &tree, Fun build) {
   try {
-    size_t cnt = tree.WordsCnt();
-    uint size = tree.WordSize();
+    size_t cnt = tree.words_cnt();
+    uint size = tree.words_size();
 
     Vocabulary words(cnt, size);
 
     size_t pos = 0;
-    tree.Words([&] (const uchar *word) {
+    tree.words([&] (const uchar *word) {
       words.assign(pos, word);
       ++pos;
     });

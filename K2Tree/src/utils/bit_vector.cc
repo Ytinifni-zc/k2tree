@@ -4,6 +4,7 @@
 
 #include <utils/bit_vector.h>
 #include <cassert>
+#include <fstream>
 
 bit_vector libk2tree::utils::int2bit_vector(const unsigned long long &num, const int &size) {
     assert (num < (1l<<size));
@@ -52,7 +53,7 @@ vector<bool> libk2tree::utils::int2vector_bool(const unsigned long long &num, co
     return vb;
 }
 
-void ::libk2tree::utils::int2vector_bool(const unsigned long long &num, const int &size, vector<bool> &vb) {
+void libk2tree::utils::int2vector_bool(const unsigned long long &num, const int &size, vector<bool> &vb) {
     assert (num < (1l<<size));
     vb.resize(size, false);
     unsigned long long tmp = num;
@@ -76,4 +77,43 @@ bool libk2tree::utils::store_to_file(const bit_vector& v, const std::string& fil
     v.serialize(out, nullptr, "", false);
     out.close();
     return true;
+}
+
+vector<uint> libk2tree::utils::bit_vector2FTRep(const bit_vector &bv, const int &unit, FTRep *&ret) {
+    //assert(unit == 16 || unit == 64 || unit == 256);
+    const int uint_s = sizeof(uint)*8;
+    uint list_size = static_cast<uint>(
+            ceil(static_cast<float>(bv.size())/uint_s)
+    );
+    uint* list = (uint*)malloc(sizeof(uint)*list_size);
+    memset(list, 0u, list_size*sizeof(uint));
+    for (int i = 0; i < bv.size(); ++i) {
+        int idx = i/uint_s, bit_pos = i%uint_s;
+        if (bv[i])
+            *(list+idx) |= (1<<bit_pos);
+    }
+    ret = createFT(list, list_size);
+    vector<uint> tmp(list_size);
+    for (int i = 0; i < list_size; ++i) tmp[i] = *(list+i);
+    return tmp;
+
+}
+
+void ::libk2tree::utils::bit_vector2int_bin(const bit_vector &bv, const int &unit, std::string file) {
+
+    const int uint_s = sizeof(uint)*8;
+    uint list_size = static_cast<uint>(
+            ceil(static_cast<float>(bv.size())/uint_s)
+    );
+    uint* list = (uint*)malloc(sizeof(uint)*list_size);
+    memset(list, 0, list_size*sizeof(uint));
+    for (int i = 0; i < bv.size(); ++i) {
+        int idx = i/uint_s, bit_pos = i%uint_s;
+        if (bv[i])
+            *(list+idx) |= (1<<bit_pos);
+    }
+    std::ofstream out(file, std::ios::binary);
+    for (int i = 0; i < list_size; ++i)
+        out.write((char*)(list+i), sizeof(uint));
+    out.close();
 }

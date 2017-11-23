@@ -1,3 +1,6 @@
+#ifndef DACS_H
+#define DACS_H
+
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
@@ -34,3 +37,5 @@ typedef struct sFTRep {
 	uint * decompressFT(FTRep * listRep, uint n);
 	FTRep* loadFT(char * filename);
 	void destroyFT(FTRep * listRep);
+
+#endif

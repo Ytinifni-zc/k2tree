@@ -7,4 +7,5 @@ add_library(${PROJECT_NAME}  ${source_file})
 #add_library(${PROJECT_NAME} SHARED ${source_file})
 add_executable(dacs_test "include/test.c" ${source_file})
 
-set(CMAKE_CXX_FLAGS -O9)
+set(CMAKE_CXX_FLAGS -O0)
+set(CMAKE_BUILD_TYPE "DEBUG")
