@@ -80,6 +80,12 @@ namespace libk2tree {
          */
         explicit k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, const string &path, const int &read_flag=read_T_levels);
 
+        /**
+         * Move constructor
+         * @param lhs
+         */
+        k2tree(k2tree &&lhs);
+
 
     public:
         //void T(bit_vector t);

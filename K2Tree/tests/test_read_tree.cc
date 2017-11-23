@@ -31,24 +31,6 @@ TEST(Read, readT) {
     }
     cout << endl;
     ASSERT_EQ(kt.edge_num(), edge_num);
-
-    FTRep* listRep;
-    auto list = libk2tree::utils::bit_vector2FTRep(kt.L(), 4, listRep);
-    for (int i = 0; i < kt.L().size(); ++i) {
-        cout << ((list[i/32] >> (i%32)) & 1);
-    }
-    cout << endl;
-
-    uint* listaux = decompressFT(listRep, list.size());
-    for (int i = 0; i < list.size(); ++i) {
-        ASSERT_EQ(listaux[i], list[i]);
-    }
-
-    uint value;
-    for (int i = 0; i < list.size(); ++i) {
-        ASSERT_EQ(accessFT(listRep, i+1), list[i]);
-    }
-
 }
 
 TEST(Read, readTvector) {

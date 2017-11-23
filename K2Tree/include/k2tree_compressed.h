@@ -27,6 +27,8 @@ namespace libk2tree {
         k2tree_compressed(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, size_t edge_num_,
                           const bit_vector &T_, const bit_vector &L_);
 
+        void build_compressed_leaves();
+
         void build_compressed_leaves(const HashTable &table, shared_ptr<Vocabulary> voc);
 
 //        /**

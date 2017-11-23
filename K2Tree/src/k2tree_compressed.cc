@@ -12,7 +12,6 @@ k2tree_compressed::k2tree_compressed(int k1_, int k2_,
         k2tree(k1_, k2_, k1_levels_, kL_,
                node_num_, edge_num_, T_, L_) {}
 
-
 FTRep* libk2tree::k2tree_compressed::compressL() {
     return compressL_;
 }
@@ -52,4 +51,13 @@ void k2tree_compressed::build_compressed_leaves(const HashTable &table, shared_p
     compressL_ = compressL;
     voc_ = voc;
 }
+
+void k2tree_compressed::build_compressed_leaves() {
+    compression::FreqVoc(*this, [&](const HashTable& table,
+                                    shared_ptr<Vocabulary> voc) {
+        this->build_compressed_leaves(table, voc);
+    });
+}
+
+
 

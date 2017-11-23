@@ -309,3 +309,12 @@ void k2tree::build_rank_support() {
     l_rank = rank_support_v<1>(&L_);
 }
 
+k2tree::k2tree(k2tree &&lhs): k1_(lhs.k1_),
+    k2_(lhs.k2_),
+    k1_levels_(lhs.k1_levels_),
+    kL_(lhs.kL_),
+    node_num_(lhs.node_num_),
+    edge_num_(lhs.edge_num_),
+    T_(lhs.T_),
+    L_(lhs.L_) {}
+
