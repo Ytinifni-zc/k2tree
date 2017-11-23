@@ -26,21 +26,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="562a6379-5f41-40d1-945c-4dc7b6d1ca63" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/include/k2tree_compressed.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/k2tree_compressed.cc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dacs/CMakeLists.txt" afterPath="$PROJECT_DIR$/dacs/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dacs/include/dacs.h" afterPath="$PROJECT_DIR$/dacs/include/dacs.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/compression/compressor.h" afterPath="$PROJECT_DIR$/include/compression/compressor.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/k2tree.h" afterPath="$PROJECT_DIR$/include/k2tree.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/utils/bit_vector.h" afterPath="$PROJECT_DIR$/include/utils/bit_vector.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/CMakeLists.txt" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/k2tree.cc" afterPath="$PROJECT_DIR$/src/k2tree.cc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/bit_vector.cc" afterPath="$PROJECT_DIR$/src/utils/bit_vector.cc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_dacs.cc" afterPath="$PROJECT_DIR$/tests/test_dacs.cc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_read_tree.cc" afterPath="$PROJECT_DIR$/tests/test_read_tree.cc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/CMakeLists.txt" afterPath="$PROJECT_DIR$/tools/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/csv_convertor.cc" afterPath="$PROJECT_DIR$/tools/csv_convertor.cc" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -151,7 +137,7 @@
           <file leaf-file-name="hybrid_k2tree.cc" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/../../dell122/k2tree/src/libk2tree/hybrid_k2tree.cc">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="720">
+                <state relative-caret-position="558">
                   <caret line="73" column="13" lean-forward="false" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
                   <folding />
                 </state>
@@ -169,6 +155,9 @@
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <push-targets>
+      <push-target-info target-remote="origin" target-branch="master" repo="$PROJECT_DIR$/.." source="using-sdsl" />
+    </push-targets>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/include/k2tree.h" root0="SKIP_INSPECTION" />
@@ -460,7 +449,7 @@
       <workItem from="1511311388572" duration="21714000" />
       <workItem from="1511356422576" duration="4343000" />
       <workItem from="1511398943081" duration="1751000" />
-      <workItem from="1511402371469" duration="15146000" />
+      <workItem from="1511402371469" duration="15365000" />
     </task>
     <task id="LOCAL-00001" summary="Build sd_vector and rrr_vector. Add compress from libk2tree.">
       <created>1511271455327</created>
@@ -476,14 +465,22 @@
       <option name="project" value="LOCAL" />
       <updated>1511342636669</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add k2tree_compressed in using DACs.">
+      <created>1511427806071</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1511427806071</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108392000" />
+    <option name="totallyTimeSpent" value="108611000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15533444" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -491,7 +488,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843652" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32948583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32948583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30640084" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -563,7 +560,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Build sd_vector and rrr_vector. Add compress from libk2tree." />
     <MESSAGE value="Add dacs lib and dacs test." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add dacs lib and dacs test." />
+    <MESSAGE value="Add k2tree_compressed in using DACs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add k2tree_compressed in using DACs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -888,7 +886,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../dell122/k2tree/src/libk2tree/hybrid_k2tree.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
+        <state relative-caret-position="558">
           <caret line="73" column="13" lean-forward="false" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
           <folding />
         </state>
