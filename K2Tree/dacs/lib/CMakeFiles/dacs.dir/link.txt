@@ -1,0 +1,2 @@
+/usr/bin/ar cr libdacs.a  CMakeFiles/dacs.dir/include/basics.c.o CMakeFiles/dacs.dir/include/bitrankw32int.c.o CMakeFiles/dacs.dir/include/dacs.c.o
+/usr/bin/ranlib libdacs.a
