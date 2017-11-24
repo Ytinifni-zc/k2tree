@@ -59,5 +59,9 @@ void k2tree_compressed::build_compressed_leaves() {
     });
 }
 
+k2tree_compressed::k2tree_compressed(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, const string &path,
+                                     const int &read_flag) : k2tree(k1_, k2_, k1_levels_, kL_, node_num_, path,
+                                                                    read_flag){}
+
 
 

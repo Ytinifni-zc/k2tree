@@ -1,7 +1,7 @@
 enable_testing()
 
 include_directories(${CMAKE_SOURCE_DIR}/tests)
-add_executable(test_k2tree test_main.cc)
+add_executable(test_k2tree test_main.cc test_k2tree_compressed.cc)
 target_link_libraries(test_k2tree ${GTEST_LIBRARIES} dacs rt gtest ${K2TREE_NAME} pthread sdsl divsufsort divsufsort64)
 
 set(TEST_DIR ${PROJECT_SOURCE_DIR}/tests)
