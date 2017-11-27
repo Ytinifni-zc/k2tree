@@ -4,11 +4,7 @@
 
 #include <k2tree.h>
 #include <k2tree_compressed.h>
-#include <cstdlib>
 #include <utils/time.h>
-#include <iostream>
-#include <utils/time.cc>
-#include <utils/bit_vector.h>
 #include "config.h"
 
 int main(int argc, char** argv) {
@@ -36,10 +32,10 @@ int main(int argc, char** argv) {
         sdsl::store_to_file(rrr_t, path+"T_rrr.bin");
         sdsl::store_to_file(rrr_l, path+"L_rrr.bin");
 
-        libk2tree::k2tree_compressed* c_tree = (libk2tree::k2tree_compressed*)(&tree);
-        c_tree->build_compressed_leaves();
-        const char * ft_path = (path + "L_FTR.bin").c_str();
-        saveFT(c_tree->compressL(), const_cast<char *>(ft_path));
+        libk2tree::k2tree_compressed c_tree(k1, k2, k1_levels, kL, node_num, path, libk2tree::read_T);
+        c_tree.build_compressed_leaves();
+        char * ft_path = strdup((path + "L_FTR.bin").c_str());
+        saveFT(c_tree.compressL(), ft_path);
 
     };
     libk2tree::utils::cost(build_tree);

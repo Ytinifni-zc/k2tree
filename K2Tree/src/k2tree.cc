@@ -4,10 +4,6 @@
 #include <k2tree.h>
 #include <utils/sort.h>
 #include <utils/file.h>
-#include <sdsl/io.hpp>
-#include <iostream>
-#include <fstream>
-#include <map>
 
 using std::ifstream;
 using std::ofstream;
@@ -37,6 +33,14 @@ libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node
     set_tree_unit();
 }
 
+libk2tree::k2tree::k2tree(k2tree &&lhs): k1_(lhs.k1_),
+    k2_(lhs.k2_),
+    k1_levels_(lhs.k1_levels_),
+    kL_(lhs.kL_),
+    node_num_(lhs.node_num_),
+    edge_num_(lhs.edge_num_),
+    T_(lhs.T_),
+    L_(lhs.L_) {}
 
 
 void libk2tree::k2tree::set_tree_unit() {
@@ -112,7 +116,7 @@ libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_,
         sdsl::load_from_file(T_, t_file);
     }
     build_rank_support();
-    edge_num_ = l_rank(L_.size()-1);
+    edge_num_ = l_rank(L_.size());
 }
 
 bit_vector libk2tree::k2tree::T() {
@@ -215,15 +219,6 @@ void libk2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const str
 
 }
 
-size_t libk2tree::k2tree::rank(size_t pos) {
-    if (pos >= T_.size()+L_.size()) {
-        std::cerr << "Position is bigger than k2tree." << std::endl;
-        exit(1);
-    }
-    ;
-    return 0;
-}
-
 void libk2tree::k2tree::hm_insert_bit(pos_submat &hm, const int &level,
                                    const submat_info &si, level_1s &last_level) {
     int k = which_k(level);
@@ -234,7 +229,7 @@ void libk2tree::k2tree::hm_insert_bit(pos_submat &hm, const int &level,
     int tmp_idx = ((u%k)*k+v%k);
     submat[tmp_idx] = 1;
 
-    if (hm.find(pos) == hm.end()) {
+    if (hm.end() == hm.find(pos)) {
         hm.insert(std::make_pair(pos, submat));
         last_level.insert(submat_info(u/k, v/k));
     } else {
@@ -309,12 +304,17 @@ void k2tree::build_rank_support() {
     l_rank = rank_support_v<1>(&L_);
 }
 
-k2tree::k2tree(k2tree &&lhs): k1_(lhs.k1_),
-    k2_(lhs.k2_),
-    k1_levels_(lhs.k1_levels_),
-    kL_(lhs.kL_),
-    node_num_(lhs.node_num_),
-    edge_num_(lhs.edge_num_),
-    T_(lhs.T_),
-    L_(lhs.L_) {}
+size_t libk2tree::k2tree::rank(size_t pos) {
+    if (pos >= T_.size()+L_.size()) {
+        std::cerr << "Position is bigger than k2tree." << std::endl;
+        exit(1);
+    }
+    if (t_rank.size() == 0 || l_rank.size() == 0) {
+        build_rank_support();
+    }
+    if (pos < T_.size())
+        return t_rank.rank(pos);
+    else
+        return t_rank(T_.size())+l_rank.rank(pos-T_.size());
+}
 

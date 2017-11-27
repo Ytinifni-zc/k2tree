@@ -75,17 +75,37 @@ TEST(ReadTwitter0, readT_kL8) {
 
 }
 
-/*
-
-TEST(ReadTwitter, readT_kL4) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/k2tree/kl4/";
-    const size_t node_num = 41652230, edge_num = 1468365182;
+TEST(ReadTwitter8514, readT_kL4) {
+    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter8514.tree/kl4/";
+    const size_t node_num = 325409, edge_num = 215287671;
 
     libk2tree::k2tree kt(2, 2, 1, 4, node_num, path, libk2tree::read_T);
     cout << kt.T().size() << endl;
     ASSERT_EQ(kt.edge_num(), edge_num);
 
 }
+
+TEST(ReadTwitter8514, readT_kL8) {
+    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter8514.tree/kl8/";
+    const size_t node_num = 325409, edge_num = 215287671;
+
+    libk2tree::k2tree kt(2, 2, 1, 8, node_num, path, libk2tree::read_T);
+    cout << kt.T().size() << endl;
+    ASSERT_EQ(kt.edge_num(), edge_num);
+
+}
+
+TEST(ReadTwitter8514, readT_kL16) {
+    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter8514.tree/kl16/";
+    const size_t node_num = 325409, edge_num = 215287671;
+
+    libk2tree::k2tree kt(2, 2, 1, 16, node_num, path, libk2tree::read_T);
+    cout << kt.T().size() << endl;
+    ASSERT_EQ(kt.edge_num(), edge_num);
+
+}
+
+/*
 
 TEST(ReadTwitter, readT_kL8) {
     const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/k2tree/kl8/";
