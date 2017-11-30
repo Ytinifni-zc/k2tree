@@ -5,6 +5,7 @@
 #include <k2tree.h>
 #include <k2tree_compressed.h>
 #include <utils/time.h>
+#include <utils/time.cc>
 #include "config.h"
 
 int main(int argc, char** argv) {

@@ -130,7 +130,7 @@ namespace libk2tree {
 
     private:
         static const size_t __n = 19;
-        static const size_t __p = 33;
+        static const size_t __p = 35;
         typedef bitset<__n> node_bits;
         typedef bitset<__p> submat_pos;
         int leaf_bits;
@@ -178,7 +178,8 @@ namespace libk2tree {
         // <pos, submat>
         typedef unordered_map<submat_pos, bit_vector> pos_submat;
         // 上一层中不为0的子阵对应的u,v
-        typedef unordered_set<submat_info, submat_info_hash> level_1s;
+        // typedef unordered_set<submat_info, submat_info_hash> level_1s;
+        typedef vector<submat_info> level_1s;
 
         static bool cmp_submat_pos(const submat_pos &p1, const submat_pos &p2) {
             for (int i = __p-1; i >= 0; --i) {
@@ -241,15 +242,42 @@ namespace libk2tree {
          */
         void write_to_memory(const pos_submat &hm, const int &level);
 
+        /**
+         * Return true iff node p points to q and false otherwise.
+         * @param n Current submatrix size.
+         * @param p Row in current submatrix.
+         * @param q Column in current submatrix.
+         * @param pos Position in T||L;
+         * @param level Current level of submatrix.
+         * @return
+         */
+        bool check_link_(size_t n, size_t p, size_t q, llong pos, int level);
+
     public:
         /**
          * Merge each level's Tl to T_
          */
         void merge_tree_bitmap();
 
-        size_t rank(size_t pos);
-
+        /**
+         * Build sdsl::rank_support_v from T_ and L_.
+         */
         void build_rank_support();
+
+        /**
+         * Using the rank function from sdsl::rank_support_v.
+         * @param pos Position in T||L.
+         * @return Rank number of pos in T||L.
+         */
+        size_t rank(llong pos);
+
+        /**
+         * Return true iff node p points to q and false otherwise.
+         * @param p Node of start.
+         * @param q Node of end.
+         * @return
+         */
+        bool check_link(size_t p, size_t q);
 
     public:
 
@@ -272,6 +300,7 @@ namespace libk2tree {
         int kL_;
 
         int height_;
+        size_t n_prime_;
 
         size_t node_num_;
         size_t edge_num_;

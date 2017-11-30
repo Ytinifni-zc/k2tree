@@ -15,8 +15,8 @@ TEST(Rank, test_tree) {
     ASSERT_NE(kt.T().size(), 0);
     ASSERT_NE(kt.L().size(), 0);
 
-    ASSERT_EQ(kt.rank(0), 0);
-    ASSERT_EQ(kt.rank(2), 1);
+    ASSERT_EQ(kt.rank(0), 1);
+    ASSERT_EQ(kt.rank(2), 2);
     ASSERT_EQ(kt.rank(35), 17);
     ASSERT_EQ(kt.rank(40), 18);
 }

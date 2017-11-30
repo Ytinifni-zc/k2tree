@@ -60,6 +60,7 @@ int main(int argc, char** argv) {
         while (line_num < edge_num && !fin.eof()) {
 
             fin >> u >> v;
+            if (u == 3 && v == 0) continue;
             u--;
             v--;
 
@@ -73,7 +74,7 @@ int main(int argc, char** argv) {
                     fouts[i].close();
                     if (i + k0 < k0 * k0) {
                         string of = out_file + std::to_string(i + k0) + ".csv";
-                        fouts[i + k0].open(of, std::ios::out | std::ios::trunc);
+                        fouts[i + k0].open(of, std::ios::out);
                         assert(!fouts[i + k0].fail());
                     }
                 }

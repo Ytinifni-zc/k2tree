@@ -17,6 +17,7 @@ namespace libk2tree {
 
     typedef unsigned char uchar;
     typedef unsigned int uint;
+    typedef long long llong;
 
 //    const size_t k = 2;
 //    const size_t kL = 2;

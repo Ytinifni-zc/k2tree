@@ -4,6 +4,8 @@
 .idea
 build/*
 _build/*
+#libsdsl
+#libsdsl/*
 .DS_Store
 cmake-build-debug/*
 
