@@ -238,6 +238,17 @@ namespace libk2tree {
          */
         void get_child_(size_t n, size_t p, size_t q, llong pos, int level, vector<size_t> &children);
 
+        /**
+         * Return parents' id in current level.
+         * @param n
+         * @param p
+         * @param q
+         * @param pos
+         * @param level
+         * @param parents
+         */
+        void get_parent_(size_t n, size_t p, size_t q, llong pos, int level, vector<size_t> &parents);
+
     protected:
 
         /**
@@ -286,11 +297,18 @@ namespace libk2tree {
         bool check_link(size_t p, size_t q);
 
         /**
-         * Return children list of node p.
+         * Return children array of node p.
          * @param p
          * @return
          */
         vector<size_t> get_children(size_t p);
+
+        /**
+         * Return parents array of node q.
+         * @param q
+         * @return
+         */
+        vector<size_t> get_parents(size_t q);
 
         /**
          * Using the rank function from sdsl::rank_support_v.

@@ -22,6 +22,7 @@ TEST(GetChild, test_csv) {
     libk2tree::k2tree kt(2, 2, 1, 2, node_num, path, libk2tree::read_T);
 
     show_children(kt.get_children(9));
+    show_children(kt.get_parents(9));
 
 }
 
@@ -32,6 +33,9 @@ TEST(GetChild, test_csv_kl4) {
     libk2tree::k2tree kt(2, 2, 1, 4, node_num, path, libk2tree::read_T);
 
     show_children(kt.get_children(10));
+    show_children(kt.get_parents(10));
+    show_children(kt.get_parents(2));
+    show_children(kt.get_parents(7));
 }
 
 TEST(GetChild, twitter0_kl4) {
@@ -41,6 +45,7 @@ TEST(GetChild, twitter0_kl4) {
     k2tree kt(2, 2, 1, 4, node_num, path, libk2tree::read_T);
 
     show_children(kt.get_children(27));
+    show_children(kt.get_parents(27));
 
 }
 
@@ -51,6 +56,7 @@ TEST(GetChild, twitter0_kl8) {
     k2tree kt(2, 2, 1, 8, node_num, path, libk2tree::read_T);
 
     show_children(kt.get_children(27));
+    show_children(kt.get_parents(27));
 }
 
 TEST(GetChild, twitter0_kl16) {
@@ -60,6 +66,7 @@ TEST(GetChild, twitter0_kl16) {
     k2tree kt(2, 2, 1, 16, node_num, path, libk2tree::read_T);
 
     show_children(kt.get_children(27));
+    show_children(kt.get_parents(27));
 }
 
 TEST(GetChild, twitter8514_kl16) {
@@ -69,5 +76,6 @@ TEST(GetChild, twitter8514_kl16) {
     k2tree kt(2, 2, 1, 16, node_num, path, libk2tree::read_T);
 
     show_children(kt.get_children(325409));
+    show_children(kt.get_parents(325409));
 
 }

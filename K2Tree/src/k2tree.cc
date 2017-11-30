@@ -410,3 +410,45 @@ vector<size_t> k2tree::get_children(size_t p) {
     return children;
 }
 
+void k2tree::get_parent_(size_t n, size_t p, size_t q, llong pos, int level, vector<size_t> &parents) {
+    if (pos >= static_cast<llong>(T_.size()+L_.size())) {
+        std::cerr << "Position is bigger than k2tree." << std::endl;
+        exit(1);
+    }
+    if (pos >= static_cast<llong>(T_.size())) { // Leaf
+        if(L_[pos-T_.size()]) {
+            parents.push_back(++p);
+        }
+    } else {
+        if (pos == -1 or T_[pos] == 1) {
+            if (level < k1_levels_) {
+                auto k = which_k(level);
+                auto y = rank(pos) * k*k;
+                auto n_div_k = n/k;
+                y += std::floor(static_cast<double>(q)/n_div_k);
+                for (int j = 0; j < k; ++j) {
+                    get_parent_(n_div_k, p+n_div_k*j, q%n_div_k, y+j*k, level+1, parents);
+                }
+            } else {
+                auto delimiter = (level == height_-1)?level:k1_levels_;
+                auto tmp_pos = 0;
+                for (int i = 0; i < delimiter-1; ++i)
+                    tmp_pos += level_pos[i];
+                auto k = which_k(level+1);
+                auto y = tmp_pos+level_pos[delimiter-1]+(rank(pos-1)-rank(tmp_pos-1))*k*k;
+                auto n_div_k = n/k;
+                y += std::floor(static_cast<double>(q)/n_div_k);
+                for (int j = 0; j < k; ++j) {
+                    get_parent_(n_div_k, p+n_div_k*j, q%n_div_k, y+j*k, level+1, parents);
+                }
+            }
+        }
+    }
+}
+
+vector<size_t> k2tree::get_parents(size_t q) {
+    vector<size_t> parents(0);
+    get_parent_(n_prime_, 0, --q, -1, 0, parents);
+    return parents;
+}
+
