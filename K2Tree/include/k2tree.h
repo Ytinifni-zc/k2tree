@@ -214,6 +214,29 @@ namespace libk2tree {
 
         }
 
+        void split_T();
+
+        /**
+         * Return true iff node p points to q and false otherwise.
+         * @param n Current submatrix size.
+         * @param p Row in current submatrix.
+         * @param q Column in current submatrix.
+         * @param pos Position in T||L;
+         * @param level Current level of submatrix.
+         * @return
+         */
+        bool check_link_(size_t n, size_t p, size_t q, llong pos, int level);
+
+        /**
+         * Return the first child's position in current level.
+         * @param n
+         * @param p
+         * @param pos
+         * @param level
+         * @return
+         */
+        llong get_child_(size_t n, size_t p, llong pos, int level);
+
     protected:
 
         /**
@@ -242,20 +265,9 @@ namespace libk2tree {
          */
         void write_to_memory(const pos_submat &hm, const int &level);
 
-        /**
-         * Return true iff node p points to q and false otherwise.
-         * @param n Current submatrix size.
-         * @param p Row in current submatrix.
-         * @param q Column in current submatrix.
-         * @param pos Position in T||L;
-         * @param level Current level of submatrix.
-         * @return
-         */
-        bool check_link_(size_t n, size_t p, size_t q, llong pos, int level);
-
     public:
         /**
-         * Merge each level's Tl to T_
+         * Merge each level's Tl to T_.
          */
         void merge_tree_bitmap();
 
@@ -265,19 +277,20 @@ namespace libk2tree {
         void build_rank_support();
 
         /**
-         * Using the rank function from sdsl::rank_support_v.
-         * @param pos Position in T||L.
-         * @return Rank number of pos in T||L.
-         */
-        size_t rank(llong pos);
-
-        /**
          * Return true iff node p points to q and false otherwise.
          * @param p Node of start.
          * @param q Node of end.
          * @return
          */
         bool check_link(size_t p, size_t q);
+
+        /**
+         * Using the rank function from sdsl::rank_support_v.
+         * rank(k) equals number of 1 in T||L[0, k]
+         * @param pos Position in T||L.
+         * @return Rank number of pos in T||L.
+         */
+        size_t rank(llong pos);
 
     public:
 
@@ -313,6 +326,11 @@ namespace libk2tree {
     private:
         rank_support_v<1> t_rank;
         rank_support_v<1> l_rank;
+
+        /**
+         * Length of each level in T, aka Tl.
+         */
+        vector<llong> level_pos;
     };
 }
 

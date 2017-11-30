@@ -94,13 +94,15 @@ libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_,
                 T_[idx++] = b;
             }
         }
+        build_rank_support();
     } else {
         string l_file = path + "L.bin";
         sdsl::load_from_file(L_, l_file);
         string t_file = path + "T.bin";
         sdsl::load_from_file(T_, t_file);
+        build_rank_support();
+        split_T();
     }
-    build_rank_support();
     edge_num_ = l_rank(L_.size());
 }
 
@@ -288,6 +290,24 @@ void libk2tree::k2tree::merge_tree_bitmap() {
     tree_bitmap_.shrink_to_fit();
 }
 
+void k2tree::split_T() {
+    level_pos.resize(height_-1);
+    level_pos[0] = k1_*k1_;
+    // Run start from level 2.
+    int level = 2;
+    int t_size = k1_*k1_, t1_size;
+    size_t tmp_rank = 0;
+    for (; level < height_; ++level) {
+        if (level >= k1_levels_)
+            t1_size = t_size;
+        auto k = which_k(level);
+        auto current_rank = rank(t_size-1);
+        level_pos[level-1] = (current_rank - tmp_rank)*k*k;
+        tmp_rank = current_rank;
+        t_size+=level_pos[level-1];
+    }
+}
+
 void k2tree::build_rank_support() {
     assert(T_.size() != 0 && L_.size() != 0);
     t_rank = rank_support_v<1>(&T_);
@@ -295,13 +315,10 @@ void k2tree::build_rank_support() {
 }
 
 size_t libk2tree::k2tree::rank(llong pos) {
-    if (pos == -1) return 0;
+    if (pos < 0) return 0;
     if (pos >= static_cast<llong>(T_.size()+L_.size())) {
         std::cerr << "Position is bigger than k2tree." << std::endl;
         exit(1);
-    }
-    if (t_rank.size() == 0 || l_rank.size() == 0) {
-        build_rank_support();
     }
     pos ++;
     if (pos <= T_.size())
@@ -311,6 +328,9 @@ size_t libk2tree::k2tree::rank(llong pos) {
 }
 
 bool k2tree::check_link_(size_t n, size_t p, size_t q, llong pos, int level) {
+    // 主要问题为在树中找叶子结点时，每一层的内部节点在T中的位置
+    // 思路为：当level < k1_levels时，与论文一致，当level >= k1_levels时，
+    // 使用
     if (pos >= static_cast<llong>(T_.size()+L_.size())) {
         std::cerr << "Position is bigger than k2tree." << std::endl;
         exit(1);
@@ -320,13 +340,24 @@ bool k2tree::check_link_(size_t n, size_t p, size_t q, llong pos, int level) {
     } else { //internal node
         auto k = which_k(level);
         if (pos == -1 or T_[pos] == 1) {
-            auto y = rank(pos)*k*k;
-            level ++;
-            auto k2 = which_k(level);
-            auto n_div_k = n/k2;
-            y += floor(static_cast<double>(p)/n_div_k)*k2+
-                    floor(static_cast<double>(q)/n_div_k);
-            return check_link_(n_div_k, p%n_div_k, q%n_div_k, y, level);
+            if (level < k1_levels_) {
+                auto y = rank(pos) * k*k;
+                auto n_div_k = n/k;
+                y += std::floor(static_cast<double>(p)/n_div_k)*k+
+                     std::floor(static_cast<double>(q)/n_div_k);
+                return check_link_(n_div_k, p%n_div_k, q%n_div_k, y, level+1);
+            } else {
+                auto delimiter = (level == height_-1)?level:k1_levels_;
+                auto tmp_pos = 0;
+                for (int i = 0; i < delimiter-1; ++i)
+                    tmp_pos += level_pos[i];
+                k = which_k(level+1);
+                auto y = tmp_pos+level_pos[delimiter-1]+(rank(pos-1)-rank(tmp_pos-1))*k*k;
+                auto n_div_k = n/k;
+                y += std::floor(static_cast<double>(p)/n_div_k)*k+
+                     std::floor(static_cast<double>(q)/n_div_k);
+                return check_link_(n_div_k, p%n_div_k, q%n_div_k, y, level+1);
+            }
         } else
             return false;
     }
@@ -334,5 +365,10 @@ bool k2tree::check_link_(size_t n, size_t p, size_t q, llong pos, int level) {
 
 bool k2tree::check_link(size_t p, size_t q) {
     return check_link_(n_prime_, --p, --q, -1, 0);
+}
+
+llong k2tree::get_child_(size_t n, size_t p, llong pos, int level) {
+
+    return 0;
 }
 
