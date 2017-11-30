@@ -12,6 +12,22 @@ k2tree_compressed::k2tree_compressed(int k1_, int k2_,
         k2tree(k1_, k2_, k1_levels_, kL_,
                node_num_, edge_num_, T_, L_) {}
 
+k2tree_compressed::k2tree_compressed(int k1_, int k2_, int k1_levels_, int kL_,
+                                     size_t node_num_, const string &path,
+                                     const int &read_flag, const bool& read_compressL) :
+        k2tree(k1_, k2_, k1_levels_, kL_,
+               node_num_, path, read_flag) {
+    if (read_compressL) {
+        char *ft_path = strdup((path + "L_FTR.bin").c_str());
+        compressL_ = loadFT(ft_path);
+        ifstream in(path + "voc.bin", ifstream::binary);
+        voc_ = std::make_shared<Vocabulary>(&in);
+        in.close();
+    } else {
+        build_compressed_leaves();
+    }
+}
+
 FTRep* libk2tree::k2tree_compressed::compressL() {
     return compressL_;
 }
@@ -59,9 +75,13 @@ void k2tree_compressed::build_compressed_leaves() {
     });
 }
 
-k2tree_compressed::k2tree_compressed(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_, const string &path,
-                                     const int &read_flag) : k2tree(k1_, k2_, k1_levels_, kL_, node_num_, path,
-                                                                    read_flag){}
+void k2tree_compressed::save(const string &path) {
+    char * ft_path = strdup((path+"L_FTR.bin").c_str());
+    saveFT(compressL_, ft_path);
+    ofstream out(path+"voc.bin", ofstream::binary);
+    voc_->Save(&out);
+    out.close();
 
+}
 
 
