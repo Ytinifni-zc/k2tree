@@ -330,7 +330,8 @@ size_t libk2tree::k2tree::rank(llong pos) {
 bool k2tree::check_link_(size_t n, size_t p, size_t q, llong pos, int level) {
     // 主要问题为在树中找叶子结点时，每一层的内部节点在T中的位置
     // 思路为：当level < k1_levels时，与论文一致，当level >= k1_levels时，
-    // 使用
+    // 记录前k1_levels-1层在T中的位置，再加上当前层中1的个数与k2^2的积，可得到
+    // 孩子结点的位置，然后再根据p、q取具体在子阵中的位置。
     if (pos >= static_cast<llong>(T_.size()+L_.size())) {
         std::cerr << "Position is bigger than k2tree." << std::endl;
         exit(1);
@@ -367,8 +368,45 @@ bool k2tree::check_link(size_t p, size_t q) {
     return check_link_(n_prime_, --p, --q, -1, 0);
 }
 
-llong k2tree::get_child_(size_t n, size_t p, llong pos, int level) {
+void k2tree::get_child_(size_t n, size_t p, size_t q, llong pos, int level, vector<size_t> & children) {
+    if (pos >= static_cast<llong>(T_.size()+L_.size())) {
+        std::cerr << "Position is bigger than k2tree." << std::endl;
+        exit(1);
+    }
+    if (pos >= static_cast<llong>(T_.size())) { // Leaf
+        if(L_[pos-T_.size()]) {
+            children.push_back(++q);
+        }
+    } else {
+        if (pos == -1 or T_[pos] == 1) {
+            if (level < k1_levels_) {
+                auto k = which_k(level);
+                auto y = rank(pos) * k*k;
+                auto n_div_k = n/k;
+                y += std::floor(static_cast<double>(p)/n_div_k)*k;
+                for (int j = 0; j < k; ++j) {
+                    get_child_(n_div_k, p%n_div_k, q+n_div_k*j, y+j, level+1, children);
+                }
+            } else {
+                auto delimiter = (level == height_-1)?level:k1_levels_;
+                auto tmp_pos = 0;
+                for (int i = 0; i < delimiter-1; ++i)
+                    tmp_pos += level_pos[i];
+                auto k = which_k(level+1);
+                auto y = tmp_pos+level_pos[delimiter-1]+(rank(pos-1)-rank(tmp_pos-1))*k*k;
+                auto n_div_k = n/k;
+                y += std::floor(static_cast<double>(p)/n_div_k)*k;
+                for (int j = 0; j < k; ++j) {
+                    get_child_(n_div_k, p%n_div_k, q+n_div_k*j, y+j, level+1, children);
+                }
+            }
+        }
+    }
+}
 
-    return 0;
+vector<size_t> k2tree::get_children(size_t p) {
+    vector<size_t> children(0);
+    get_child_(n_prime_, --p, 0, -1, 0, children);
+    return children;
 }
 
