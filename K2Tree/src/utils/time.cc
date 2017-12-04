@@ -10,7 +10,7 @@
 template<typename L>
 void ::libk2tree::utils::cost(L lambda, const std::string &unit) {
 
-    assert(unit=="ms" || unit=="s");
+    assert(unit == "us" || unit=="ms" || unit=="s");
 
     auto start = std::chrono::system_clock::now();
     lambda();
@@ -19,6 +19,7 @@ void ::libk2tree::utils::cost(L lambda, const std::string &unit) {
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end-start);
     auto den = std::chrono::milliseconds::period::den;
     if (unit == "s") den = std::chrono::microseconds::period::den;
+    else if (unit == "us") den = 1;
     std::cout << "[" << double(duration.count())
                         *std::chrono::microseconds::period::num / den
               << unit << "]" << std::endl;

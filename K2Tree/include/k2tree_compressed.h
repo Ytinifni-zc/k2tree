@@ -96,11 +96,43 @@ namespace libk2tree {
 //
 //        size_t get_size() const;
 
-        FTRep* compressL();
-
         ~k2tree_compressed() {
             destroyFT(compressL_);
         }
+
+    public:
+        FTRep* compressL();
+
+        /**
+         * Get bit of compressL_ on position pos.
+         * @param pos
+         * @return
+         */
+        int accessCompressL(llong pos) const;
+
+        /**
+         * Return true iff node p points to q and false otherwise.
+         * @param p Node of start.
+         * @param q Node of end.
+         * @return
+         */
+        bool check_link(size_t p, size_t q);
+
+        /**
+         * Return children array of node p.
+         * @param p
+         * @return
+         */
+        vector<size_t> get_children(size_t p);
+
+        /**
+         * Return parents array of node q.
+         * @param q
+         * @return
+         */
+        vector<size_t> get_parents(size_t q);
+
+
 
     private:
         /**
@@ -121,7 +153,10 @@ namespace libk2tree {
          */
         const uchar *get_word(size_t pos) const {
             // TODO Port to 64-bits
-            uint iword = accessFT(compressL_, pos/(kL_*kL_));
+            // dacs.c:325 uint ini = param-1;
+            // shows that uint accessFT(FTRep * listRep,uint param)
+            // param start from 1
+            uint iword = accessFT(compressL_, pos/(kL_*kL_)+1);
             return voc_->get(iword);
         }
 

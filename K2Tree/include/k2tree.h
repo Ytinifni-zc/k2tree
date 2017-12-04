@@ -90,8 +90,8 @@ namespace libk2tree {
     public:
         //void T(bit_vector t);
         //void L(bit_vector l);
-        bit_vector T();
-        bit_vector L();
+        bit_vector T() const;
+        bit_vector L() const;
         vector<bit_vector> tree_bitmap();
 
         size_t edge_num();
@@ -216,6 +216,8 @@ namespace libk2tree {
 
         void split_T();
 
+    protected:
+
         /**
          * Return true iff node p points to q and false otherwise.
          * @param n Current submatrix size.
@@ -223,9 +225,12 @@ namespace libk2tree {
          * @param q Column in current submatrix.
          * @param pos Position in T||L;
          * @param level Current level of submatrix.
+         * @param accessL Function that access position pos in L or compressL.
          * @return
          */
-        bool check_link_(size_t n, size_t p, size_t q, llong pos, int level);
+        bool check_link_(size_t n, size_t p, size_t q, llong pos, int level,
+                         const std::function<int(llong)> &accessL
+        );
 
         /**
          * Return children's id in current level.
@@ -235,8 +240,12 @@ namespace libk2tree {
          * @param pos
          * @param level
          * @param children Result of children.
+         * @param accessL Function that access position pos in L or compressL.
          */
-        void get_child_(size_t n, size_t p, size_t q, llong pos, int level, vector<size_t> &children);
+        void get_child_(size_t n, size_t p, size_t q, llong pos, int level,
+                        vector<size_t> &children,
+                        const std::function<int(llong)> &accessL
+        );
 
         /**
          * Return parents' id in current level.
@@ -245,11 +254,13 @@ namespace libk2tree {
          * @param q
          * @param pos
          * @param level
-         * @param parents
+         * @param parents Result of parents.
+         * @param accessL Function that access position pos in L or compressL.
          */
-        void get_parent_(size_t n, size_t p, size_t q, llong pos, int level, vector<size_t> &parents);
-
-    protected:
+        void get_parent_(size_t n, size_t p, size_t q, llong pos, int level,
+                         vector<size_t> &parents,
+                         const std::function<int(llong)> &accessL
+        );
 
         /**
          * Add one submatrix bit to hashmap and last_level hashset.
