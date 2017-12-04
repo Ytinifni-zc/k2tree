@@ -5,7 +5,7 @@ add_executable(test_k2tree test_main.cc)
 target_link_libraries(test_k2tree ${GTEST_LIBRARIES} dacs gtest ${K2TREE_NAME} pthread sdsl divsufsort divsufsort64)
 
 set(TEST_DIR ${PROJECT_SOURCE_DIR}/tests)
-file(GLOB TEST_SRCS RELATIVE ${TEST_DIR} "*.cc")
+file(GLOB TEST_SRCS RELATIVE ${TEST_DIR} "*.cc" "tests_utils.h")
 message("[Test_srcs]: ${TEST_SRCS}")
 foreach(test ${TEST_SRCS})
     message("[###]: ${test}")

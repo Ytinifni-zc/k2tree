@@ -3,8 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include <k2tree.h>
-#include <k2tree_compressed.h>
+#include "tests_utils.h"
 
 using namespace libk2tree;
 using namespace std;
@@ -41,82 +40,52 @@ TEST(CheckLink, test_csv_kl4) {
 }
 
 TEST(CheckLink, twitter0_kl4) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter0.tree/kl4/";
-    const size_t node_num = 325409;
+    auto kL = 4;
+    auto kt = read_twitter_partition(0, kL);
 
-    k2tree kt(2, 2, 1, 4, node_num, path, libk2tree::read_T);
+    ASSERT_TRUE(kt->check_link(4, 3));
+    ASSERT_TRUE(kt->check_link(5, 2));
+    ASSERT_FALSE(kt->check_link(5, 4));
 
-    ASSERT_TRUE(kt.check_link(4, 3));
-    ASSERT_TRUE(kt.check_link(5, 2));
-    ASSERT_FALSE(kt.check_link(5, 4));
-
-    ASSERT_TRUE(kt.check_link(325396, 222193));
-    ASSERT_TRUE(kt.check_link(325396, 325351));
-    ASSERT_TRUE(kt.check_link(325397, 325351));
+    ASSERT_TRUE(kt->check_link(325396, 222193));
+    ASSERT_TRUE(kt->check_link(325396, 325351));
+    ASSERT_TRUE(kt->check_link(325397, 325351));
 
 }
 
 TEST(CheckLink, twitter0_kl8) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter0.tree/kl8/";
-    const size_t node_num = 325409;
+    auto kL = 8;
+    auto kt = read_twitter_partition(0, kL);
 
-    k2tree kt(2, 2, 1, 8, node_num, path, libk2tree::read_T);
-
-    ASSERT_TRUE(kt.check_link(4, 3));
-    ASSERT_TRUE(kt.check_link(5, 2));
-    ASSERT_FALSE(kt.check_link(5, 4));
-    ASSERT_TRUE(kt.check_link(325396, 222193));
-    ASSERT_TRUE(kt.check_link(325396, 325351));
-    ASSERT_TRUE(kt.check_link(325397, 325351));
+    ASSERT_TRUE(kt->check_link(4, 3));
+    ASSERT_TRUE(kt->check_link(5, 2));
+    ASSERT_FALSE(kt->check_link(5, 4));
+    ASSERT_TRUE(kt->check_link(325396, 222193));
+    ASSERT_TRUE(kt->check_link(325396, 325351));
+    ASSERT_TRUE(kt->check_link(325397, 325351));
 
 }
 
 TEST(CheckLink, twitter0_kl16) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter0.tree/kl16/";
-    const size_t node_num = 325409;
+    auto kL = 16;
+    auto kt = read_twitter_partition(0, kL);
 
-    k2tree kt(2, 2, 1, 16, node_num, path, libk2tree::read_T);
-
-    ASSERT_TRUE(kt.check_link(4, 3));
-    ASSERT_TRUE(kt.check_link(5, 2));
-    ASSERT_FALSE(kt.check_link(5, 4));
-    ASSERT_TRUE(kt.check_link(325396, 222193));
-    ASSERT_TRUE(kt.check_link(325396, 325351));
-    ASSERT_TRUE(kt.check_link(325397, 325351));
+    ASSERT_TRUE(kt->check_link(4, 3));
+    ASSERT_TRUE(kt->check_link(5, 2));
+    ASSERT_FALSE(kt->check_link(5, 4));
+    ASSERT_TRUE(kt->check_link(325396, 222193));
+    ASSERT_TRUE(kt->check_link(325396, 325351));
+    ASSERT_TRUE(kt->check_link(325397, 325351));
 
 }
 
 TEST(CheckLink, twitter8514_kl16) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter8514.tree/kl16/";
-    const size_t node_num = 325409;
+    auto kL = 16;
+    auto kt = read_twitter_partition(8514, kL);
 
-    k2tree kt(2, 2, 1, 16, node_num, path, libk2tree::read_T);
-
-    ASSERT_TRUE(kt.check_link(1, 15));
-    ASSERT_TRUE(kt.check_link(325409, 74107));
-    ASSERT_TRUE(kt.check_link(325408, 142158));
-
-}
-
-void show(const k2tree_compressed &kt, int ws) {
-    int length = (36>ws)?36:ws;
-    for (int i = 0; i < length; ++i) {
-        cout << kt.L()[i];
-        if (0 == (i+1)%ws) cout << " ";
-    }
-    cout << endl;
-    for (int i = 0; i < length; ++i) {
-        cout << kt.accessCompressL(i);
-        if (0 == (i+1)%ws) cout << " ";
-    }
-    cout << endl;
-
-    int err = 0;
-    for (int i = 0; i < length; ++i) {
-        if (kt.accessCompressL(i) != kt.L()[i])
-            err++;
-    }
-    std::cout << err << std::endl;
+    ASSERT_TRUE(kt->check_link(1, 15));
+    ASSERT_TRUE(kt->check_link(325409, 74107));
+    ASSERT_TRUE(kt->check_link(325408, 142158));
 
 }
 
@@ -125,8 +94,6 @@ TEST(CompressedCheckLink, test_csv) {
     const string path = "./k2tree/";
     const size_t node_num = 11;
     k2tree_compressed kt(2, 2, 1, 2, node_num, path, libk2tree::read_T, true);
-
-    show(kt, 4);
 
     ASSERT_TRUE(kt.check_link(1, 2));
     ASSERT_TRUE(kt.check_link(10, 7));
@@ -139,63 +106,50 @@ TEST(CompressedCheckLink, test_csv) {
 }
 
 TEST(CompressedCheckLink, twitter0_kl4) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter0.tree/kl4/";
-    const size_t node_num = 325409;
+    auto kL = 4;
+    auto kt = read_twitter_partition_compressed(0, kL);
 
-    k2tree_compressed kt(2, 2, 1, 4, node_num, path, libk2tree::read_T, true);
-    show(kt, 4*4);
-
-    ASSERT_TRUE(kt.check_link(4, 3));
-    ASSERT_TRUE(kt.check_link(5, 2));
-    ASSERT_FALSE(kt.check_link(5, 4));
-    ASSERT_TRUE(kt.check_link(325396, 222193));
-    ASSERT_TRUE(kt.check_link(325396, 325351));
-    ASSERT_TRUE(kt.check_link(325397, 325351));
+    ASSERT_TRUE(kt->check_link(4, 3));
+    ASSERT_TRUE(kt->check_link(5, 2));
+    ASSERT_FALSE(kt->check_link(5, 4));
+    ASSERT_TRUE(kt->check_link(325396, 222193));
+    ASSERT_TRUE(kt->check_link(325396, 325351));
+    ASSERT_TRUE(kt->check_link(325397, 325351));
 
 }
 
 TEST(CompressedCheckLink, twitter0_kl8) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter0.tree/kl8/";
-    const size_t node_num = 325409;
+    auto kL = 8;
+    auto kt = read_twitter_partition_compressed(0, kL);
 
-    k2tree_compressed kt(2, 2, 1, 8, node_num, path, libk2tree::read_T, true);
-
-    show(kt, 8*8);
-
-    ASSERT_TRUE(kt.check_link(4, 3));
-    ASSERT_TRUE(kt.check_link(5, 2));
-    ASSERT_FALSE(kt.check_link(5, 4));
-    ASSERT_TRUE(kt.check_link(325396, 222193));
-    ASSERT_TRUE(kt.check_link(325396, 325351));
-    ASSERT_TRUE(kt.check_link(325397, 325351));
+    ASSERT_TRUE(kt->check_link(4, 3));
+    ASSERT_TRUE(kt->check_link(5, 2));
+    ASSERT_FALSE(kt->check_link(5, 4));
+    ASSERT_TRUE(kt->check_link(325396, 222193));
+    ASSERT_TRUE(kt->check_link(325396, 325351));
+    ASSERT_TRUE(kt->check_link(325397, 325351));
 
 }
 
 TEST(CompressedCheckLink, twitter0_kl16) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter0.tree/kl16/";
-    const size_t node_num = 325409;
+    auto kL = 16;
+    auto kt = read_twitter_partition_compressed(0, kL);
 
-    k2tree_compressed kt(2, 2, 1, 16, node_num, path, libk2tree::read_T, true);
-    show(kt, 16*16);
-
-    ASSERT_TRUE(kt.check_link(4, 3));
-    ASSERT_TRUE(kt.check_link(5, 2));
-    ASSERT_FALSE(kt.check_link(5, 4));
-    ASSERT_TRUE(kt.check_link(325396, 222193));
-    ASSERT_TRUE(kt.check_link(325396, 325351));
-    ASSERT_TRUE(kt.check_link(325397, 325351));
+    ASSERT_TRUE(kt->check_link(4, 3));
+    ASSERT_TRUE(kt->check_link(5, 2));
+    ASSERT_FALSE(kt->check_link(5, 4));
+    ASSERT_TRUE(kt->check_link(325396, 222193));
+    ASSERT_TRUE(kt->check_link(325396, 325351));
+    ASSERT_TRUE(kt->check_link(325397, 325351));
 
 }
 
 TEST(CompressedCheckLink, twitter8514_kl16) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter8514.tree/kl16/";
-    const size_t node_num = 325409;
+    auto kL = 16;
+    auto kt = read_twitter_partition_compressed(8514, kL);
 
-    k2tree_compressed kt(2, 2, 1, 16, node_num, path, libk2tree::read_T, true);
-    show(kt, 16*16);
-
-    ASSERT_TRUE(kt.check_link(1, 15));
-    ASSERT_TRUE(kt.check_link(325409, 74107));
-    ASSERT_TRUE(kt.check_link(325408, 142158));
+    ASSERT_TRUE(kt->check_link(1, 15));
+    ASSERT_TRUE(kt->check_link(325409, 74107));
+    ASSERT_TRUE(kt->check_link(325408, 142158));
 
 }

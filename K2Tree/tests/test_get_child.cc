@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include <k2tree.h>
+#include "tests_utils.h"
 
 using namespace libk2tree;
 using namespace std;
@@ -39,43 +39,50 @@ TEST(GetChild, test_csv_kl4) {
 }
 
 TEST(GetChild, twitter0_kl4) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter0.tree/kl4/";
-    const size_t node_num = 325409;
+    auto kL = 4;
+    auto kt = read_twitter_partition(0, kL);
 
-    k2tree kt(2, 2, 1, 4, node_num, path, libk2tree::read_T);
+    show_children(kt->get_children(27));
+    show_children(kt->get_parents(27));
 
-    show_children(kt.get_children(27));
-    show_children(kt.get_parents(27));
+    auto ktc = read_twitter_partition_compressed(0, kL);
+    show_children(ktc->get_children(27));
+    show_children(ktc->get_parents(27));
 
 }
 
 TEST(GetChild, twitter0_kl8) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter0.tree/kl8/";
-    const size_t node_num = 325409;
+    auto kL = 8;
+    auto kt = read_twitter_partition(0, kL);
 
-    k2tree kt(2, 2, 1, 8, node_num, path, libk2tree::read_T);
+    show_children(kt->get_children(27));
+    show_children(kt->get_parents(27));
 
-    show_children(kt.get_children(27));
-    show_children(kt.get_parents(27));
+    auto ktc = read_twitter_partition_compressed(0, kL);
+    show_children(ktc->get_children(27));
+    show_children(ktc->get_parents(27));
 }
 
 TEST(GetChild, twitter0_kl16) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter0.tree/kl16/";
-    const size_t node_num = 325409;
+    auto kL = 16;
+    auto kt = read_twitter_partition(0, kL);
 
-    k2tree kt(2, 2, 1, 16, node_num, path, libk2tree::read_T);
+    show_children(kt->get_children(27));
+    show_children(kt->get_parents(27));
 
-    show_children(kt.get_children(27));
-    show_children(kt.get_parents(27));
+    auto ktc = read_twitter_partition_compressed(0, kL);
+    show_children(ktc->get_children(27));
+    show_children(ktc->get_parents(27));
 }
 
 TEST(GetChild, twitter8514_kl16) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter8514.tree/kl16/";
-    const size_t node_num = 325409;
+    auto kL = 16;
+    auto kt = read_twitter_partition(8514, kL);
 
-    k2tree kt(2, 2, 1, 16, node_num, path, libk2tree::read_T);
+    show_children(kt->get_children(325409));
+    show_children(kt->get_parents(325409));
 
-    show_children(kt.get_children(325409));
-    show_children(kt.get_parents(325409));
-
+    auto ktc = read_twitter_partition_compressed(8514, kL);
+    show_children(ktc->get_children(325409));
+    show_children(ktc->get_parents(325409));
 }

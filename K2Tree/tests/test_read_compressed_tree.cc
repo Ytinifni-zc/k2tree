@@ -3,9 +3,9 @@
 //
 
 #include <gtest/gtest.h>
-#include <k2tree_compressed.h>
 #include <utils/time.h>
 #include <utils/time.cc>
+#include "tests_utils.h"
 
 using namespace libk2tree;
 using namespace std;
@@ -17,18 +17,6 @@ vector<size_t> get_rand(size_t length, int num) {
     vector<size_t> ret(num, 0);
     for (auto r : ret) r = uniform_dist(eg);
     return ret;
-}
-
-shared_ptr<k2tree_compressed> read_twitter_partition(const int part_num, const int kL) {
-    const string path = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree_partition/twitter"
-                        +std::to_string(part_num)+".tree/kl"
-                        +std::to_string(kL)+"/";
-    const size_t node_num = 325409;
-
-    shared_ptr<k2tree_compressed> kt =
-            std::make_shared<k2tree_compressed>(2, 2, 1, kL, node_num, path, libk2tree::read_T, true);
-    return kt;
-
 }
 
 void show(const k2tree_compressed &kt, int ws) {
@@ -107,7 +95,7 @@ TEST(ReadCompressedTree, test_csv_kl4) {
 TEST(ReadCompressedTwitter0, readT_kL4) {
     const int kL = 4;
 
-    auto ktc = read_twitter_partition(0, kL);
+    auto ktc = read_twitter_partition_compressed(0, kL);
 
     int err = calculate_err(*ktc);
     ASSERT_EQ(err, 0);
@@ -116,7 +104,7 @@ TEST(ReadCompressedTwitter0, readT_kL4) {
 TEST(ReadCompressedTwitter0, readT_kL8) {
     const int kL = 8;
 
-    auto ktc = read_twitter_partition(0, kL);
+    auto ktc = read_twitter_partition_compressed(0, kL);
 
     int err = calculate_err(*ktc);
     ASSERT_EQ(err, 0);
@@ -125,7 +113,7 @@ TEST(ReadCompressedTwitter0, readT_kL8) {
 TEST(ReadCompressedTwitter0, readT_kL16) {
     const int kL = 16;
 
-    auto ktc = read_twitter_partition(0, kL);
+    auto ktc = read_twitter_partition_compressed(0, kL);
 
     int err = calculate_err(*ktc);
     ASSERT_EQ(err, 0);
@@ -134,7 +122,7 @@ TEST(ReadCompressedTwitter0, readT_kL16) {
 TEST(ReadCompressedTwitter8514, readT_kL4) {
     const int kL = 4;
 
-    auto ktc = read_twitter_partition(8514, kL);
+    auto ktc = read_twitter_partition_compressed(8514, kL);
 
     int err = calculate_err(*ktc);
     ASSERT_EQ(err, 0);
@@ -143,7 +131,7 @@ TEST(ReadCompressedTwitter8514, readT_kL4) {
 TEST(ReadCompressedTwitter8514, readT_kL8) {
     const int kL = 8;
 
-    auto ktc = read_twitter_partition(8514, kL);
+    auto ktc = read_twitter_partition_compressed(8514, kL);
 
     int err = calculate_err(*ktc);
     ASSERT_EQ(err, 0);
@@ -152,7 +140,7 @@ TEST(ReadCompressedTwitter8514, readT_kL8) {
 TEST(ReadCompressedTwitter8514, readT_kL16) {
     const int kL = 16;
 
-    auto ktc = read_twitter_partition(8514, kL);
+    auto ktc = read_twitter_partition_compressed(8514, kL);
 
     int err = calculate_err(*ktc);
     ASSERT_EQ(err, 0);
