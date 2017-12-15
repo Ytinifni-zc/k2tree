@@ -100,6 +100,7 @@ namespace libk2tree {
             return L_.size()/(kL_*kL_);
         }
 
+
         size_t words_size() const {
             return static_cast<size_t>(ceil(static_cast<double>(kL_ * kL_) / 8));
         }
@@ -129,7 +130,7 @@ namespace libk2tree {
         }
 
     private:
-        static const size_t __n = 19;
+        static const size_t __n = 26;
         static const size_t __p = 35;
         typedef bitset<__n> node_bits;
         typedef bitset<__p> submat_pos;
@@ -161,12 +162,15 @@ namespace libk2tree {
          * Indicating row and column of this submatrix in current level.
          */
         struct submat_info {
-            node_bits u;
-            node_bits v;
-            submat_info(int _u, int _v) :u(_u), v(_v) {}
+            uint32_t u;
+            uint32_t v;
+            submat_info() {}
+            submat_info(uint32_t _u, uint32_t _v) :u(_u), v(_v) {}
             bool operator==(const submat_info &si) const {
                 return u == si.u && v == si.v;
             }
+            ~submat_info() {}
+            
         };
         struct submat_info_hash {
             size_t operator()(const submat_info& si) const {
@@ -174,6 +178,39 @@ namespace libk2tree {
                 return hash_fn(si.u << 11) ^ hash_fn(si.v);
             }
         };
+        /*
+        bool submat_info_cmp(const submat_info &lhs, const submat_info &rhs) {
+            auto x = lhs.u, y = lhs.v;
+            auto a = rhs.u, b = rhs.v;
+            auto level = height_;
+            auto k = which_k(level);
+            while ((x / k) != (a / k) || (y / k) != (b / k)) {
+                x /= k;
+                y /= k;
+                a /= k;
+                b /= k;
+                k = which_k(--level);
+            }
+            return x < a || (x == a && y < b);
+        }
+        */
+        bool submat_info_cmp(const submat_info &lhs, const submat_info &rhs) {
+            auto x = lhs.u, y = lhs.v;
+            auto a = rhs.u, b = rhs.v;
+            auto level = height_;
+            auto k = which_k(level);
+            //auto k_log = static_cast<uint32_t>(std::log(k));
+            const uint32_t k_log = 3;
+            while ((x >> k_log) != (a >> k_log) || (y >> k_log) != (b >> k_log)) {
+                x >>= k_log;
+                y >>= k_log;
+                a >>= k_log;
+                b >>= k_log;
+                k = which_k(--level);
+                //k_log = static_cast<uint32_t>(std::log(k));
+            }
+            return x < a || (x == a && y < b);
+        }
 
         // <pos, submat>
         typedef unordered_map<submat_pos, bit_vector> pos_submat;
@@ -333,7 +370,8 @@ namespace libk2tree {
 
         typedef vector<submat_info > edge_array;
 
-        void build_from_edge_array_csv(const edge_array& edges);
+        //void build_from_edge_array_csv(const edge_array& edges);
+        void build_from_edge_array_csv(int (*edges)[2], const long size);
 
         /**
          * Read edge array from csv and construct k2tree and write it to binary files.

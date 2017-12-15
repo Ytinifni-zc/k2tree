@@ -1,1 +1,0 @@
-/usr/bin/cc      CMakeFiles/dacs_test.dir/include/test.c.o CMakeFiles/dacs_test.dir/include/basics.c.o CMakeFiles/dacs_test.dir/include/bitrankw32int.c.o CMakeFiles/dacs_test.dir/include/dacs.c.o  -o dacs_test -rdynamic 

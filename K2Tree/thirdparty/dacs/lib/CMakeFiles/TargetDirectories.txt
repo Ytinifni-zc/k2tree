@@ -1,0 +1,2 @@
+/home/zhaocheng/k2tree/K2Tree/thirdparty/dacs/lib/CMakeFiles/dacs.dir
+/home/zhaocheng/k2tree/K2Tree/thirdparty/dacs/lib/CMakeFiles/dacs_test.dir

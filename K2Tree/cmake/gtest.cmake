@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-set(GTEST_ROOT ${PROJECT_SOURCE_DIR}/gtest)
+set(GTEST_ROOT ${PROJECT_SOURCE_DIR}/thirdparty/gtest)
 add_subdirectory(${GTEST_ROOT})
 set(GTEST_INCLUDE_DIR ${GTEST_ROOT}/include)
 set(GTEST_LIBRARIES gtest gtest_main)

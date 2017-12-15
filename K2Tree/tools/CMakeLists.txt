@@ -10,5 +10,5 @@ foreach(tool ${TOOLS_SRCS})
             RUNTIME_OUTPUT_DIRECTORY "${BUILD_DIR}/tools"
             )
 
-    target_link_libraries(${TOOL_NAME} ${K2TREE_NAME} dacs sdsl divsufsort divsufsort64)
+    target_link_libraries(${TOOL_NAME} ${K2TREE_NAME} dacs sdsl divsufsort divsufsort64 async++ pthread)
 endforeach()

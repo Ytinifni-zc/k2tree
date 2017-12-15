@@ -4,6 +4,12 @@
 #include <k2tree.h>
 #include <utils/sort.h>
 #include <utils/file.h>
+#include <utils/time.h>
+#include <utils/time.cc>
+#include <async++.h>
+#include <atomic>
+#include <boost/sort/sort.hpp>
+#include <algorithm>
 
 using std::ifstream;
 using std::ofstream;
@@ -122,8 +128,127 @@ size_t k2tree::edge_num() {
     return edge_num_;
 }
 
-void libk2tree::k2tree::build_from_edge_array_csv(const edge_array &edges) {
+//void libk2tree::k2tree::build_from_edge_array_csv(const edge_array &edges) {
+void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const long size) {
     // TODO
+    using Key = submat_info;
+    //using Key = std::pair<uint32_t, uint32_t>;
+    using Value = uint64_t;
+    using kv = std::pair<Key, Value>;
+    using LayerQueue = std::vector<kv>;
+    LayerQueue layer_queue;
+
+    utils::cost([&](){
+        std::cerr << "Size of layer queue: " << size << ". layer_queue malloc: ";
+        layer_queue.resize(size);
+    });
+
+    auto load_edge = [&]() {
+        std::cerr << "Loading edges: " << std::endl;
+        std::atomic<int> max_label;
+        max_label = 0;
+        async::parallel_for(async::irange(0ul, size), [&](int i) {
+            int local_max = std::max(edges[i][0], edges[i][1]);
+            int global_max = max_label.load(std::memory_order_relaxed);
+            do {
+                if (global_max >= local_max) break;
+            } while (!max_label.compare_exchange_weak(
+                  global_max, local_max, std::memory_order_relaxed));
+            layer_queue[i] = {submat_info(edges[i][0], edges[i][1]), 1};
+        });
+
+        std::cerr << "Boost::block_sort edge array: " << std::endl;
+        //std::sort(layer_queue.begin(), layer_queue.end(), [=](const kv& lhs, const kv& rhs) {
+        boost::sort::block_indirect_sort(layer_queue.begin(), layer_queue.end(),
+                                         [=](const kv& lhs, const kv& rhs) {
+            return submat_info_cmp(lhs.first, rhs.first);
+        });
+
+        /*
+        for (int i = 0; i < 100; ++i) {
+          fprintf(stderr, "<%u, %u>: %ul\n", layer_queue[i].first.u,
+                  layer_queue[i].first.v, layer_queue[i].second);
+        }
+        */
+    };
+
+    utils::cost(load_edge);
+    std::cerr << std::endl;
+
+    std::vector<bit_vector> bs(height_);
+    auto build_k2tree = [&](uint32_t l) {
+        utils::cost([&](){
+            std::cerr << "Contraction layer queue: ";
+            async::parallel_for(async::irange(0ul, layer_queue.size()), [&](int i) {
+                uint32_t s = layer_queue[i].first.u / 8,
+                     t = layer_queue[i].first.v / 8;
+                uint32_t sr = layer_queue[i].first.u % 8,
+                     tr = layer_queue[i].first.v % 8;
+                auto bit = 1ul << (sr*8+tr);
+                layer_queue[i] = {submat_info(s, t), bit};
+            });
+        });
+
+        utils::cost([&]() {
+            std::cerr << "Merging old queue to new queue: ";
+            auto _key = layer_queue[0].first;
+            //std::optional<Key> _key;
+            auto c = layer_queue.begin();
+            for (auto v : layer_queue) {
+                if (v.first == _key) {
+                    c->second |= v.second;
+                } else {
+                    *(++c) = v;
+                    _key = v.first;
+                }
+            }
+            std::cerr << "Before shrink queue. Queue size: " << layer_queue.size() << " ";
+            layer_queue.resize(c-layer_queue.begin()+1);
+        });
+
+        utils::cost([&](){
+            std::cerr << "Shrinking layer queue. Queue size: " << layer_queue.size() << " ";
+            layer_queue.shrink_to_fit();
+        });
+
+        utils::cost([&]() {
+            std::cerr << "Concatenating bitmap: ";
+            bs[l].resize(layer_queue.size() * 64);
+            auto d = bs[l].data();
+            async::parallel_for(async::irange(0ul, layer_queue.size()), [&](int i) {
+                d[i] = layer_queue[i].second;
+            });
+        });
+    };
+
+    for (int l = height_-1; l >= 0; --l) {
+        std::cerr << "Building k2tree layer {" << l << "}" << std::endl;
+        utils::cost(std::bind(build_k2tree, l));
+        std::cerr << std::endl;
+    }
+    L_.swap(bs.back());
+    bs.pop_back();
+
+    std::cerr << std::endl;
+
+    auto compact_bitmaps = [&]() {
+        std::cerr << "Compacting bitmaps: ";
+        size_t size = 0;
+        for (auto b : bs) {
+            size += b.size();
+        }
+        T_.resize(size);
+        auto d = T_.data();
+        for (auto b : bs) {
+            memcpy((char*)d, (char*)b.data(), b.size() / 8);
+            d += b.size() / 64;
+        }
+    };
+    utils::cost(compact_bitmaps);
+    utils::cost([&]() {
+        std::cerr << "Building rank: ";
+        build_rank_support();
+    });
 }
 
 void libk2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string &path, const int &write_flag) {
@@ -215,7 +340,7 @@ void libk2tree::k2tree::hm_insert_bit(pos_submat &hm, const int &level,
                                    const submat_info &si, level_1s &last_level) {
     int k = which_k(level);
     int submat_size = which_submat(level);
-    int u = si.u.to_ulong(), v = si.v.to_ulong();
+    auto u = si.u, v = si.v;
     submat_pos pos = get_pos(u/k, v/k, level-1);
     bit_vector submat(submat_size, 0);
     int tmp_idx = ((u%k)*k+v%k);
@@ -309,7 +434,7 @@ void k2tree::split_T() {
 void k2tree::build_rank_support() {
     assert(T_.size() != 0 && L_.size() != 0);
     t_rank = rank_support_v<1>(&T_);
-    l_rank = rank_support_v<1>(&L_);
+    //l_rank = rank_support_v<1>(&L_);
 }
 
 size_t libk2tree::k2tree::rank(llong pos) {
