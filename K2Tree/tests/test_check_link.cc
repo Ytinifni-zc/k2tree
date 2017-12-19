@@ -8,6 +8,7 @@
 using namespace libk2tree;
 using namespace std;
 
+/*
 TEST(CheckLink, test_csv) {
 
     const string path = "./k2tree/";
@@ -38,12 +39,28 @@ TEST(CheckLink, test_csv_kl4) {
     ASSERT_FALSE(kt.check_link(11, 1));
     ASSERT_FALSE(kt.check_link(13, 1));
 }
+*/
+
+TEST(CheckLink, Twitter) {
+    shared_ptr<k2tree> kt;
+    utils::cost([&](){
+        kt = read_twitter();
+    });
+
+    utils::cost([=](){
+        uint64_t u = 1, v = 41652230;
+        std::cerr << "Check <" << u << ", " << v << ">: ";
+        std::cerr << kt->check_link(u, v) << " \t";
+      }, "us");
+}
 
 TEST(CheckLink, twitter0_kl4) {
     auto kL = 4;
     auto kt = read_twitter_partition(0, kL);
 
+    utils::cost([=](){
     ASSERT_TRUE(kt->check_link(4, 3));
+      }, "us");
     ASSERT_TRUE(kt->check_link(5, 2));
     ASSERT_FALSE(kt->check_link(5, 4));
 
@@ -76,16 +93,6 @@ TEST(CheckLink, twitter0_kl16) {
     ASSERT_TRUE(kt->check_link(325396, 222193));
     ASSERT_TRUE(kt->check_link(325396, 325351));
     ASSERT_TRUE(kt->check_link(325397, 325351));
-
-}
-
-TEST(CheckLink, twitter8514_kl16) {
-    auto kL = 16;
-    auto kt = read_twitter_partition(8514, kL);
-
-    ASSERT_TRUE(kt->check_link(1, 15));
-    ASSERT_TRUE(kt->check_link(325409, 74107));
-    ASSERT_TRUE(kt->check_link(325408, 142158));
 
 }
 
@@ -141,15 +148,5 @@ TEST(CompressedCheckLink, twitter0_kl16) {
     ASSERT_TRUE(kt->check_link(325396, 222193));
     ASSERT_TRUE(kt->check_link(325396, 325351));
     ASSERT_TRUE(kt->check_link(325397, 325351));
-
-}
-
-TEST(CompressedCheckLink, twitter8514_kl16) {
-    auto kL = 16;
-    auto kt = read_twitter_partition_compressed(8514, kL);
-
-    ASSERT_TRUE(kt->check_link(1, 15));
-    ASSERT_TRUE(kt->check_link(325409, 74107));
-    ASSERT_TRUE(kt->check_link(325408, 142158));
 
 }

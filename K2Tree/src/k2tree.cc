@@ -30,6 +30,8 @@ libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node
         edge_num_(edge_num_), T_(T_), L_(L_)
 {
     set_tree_unit();
+    t_size_ = T_.size();
+    l_size_ = L_.size();
 }
 
 libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_,
@@ -59,6 +61,7 @@ void libk2tree::k2tree::set_tree_unit() {
     int x = static_cast<int>(ceil(log(node_num_/pow(k1_, k1_levels_)/kL_)/log(k2_)));
     height_ = k1_levels_ + x + 1;
     n_prime_ = static_cast<size_t>(pow(k1_, k1_levels_) * pow(k2_, x) * kL_);
+    log_n_prime_ = static_cast<uint8_t>(std::log(n_prime_)/std::log(2));
 
     tree_bitmap_.resize(height_);
 
@@ -109,7 +112,9 @@ libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_,
         build_rank_support();
         split_T();
     }
-    edge_num_ = l_rank(L_.size());
+    t_size_ = T_.size();
+    l_size_ = L_.size();
+    //edge_num_ = l_rank(L_.size());
 }
 
 bit_vector libk2tree::k2tree::T() const {
@@ -129,10 +134,10 @@ size_t k2tree::edge_num() {
 }
 
 //void libk2tree::k2tree::build_from_edge_array_csv(const edge_array &edges) {
-void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const long size) {
+void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const uint64_t size) {
     // TODO
     using Key = submat_info;
-    //using Key = std::pair<uint32_t, uint32_t>;
+
     using Value = uint64_t;
     using kv = std::pair<Key, Value>;
     using LayerQueue = std::vector<kv>;
@@ -154,7 +159,7 @@ void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const long si
                 if (global_max >= local_max) break;
             } while (!max_label.compare_exchange_weak(
                   global_max, local_max, std::memory_order_relaxed));
-            layer_queue[i] = {submat_info(edges[i][0], edges[i][1]), 1};
+            layer_queue[i] = {submat_info(edges[i][0]-1, edges[i][1]-1), 1};
         });
 
         std::cerr << "Boost::block_sort edge array: " << std::endl;
@@ -249,6 +254,11 @@ void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const long si
         std::cerr << "Building rank: ";
         build_rank_support();
     });
+    utils::cost([&]() {
+        std::cerr << "Split T_: ";
+        split_T();
+    });
+    std::cerr << level_pos << std::endl;
 }
 
 void libk2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string &path, const int &write_flag) {
@@ -420,7 +430,7 @@ void k2tree::split_T() {
     level_pos[0] = k1_*k1_;
     // Run start from level 2.
     int level = 2;
-    int t_size = k1_*k1_;
+    uint64_t t_size = static_cast<uint64_t>(k1_*k1_);
     size_t tmp_rank = 0;
     for (; level < height_; ++level) {
         auto k = which_k(level);
@@ -439,15 +449,12 @@ void k2tree::build_rank_support() {
 
 size_t libk2tree::k2tree::rank(llong pos) {
     if (pos < 0) return 0;
-    if (pos >= static_cast<llong>(T_.size()+L_.size())) {
-        std::cerr << "Position is bigger than k2tree." << std::endl;
+    if (pos >= static_cast<llong>(T_.size())) {
+        std::cerr << "Position is bigger than k2tree T.size()." << std::endl;
         exit(1);
     }
     pos ++;
-    if (pos <= T_.size())
-        return t_rank.rank(pos);
-    else
-        return t_rank(T_.size())+l_rank.rank(pos-T_.size());
+    return t_rank.rank(pos);
 }
 
 bool k2tree::check_link_(size_t n, size_t p, size_t q, llong pos, int level,
@@ -495,36 +502,48 @@ bool k2tree::check_link(size_t p, size_t q) {
 
 void k2tree::get_child_(size_t n, size_t p, size_t q, llong pos, int level,
                         vector<size_t> & children, const std::function<int(llong)> &accessL) {
-    if (pos >= static_cast<llong>(T_.size()+L_.size())) {
+    if (pos >= static_cast<llong>(t_size_+l_size_)) {
         std::cerr << "Position is bigger than k2tree." << std::endl;
         exit(1);
     }
-    if (pos >= static_cast<llong>(T_.size())) { // Leaf
-        if(accessL(pos-T_.size())) {
+    if (pos >= static_cast<llong>(t_size_)) { // Leaf
+        if(accessL(pos-t_size_)) {
             children.push_back(++q);
         }
     } else {
         if (pos == -1 or T_[pos] == 1) {
             if (level < k1_levels_) {
-                auto k = which_k(level);
+                int k = which_k(level);
                 auto y = rank(pos) * k*k;
                 auto n_div_k = n/k;
-                y += std::floor(static_cast<double>(p)/n_div_k)*k;
+                y += p/n_div_k*k;
+
+                // WARNING: THIS CODE IS ONLY USED IN 888.
+                //  uint64_t y = rank(pos) << 6; //
+                //  uint64_t n_div_k = n >> 3; //
+                //  y += (p/n_div_k << 3); //
                 for (int j = 0; j < k; ++j) {
                     get_child_(n_div_k, p%n_div_k, q+n_div_k*j, y+j, level+1, children, accessL);
                 }
             } else {
-                auto delimiter = (level == height_-1)?level:k1_levels_;
-                auto tmp_pos = 0;
+                int delimiter = (level == height_-1)?level:k1_levels_;
+                uint64_t tmp_pos = 0ul;
                 for (int i = 0; i < delimiter-1; ++i)
                     tmp_pos += level_pos[i];
-                auto k = which_k(level+1);
+                int k = which_k(level+1);
                 auto y = tmp_pos+level_pos[delimiter-1]+(rank(pos-1)-rank(tmp_pos-1))*k*k;
                 auto n_div_k = n/k;
-                y += std::floor(static_cast<double>(p)/n_div_k)*k;
+                y += p/n_div_k*k;
+                //for (int j = 0; j < k; ++j) {
+
+                // WARNING: THIS CODE IS ONLY USED IN 888.
+                // uint64_t y = tmp_pos+level_pos[delimiter-1]+((rank(pos-1)-rank(tmp_pos-1)) << 6);
+                // uint64_t n_div_k = n >> 3; //
+                // y += (p/n_div_k << 3); //
                 for (int j = 0; j < k; ++j) {
                     get_child_(n_div_k, p%n_div_k, q+n_div_k*j, y+j, level+1, children, accessL);
                 }
+                // END WARNING
             }
         }
     }

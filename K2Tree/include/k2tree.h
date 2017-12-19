@@ -94,6 +94,8 @@ namespace libk2tree {
         bit_vector L() const;
         vector<bit_vector> tree_bitmap();
 
+        void split_T();
+
         size_t edge_num();
 
         size_t words_cnt() const {
@@ -170,7 +172,7 @@ namespace libk2tree {
                 return u == si.u && v == si.v;
             }
             ~submat_info() {}
-            
+
         };
         struct submat_info_hash {
             size_t operator()(const submat_info& si) const {
@@ -250,8 +252,6 @@ namespace libk2tree {
             return submat_pos(pre_pos*k*k+((u%k)*k+v%k));
 
         }
-
-        void split_T();
 
     protected:
 
@@ -371,7 +371,7 @@ namespace libk2tree {
         typedef vector<submat_info > edge_array;
 
         //void build_from_edge_array_csv(const edge_array& edges);
-        void build_from_edge_array_csv(int (*edges)[2], const long size);
+        void build_from_edge_array_csv(int (*edges)[2], const uint64_t size);
 
         /**
          * Read edge array from csv and construct k2tree and write it to binary files.
@@ -388,13 +388,17 @@ namespace libk2tree {
         int kL_;
 
         int height_;
-        size_t n_prime_;
+        uint64_t n_prime_;
+        uint8_t log_n_prime_;
 
         size_t node_num_;
         size_t edge_num_;
 
         bit_vector T_;
         bit_vector L_;
+
+        uint64_t t_size_;
+        uint64_t l_size_;
 
         vector<bit_vector> tree_bitmap_;
 

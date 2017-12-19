@@ -3,8 +3,6 @@
 //
 
 #include <gtest/gtest.h>
-#include <utils/time.h>
-#include <utils/time.cc>
 #include "tests_utils.h"
 
 using namespace libk2tree;

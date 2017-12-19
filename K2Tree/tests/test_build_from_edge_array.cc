@@ -11,10 +11,10 @@ TEST(BuildFromEdgeArray, test1) {
   int (*data)[2];
   long cnt;
   //int k1 = 8, k2 = 8, k1_levels = 1, kL = 8, node_num = 325409, edge_num = 578756;
-  int k1 = 8, k2 = 8, k1_levels = 1, kL = 8, node_num = TWITTER_NODE_NUM, edge_num = TWITTER_EDGE_NUM;
+  int k1 = 8, k2 = 8, k1_levels = 1, kL = 8, node_num = INDOCHINA_NODE_NUM, edge_num = INDOCHINA_EDGE_NUM;
   utils::cost([&](){
       std::cerr << "Load edge array from bin: ";
-      std::string filename = TWITTER_PATH + "../twitter-2010-2.bin";
+      std::string filename = INDOCHINA_PATH + "../indochina-2004.bin";
       std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
       long fileSize = in.tellg();
       int fd = open(filename.c_str(), O_RDONLY, 0);
@@ -36,7 +36,7 @@ TEST(BuildFromEdgeArray, test1) {
   tree.build_from_edge_array_csv(data, cnt);
   utils::cost([&](){
       std::cerr << "Store to file." << std::endl;
-      //sdsl::store_to_file(tree.T(), TWITTER_PATH+"T.bin");
-      //sdsl::store_to_file(tree.L(), TWITTER_PATH+"L.bin");
+      sdsl::store_to_file(tree.T(), INDOCHINA_PATH+"T.bin");
+      sdsl::store_to_file(tree.L(), INDOCHINA_PATH+"L.bin");
   });
 }

@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8.7 FATAL_ERROR)
 project(K2Tree)
 
-#add_definitions( -DDebug  )
 #set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_BUILD_TYPE Release)
 
@@ -47,7 +46,7 @@ else()
 endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -O3")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ")#-Wall -Wconversion -Wsign-conversion")
 
 add_subdirectory(tests)

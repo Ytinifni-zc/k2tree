@@ -24,6 +24,11 @@ const string TWITTER_FILE = TWITTER_PATH + "../twitter-2010.csv";
 const size_t TWITTER_NODE_NUM = 41652230;
 const size_t TWITTER_EDGE_NUM = 1468365182;
 
+const string INDOCHINA_PATH = "/mnt/disk1/zhaocheng/dataset/indochina-2004/k2tree/";
+const string INDOCHINA_FILE = TWITTER_PATH + "../indochina-2004.csv";
+const size_t INDOCHINA_NODE_NUM = 7414866;
+const size_t INDOCHINA_EDGE_NUM = 194109311;
+
 tuple<string, string, size_t, size_t, int, int, int, int> get_args(int argc, char** argv) {
     int flag = 1;
     int swh = 0;
