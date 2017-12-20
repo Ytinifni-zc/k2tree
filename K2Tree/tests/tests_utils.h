@@ -12,6 +12,10 @@
 
 using namespace libk2tree;
 
+const uint64_t TWITTER_P_NODE_NUM = 325409;
+const uint64_t TWITTER_P0_EDGE_NUM = 578756;
+//const uint64_t TWITTER_P8514_EDGE_NUM = 325409;
+
 shared_ptr<k2tree> read_data(const string &path, const size_t &node_num, const size_t &edge_num) {
     sdsl::bit_vector t, l;
 
@@ -45,6 +49,13 @@ shared_ptr<k2tree> read_indochina() {
     const size_t edge_num = INDOCHINA_EDGE_NUM;
     return read_data(path, node_num, edge_num);
 
+}
+
+shared_ptr<k2tree> read_twitter_p0() {
+    const string path = TWITTER_PATH + "../k2tree_partition/twitter0.tree/k_8_8_1_kl8/";
+    const size_t node_num = TWITTER_P_NODE_NUM;
+    const size_t edge_num = TWITTER_P0_EDGE_NUM;
+    return read_data(path, node_num, edge_num);
 }
 
 shared_ptr<k2tree> read_twitter_partition(const int part_num, const int kL) {

@@ -25,21 +25,20 @@ TEST(GetChild, twitter) {
         auto most_degree = 5000000;
         std::cerr << most_degree << "=> { ";
         std::cerr << kt->get_children(most_degree) << " } \t";
-      }, "us");
+    }, "us");
 
     utils::cost([=]() {
         auto most_degree = 100000;
         std::cerr << most_degree << "=> { ";
         std::cerr << kt->get_children(most_degree) << " } \t";
-      }, "us");
+    }, "us");
 
     utils::cost([=]() {
         auto most_degree = 23934134;
         std::cerr << most_degree << "=> {...}.size(): ";
         std::cerr << kt->get_children(most_degree).size() << "\t";
-      }, "us");
+    }, "us");
 
-    /*
     auto rand_size = 100000;
     auto r100 = 100;
     vector<int> rand_100, rand_10000;
@@ -60,13 +59,19 @@ TEST(GetChild, twitter) {
           kt->get_children(_n);
           //size_100 += kt->get_children(_n).size();
     });
+    bit_vector ttt;
+    utils::cost([&](){
+            std::cerr << "ttt = kt.T_ \t";
+            ttt = kt->T();
+            });
     utils::cost([&]() {
+        //int cnt = 0;
         std::cerr << "Find " << rand_size << " node's children. \t";
         for (auto _n : rand_10000)
-          kt->get_children(_n);
+          //kt->get_children(_n);
+          (ttt[_n]==1);
           //size_10000 += kt->get_children(_n).size();
-    });
-    */
+    }, "us");
 }
 
 TEST(GetChild, indochina) {
@@ -78,33 +83,60 @@ TEST(GetChild, indochina) {
         auto _n = 10000;
         std::cerr << "Get " << _n << "'s child: {"
                   << kt->get_children(_n) << "} \t";
-      }, "us");
+    }, "us");
     utils::cost([&](){
         auto _n = 8;
         std::cerr << "Get " << _n << "'s child: {"
-                  << kt->get_children(_n) << "} \t";
-      }, "us");
+                << kt->get_children(_n) << "} \t";
+    }, "us");
 
     utils::cost([&](){
         auto _n = 1525;
         std::cerr << "Get " << _n << "'s child: {"
                   << kt->get_children(_n) << "} \t";
-      }, "us");
+    }, "us");
+
+    auto rand_size = 100000;
+    auto r100 = 100;
+    vector<int> rand_100, rand_10000;
+    utils::cost([&]() {
+        std::cerr << "Generate rand node vector(100 and 10000). \t";
+        rand_100.resize(r100);
+        rand_10000.resize(rand_size);
+        for (int i = 0; i < rand_size; ++i) {
+          if(i < r100) rand_100[i] = std::rand() % INDOCHINA_NODE_NUM;
+          rand_10000[i] = std::rand() % INDOCHINA_NODE_NUM;
+        }
+    });
+
+    auto size_100 = 0, size_10000 = 0;
+    utils::cost([&]() {
+        std::cerr << "Find 100 node's children. \t";
+        for (auto _n : rand_100)
+          kt->get_children(_n);
+          //size_100 += kt->get_children(_n).size();
+    });
+    /*
+    utils::cost([&]() {
+        std::cerr << "Find " << rand_size << " node's children. \t";
+        for (auto _n : rand_10000)
+          kt->get_children(_n);
+          //size_10000 += kt->get_children(_n).size();
+    });
+    */
 }
 
 TEST(GetChild, twitter0_kl4) {
     auto kL = 4;
-    auto kt = read_twitter_partition(0, kL);
+    auto kt = read_twitter_p0();
 
     utils::cost([=](){
-    cerr << "27-> " << kt->get_children(27) << endl;
-      }, "us");
-    cerr << "500-> " << kt->get_children(500) << endl;
+        cerr << "27-> " << kt->get_children(27) << endl;
+    }, "us");
+    utils::cost([=](){
+        cerr << "500-> " << kt->get_children(500) << endl;
+    }, "us");
     cerr << "->27: " << kt->get_parents(27) << endl;
-
-    auto ktc = read_twitter_partition_compressed(0, kL);
-    show_children(ktc->get_children(27));
-    show_children(ktc->get_parents(27));
 
 }
 

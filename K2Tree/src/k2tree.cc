@@ -513,46 +513,63 @@ void k2tree::get_child_(size_t n, size_t p, size_t q, llong pos, int level,
     } else {
         if (pos == -1 or T_[pos] == 1) {
             if (level < k1_levels_) {
-                int k = which_k(level);
-                auto y = rank(pos) * k*k;
-                auto n_div_k = n/k;
-                y += p/n_div_k*k;
+                //  int k = which_k(level);
+                //  auto n_div_k = n/k;
+                //  auto y = rank(pos) * k*k + p/n_div_k*k;
 
-                // WARNING: THIS CODE IS ONLY USED IN 888.
-                //  uint64_t y = rank(pos) << 6; //
-                //  uint64_t n_div_k = n >> 3; //
+                // TODO WARNING: THIS CODE IS ONLY USED IN 888.
+                auto n_div_k = n >> 3; //
+                auto y = (rank(pos) << 6) + (p/n_div_k << 3); //
                 //  y += (p/n_div_k << 3); //
-                for (int j = 0; j < k; ++j) {
+                //for (int j = 0; j < k; ++j) {
+                for (int j = 0; j < 8; ++j) {
                     get_child_(n_div_k, p%n_div_k, q+n_div_k*j, y+j, level+1, children, accessL);
                 }
+                // async::parallel_for(async::irange(0, 8), [&](int j) {
+                //     get_child_(n_div_k, p%n_div_k, q+n_div_k*j, y+j, level+1, children, accessL);
+                // });
             } else {
                 int delimiter = (level == height_-1)?level:k1_levels_;
                 uint64_t tmp_pos = 0ul;
                 for (int i = 0; i < delimiter-1; ++i)
                     tmp_pos += level_pos[i];
-                int k = which_k(level+1);
-                auto y = tmp_pos+level_pos[delimiter-1]+(rank(pos-1)-rank(tmp_pos-1))*k*k;
-                auto n_div_k = n/k;
-                y += p/n_div_k*k;
-                //for (int j = 0; j < k; ++j) {
+                //  int k = which_k(level+1);
+                //  auto n_div_k = n/k;
+                //  auto y = tmp_pos+level_pos[delimiter-1]
+                //      +(rank(pos-1)-rank(tmp_pos-1))*k*k
+                //      +p/n_div_k*k;
 
                 // WARNING: THIS CODE IS ONLY USED IN 888.
-                // uint64_t y = tmp_pos+level_pos[delimiter-1]+((rank(pos-1)-rank(tmp_pos-1)) << 6);
-                // uint64_t n_div_k = n >> 3; //
-                // y += (p/n_div_k << 3); //
-                for (int j = 0; j < k; ++j) {
+                auto n_div_k = n >> 3; //
+                auto y = tmp_pos + level_pos[delimiter-1] + ((rank(pos-1)-rank(tmp_pos-1)) << 6) + (p/n_div_k << 3);
+                //for (int j = 0; j < k; ++j) {
+                for (int j = 0; j < 8; ++j) {
                     get_child_(n_div_k, p%n_div_k, q+n_div_k*j, y+j, level+1, children, accessL);
                 }
-                // END WARNING
+                // TODO END WARNING
             }
         }
     }
+}
+
+void k2tree::get_child_(size_t p, vector<size_t> &children,
+        const std::function<int(llong)> &accessL) {
+    uint8_t level = 1;
+    auto k = which_k(level);
+    uint64_t n = n_prime_/k;
+    uint64_t row = p/n;
+    uint64_t pos = row*k;
+    async::parallel_for(async::irange(0, k), [&](int j) {
+        get_child_(n, p%n, n*j, pos+j, level, children, accessL);
+    });
 }
 
 vector<size_t> k2tree::get_children(size_t p) {
     vector<size_t> children(0);
     get_child_(n_prime_, --p, 0, -1, 0, children,
                [=](llong pos){return L_[pos];});
+
+    //get_child_(n_prime_, children, [=](llong pos){return L_[pos];});
     return children;
 }
 

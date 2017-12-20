@@ -284,6 +284,9 @@ namespace libk2tree {
                         const std::function<int(llong)> &accessL
         );
 
+        void get_child_(size_t p, vector<size_t> &children,
+                const std::function<int(llong)> &accessL);
+
         /**
          * Return parents' id in current level.
          * @param n
