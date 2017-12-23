@@ -1,4 +1,4 @@
-prefix=/home/zhaocheng/k2tree/K2Tree/thirdparty/libsdsl
+prefix=/home/zhaocheng/K2Tree/thirdparty/libsdsl
 exec_prefix=${prefix}
 libdir=${prefix}/lib
 includedir=${prefix}/include

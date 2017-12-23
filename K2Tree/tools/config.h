@@ -9,6 +9,8 @@
 #include <cstdlib>
 #include <tuple>
 #include <iostream>
+#include <gflags/gflags.h>
+
 using ::std::string;
 using ::std::tuple;
 using ::std::cout;
@@ -28,6 +30,8 @@ const string INDOCHINA_PATH = "/mnt/disk1/zhaocheng/dataset/indochina-2004/k2tre
 const string INDOCHINA_FILE = TWITTER_PATH + "../indochina-2004.csv";
 const size_t INDOCHINA_NODE_NUM = 7414866;
 const size_t INDOCHINA_EDGE_NUM = 194109311;
+
+
 
 tuple<string, string, size_t, size_t, int, int, int, int> get_args(int argc, char** argv) {
     int flag = 1;

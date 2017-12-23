@@ -180,7 +180,6 @@ namespace libk2tree {
                 return hash_fn(si.u << 11) ^ hash_fn(si.v);
             }
         };
-        /*
         bool submat_info_cmp(const submat_info &lhs, const submat_info &rhs) {
             auto x = lhs.u, y = lhs.v;
             auto a = rhs.u, b = rhs.v;
@@ -195,14 +194,14 @@ namespace libk2tree {
             }
             return x < a || (x == a && y < b);
         }
-        */
+        /*
         bool submat_info_cmp(const submat_info &lhs, const submat_info &rhs) {
             auto x = lhs.u, y = lhs.v;
             auto a = rhs.u, b = rhs.v;
             auto level = height_;
             auto k = which_k(level);
             //auto k_log = static_cast<uint32_t>(std::log(k));
-            const uint32_t k_log = 3;
+            const uint32_t k_log = 2;
             while ((x >> k_log) != (a >> k_log) || (y >> k_log) != (b >> k_log)) {
                 x >>= k_log;
                 y >>= k_log;
@@ -213,6 +212,7 @@ namespace libk2tree {
             }
             return x < a || (x == a && y < b);
         }
+        */
 
         // <pos, submat>
         typedef unordered_map<submat_pos, bit_vector> pos_submat;
@@ -279,7 +279,7 @@ namespace libk2tree {
          * @param children Result of children.
          * @param accessL Function that access position pos in L or compressL.
          */
-        void get_child_(size_t n, size_t p, size_t q, llong pos, int level,
+        void get_child_(size_t n, size_t p, size_t q, int64_t pos, int level,
                         vector<size_t> &children,
                         const std::function<int(llong)> &accessL
         );
@@ -400,8 +400,8 @@ namespace libk2tree {
         bit_vector T_;
         bit_vector L_;
 
-        uint64_t t_size_;
-        uint64_t l_size_;
+        int64_t t_size_;
+        int64_t l_size_;
 
         vector<bit_vector> tree_bitmap_;
 

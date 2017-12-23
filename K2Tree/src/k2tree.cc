@@ -133,9 +133,7 @@ size_t k2tree::edge_num() {
     return edge_num_;
 }
 
-//void libk2tree::k2tree::build_from_edge_array_csv(const edge_array &edges) {
 void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const uint64_t size) {
-    // TODO
     using Key = submat_info;
 
     using Value = uint64_t;
@@ -163,18 +161,11 @@ void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const uint64_
         });
 
         std::cerr << "Boost::block_sort edge array: " << std::endl;
-        //std::sort(layer_queue.begin(), layer_queue.end(), [=](const kv& lhs, const kv& rhs) {
         boost::sort::block_indirect_sort(layer_queue.begin(), layer_queue.end(),
                                          [=](const kv& lhs, const kv& rhs) {
             return submat_info_cmp(lhs.first, rhs.first);
         });
 
-        /*
-        for (int i = 0; i < 100; ++i) {
-          fprintf(stderr, "<%u, %u>: %ul\n", layer_queue[i].first.u,
-                  layer_queue[i].first.v, layer_queue[i].second);
-        }
-        */
     };
 
     utils::cost(load_edge);
@@ -182,14 +173,15 @@ void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const uint64_
 
     std::vector<bit_vector> bs(height_);
     auto build_k2tree = [&](uint32_t l) {
+        auto k = which_k(l+1);
         utils::cost([&](){
             std::cerr << "Contraction layer queue: ";
             async::parallel_for(async::irange(0ul, layer_queue.size()), [&](int i) {
-                uint32_t s = layer_queue[i].first.u / 8,
-                     t = layer_queue[i].first.v / 8;
-                uint32_t sr = layer_queue[i].first.u % 8,
-                     tr = layer_queue[i].first.v % 8;
-                auto bit = 1ul << (sr*8+tr);
+                uint32_t s = layer_queue[i].first.u / k,
+                     t = layer_queue[i].first.v / k;
+                uint32_t sr = layer_queue[i].first.u % k,
+                     tr = layer_queue[i].first.v % k;
+                auto bit = 1ul << (sr*k+tr);
                 layer_queue[i] = {submat_info(s, t), bit};
             });
         });
@@ -197,7 +189,6 @@ void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const uint64_
         utils::cost([&]() {
             std::cerr << "Merging old queue to new queue: ";
             auto _key = layer_queue[0].first;
-            //std::optional<Key> _key;
             auto c = layer_queue.begin();
             for (auto v : layer_queue) {
                 if (v.first == _key) {
@@ -207,7 +198,6 @@ void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const uint64_
                     _key = v.first;
                 }
             }
-            std::cerr << "Before shrink queue. Queue size: " << layer_queue.size() << " ";
             layer_queue.resize(c-layer_queue.begin()+1);
         });
 
@@ -218,11 +208,15 @@ void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const uint64_
 
         utils::cost([&]() {
             std::cerr << "Concatenating bitmap: ";
-            bs[l].resize(layer_queue.size() * 64);
-            auto d = bs[l].data();
-            async::parallel_for(async::irange(0ul, layer_queue.size()), [&](int i) {
-                d[i] = layer_queue[i].second;
-            });
+            bs[l].resize(layer_queue.size() * k*k);
+            for (int i = 0; i < layer_queue.size(); ++i) {
+                for (int j = 0; j < k*k; ++j)
+                    bs[l][i*k*k+j] = (layer_queue[i].second >> j)&1;
+            };
+            // auto d = bs[l].data();
+            // async::parallel_for(async::irange(0ul, layer_queue.size()), [&](int i) {
+            //    d[i] = layer_queue[i].second;
+            // })
         });
     };
 
@@ -239,14 +233,19 @@ void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const uint64_
     auto compact_bitmaps = [&]() {
         std::cerr << "Compacting bitmaps: ";
         size_t size = 0;
+        level_pos.resize(height_-1);
+        uint64_t idx = 0;
         for (auto b : bs) {
+            level_pos[idx++] = b.size();
             size += b.size();
         }
         T_.resize(size);
-        auto d = T_.data();
+        idx = 0;
         for (auto b : bs) {
-            memcpy((char*)d, (char*)b.data(), b.size() / 8);
-            d += b.size() / 64;
+            //memcpy((char*)d, (char*)b.data(), b.size() / 8);
+            //d += b.size() / 64;
+            for (auto bit: b)
+                T_[idx++] = bit;
         }
     };
     utils::cost(compact_bitmaps);
@@ -254,11 +253,9 @@ void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const uint64_
         std::cerr << "Building rank: ";
         build_rank_support();
     });
-    utils::cost([&]() {
-        std::cerr << "Split T_: ";
-        split_T();
-    });
     std::cerr << level_pos << std::endl;
+    t_size_ = T_.size();
+    l_size_ = L_.size();
 }
 
 void libk2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string &path, const int &write_flag) {
@@ -426,25 +423,24 @@ void libk2tree::k2tree::merge_tree_bitmap() {
 }
 
 void k2tree::split_T() {
+    std::cerr << "rank(T_).size(): " << t_rank.size() << std::endl;
     level_pos.resize(height_-1);
     level_pos[0] = k1_*k1_;
     // Run start from level 2.
-    int level = 2;
     uint64_t t_size = static_cast<uint64_t>(k1_*k1_);
     size_t tmp_rank = 0;
-    for (; level < height_; ++level) {
-        auto k = which_k(level);
+    for (int level = 1; level < height_-1; ++level) {
+        auto k = which_k(level+1);
         auto current_rank = rank(t_size-1);
-        level_pos[level-1] = (current_rank - tmp_rank)*k*k;
+        level_pos[level] = (current_rank - tmp_rank)*k*k;
         tmp_rank = current_rank;
-        t_size+=level_pos[level-1];
+        t_size+=level_pos[level];
     }
 }
 
 void k2tree::build_rank_support() {
-    assert(T_.size() != 0 && L_.size() != 0);
+    assert(T_.size() != 0);
     t_rank = rank_support_v<1>(&T_);
-    //l_rank = rank_support_v<1>(&L_);
 }
 
 size_t libk2tree::k2tree::rank(llong pos) {
@@ -500,53 +496,43 @@ bool k2tree::check_link(size_t p, size_t q) {
                        [=](llong pos){ return L_[pos]; });
 }
 
-void k2tree::get_child_(size_t n, size_t p, size_t q, llong pos, int level,
+void k2tree::get_child_(size_t n, size_t p, size_t q, int64_t pos, int level,
                         vector<size_t> & children, const std::function<int(llong)> &accessL) {
-    if (pos >= static_cast<llong>(t_size_+l_size_)) {
+    auto a = 0;
+    if (n == 1)
+        a = 1;
+    if (pos >= t_size_+l_size_) {
         std::cerr << "Position is bigger than k2tree." << std::endl;
         exit(1);
     }
-    if (pos >= static_cast<llong>(t_size_)) { // Leaf
+    if (pos >= t_size_) { // Leaf
         if(accessL(pos-t_size_)) {
             children.push_back(++q);
         }
     } else {
-        if (pos == -1 or T_[pos] == 1) {
+        if (pos == -1 || T_[pos] == 1) {
             if (level < k1_levels_) {
-                //  int k = which_k(level);
-                //  auto n_div_k = n/k;
-                //  auto y = rank(pos) * k*k + p/n_div_k*k;
+                auto k = which_k(level);
+                auto n_div_k = n/k;
+                auto y = rank(pos) * k*k + p/n_div_k*k;
 
-                // TODO WARNING: THIS CODE IS ONLY USED IN 888.
-                auto n_div_k = n >> 3; //
-                auto y = (rank(pos) << 6) + (p/n_div_k << 3); //
-                //  y += (p/n_div_k << 3); //
-                //for (int j = 0; j < k; ++j) {
-                for (int j = 0; j < 8; ++j) {
+                for (int j = 0; j < k; ++j) {
                     get_child_(n_div_k, p%n_div_k, q+n_div_k*j, y+j, level+1, children, accessL);
                 }
-                // async::parallel_for(async::irange(0, 8), [&](int j) {
-                //     get_child_(n_div_k, p%n_div_k, q+n_div_k*j, y+j, level+1, children, accessL);
-                // });
             } else {
-                int delimiter = (level == height_-1)?level:k1_levels_;
+                auto delimiter = (level == height_-1)?level:k1_levels_;
                 uint64_t tmp_pos = 0ul;
                 for (int i = 0; i < delimiter-1; ++i)
                     tmp_pos += level_pos[i];
-                //  int k = which_k(level+1);
-                //  auto n_div_k = n/k;
-                //  auto y = tmp_pos+level_pos[delimiter-1]
-                //      +(rank(pos-1)-rank(tmp_pos-1))*k*k
-                //      +p/n_div_k*k;
+                auto k = which_k(level+1);
+                auto n_div_k = n/k;
+                auto y = tmp_pos+level_pos[delimiter-1]
+                        +(rank(pos-1)-rank(tmp_pos-1))*k*k
+                        +p/n_div_k*k;
 
-                // WARNING: THIS CODE IS ONLY USED IN 888.
-                auto n_div_k = n >> 3; //
-                auto y = tmp_pos + level_pos[delimiter-1] + ((rank(pos-1)-rank(tmp_pos-1)) << 6) + (p/n_div_k << 3);
-                //for (int j = 0; j < k; ++j) {
-                for (int j = 0; j < 8; ++j) {
+                for (int j = 0; j < k; ++j) {
                     get_child_(n_div_k, p%n_div_k, q+n_div_k*j, y+j, level+1, children, accessL);
                 }
-                // TODO END WARNING
             }
         }
     }
@@ -557,11 +543,10 @@ void k2tree::get_child_(size_t p, vector<size_t> &children,
     uint8_t level = 1;
     auto k = which_k(level);
     uint64_t n = n_prime_/k;
-    uint64_t row = p/n;
-    uint64_t pos = row*k;
-    async::parallel_for(async::irange(0, k), [&](int j) {
+    uint64_t pos = p/n*k;
+    for (int j = 0; j < k; ++j) {
         get_child_(n, p%n, n*j, pos+j, level, children, accessL);
-    });
+    }
 }
 
 vector<size_t> k2tree::get_children(size_t p) {
@@ -569,7 +554,7 @@ vector<size_t> k2tree::get_children(size_t p) {
     get_child_(n_prime_, --p, 0, -1, 0, children,
                [=](llong pos){return L_[pos];});
 
-    //get_child_(n_prime_, children, [=](llong pos){return L_[pos];});
+    //get_child_(--p, children, [=](llong pos){return L_[pos];});
     return children;
 }
 

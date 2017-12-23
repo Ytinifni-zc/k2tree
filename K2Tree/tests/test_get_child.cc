@@ -59,19 +59,21 @@ TEST(GetChild, twitter) {
           kt->get_children(_n);
           //size_100 += kt->get_children(_n).size();
     });
-    bit_vector ttt;
-    utils::cost([&](){
-            std::cerr << "ttt = kt.T_ \t";
-            ttt = kt->T();
-            });
+    //bit_vector ttt;
+    //utils::cost([&](){
+    //        std::cerr << "ttt = kt.T_ \t";
+    //        ttt = kt->T();
+    //        });
+    /*
     utils::cost([&]() {
         //int cnt = 0;
         std::cerr << "Find " << rand_size << " node's children. \t";
         for (auto _n : rand_10000)
-          //kt->get_children(_n);
-          (ttt[_n]==1);
+          kt->get_children(_n);
+          //(ttt[_n]==1);
           //size_10000 += kt->get_children(_n).size();
-    }, "us");
+    });
+    */
 }
 
 TEST(GetChild, indochina) {
@@ -116,14 +118,12 @@ TEST(GetChild, indochina) {
           kt->get_children(_n);
           //size_100 += kt->get_children(_n).size();
     });
-    /*
     utils::cost([&]() {
         std::cerr << "Find " << rand_size << " node's children. \t";
         for (auto _n : rand_10000)
           kt->get_children(_n);
           //size_10000 += kt->get_children(_n).size();
     });
-    */
 }
 
 TEST(GetChild, twitter0_kl4) {

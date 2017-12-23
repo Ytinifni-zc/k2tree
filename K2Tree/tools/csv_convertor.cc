@@ -8,7 +8,16 @@
 #include <utils/time.cc>
 #include "config.h"
 
+DEFINE_bool(big_menu, true, "Include 'advanced' options in the menu listing");
+DEFINE_string(languages, "english,french,german",
+                "comma-separated list of languages to offer in the 'lang' menu");
+
 int main(int argc, char** argv) {
+
+    google::ParseCommandLineFlags(&argc, &argv, true);
+    cout << "argc=" << argc << endl;
+    cout << "big menu is " << FLAGS_languages << endl;
+    cout << "languages is " << FLAGS_languages << endl;
 
     string path;
     string filename;

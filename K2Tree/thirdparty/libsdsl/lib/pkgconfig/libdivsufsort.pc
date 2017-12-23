@@ -1,7 +1,7 @@
-prefix=/home/zhaocheng/k2tree/K2Tree/thirdparty/libsdsl
+prefix=/home/zhaocheng/K2Tree/thirdparty/libsdsl
 exec_prefix=${prefix}
-libdir=/home/zhaocheng/k2tree/K2Tree/thirdparty/libsdsl/lib
-includedir=/home/zhaocheng/k2tree/K2Tree/thirdparty/libsdsl/include
+libdir=/home/zhaocheng/K2Tree/thirdparty/libsdsl/lib
+includedir=/home/zhaocheng/K2Tree/thirdparty/libsdsl/include
 
 Name: libdivsufsort
 Description: A lightweight suffix sorting library

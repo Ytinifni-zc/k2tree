@@ -25,11 +25,13 @@ include_directories(${THIRDPARTY}/libsdsl/include)
 include_directories(${THIRDPARTY}/dacs/include)
 include_directories(${THIRDPARTY}/asyncplusplus/include)
 include_directories(${THIRDPARTY}/boost/include)
+include_directories(${THIRDPARTY}/gflags/include)
 #include_directories(${libsdsl_INCLUDE_DIRS})
 
 link_directories(${THIRDPARTY}/libsdsl/lib)
 link_directories(${THIRDPARTY}/dacs/lib)
 link_directories(${THIRDPARTY}/asyncplusplus/lib)
+link_directories(${THIRDPARTY}/gflags/lib)
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   # require at least gcc 4.8
@@ -46,7 +48,7 @@ else()
 endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -O3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC")#" -Ofast")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ")#-Wall -Wconversion -Wsign-conversion")
 
 add_subdirectory(tests)

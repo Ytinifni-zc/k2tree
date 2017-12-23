@@ -20,7 +20,6 @@ TEST(vector_test, int_vector) {
     ASSERT_EQ(size_in_bytes(v), 17);
 }
 
-/*
 TEST(vector_test, int_vector2) {
     int_vector<> v(10*(1<<20));
     for (size_t i=0; i<10; ++i)
@@ -72,7 +71,6 @@ TEST(vector_test, bit_write_json) {
     sd_vector<> sdb(b);
     write_structure<JSON_FORMAT>(sdb, cout);
 }
- */
 
 TEST(vector_test, bit_rank) {
     bit_vector b = bit_vector(8000, 0);
