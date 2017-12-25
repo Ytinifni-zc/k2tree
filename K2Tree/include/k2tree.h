@@ -362,6 +362,12 @@ namespace libk2tree {
         vector<size_t> get_parents(size_t q);
 
         /**
+         * BFS of this graph. Node label start from 1.
+         * @param node Start node of BFS, -1 means BFS starts from a random node.
+         */
+        void BFS(size_t node=1);
+
+        /**
          * Using the rank function from sdsl::rank_support_v.
          * rank(k) equals number of 1 in T||L[0, k]
          * @param pos Position in T||L.

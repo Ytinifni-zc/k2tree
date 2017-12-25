@@ -15,6 +15,22 @@ void show_children(const vector<size_t> &children) {
     cout << endl;
 }
 
+TEST(GetChild, test_csv) {
+
+    auto kt = read_test_graph();
+    const vector<size_t> children9 = {7, 10};
+    const vector<size_t> children2 = {3, 4, 5};
+    const vector<size_t> children10 = {7, 9, 11};
+    const vector<size_t> parents9 = {10};
+    const vector<size_t> parents7 = {8, 9, 10, 11};
+    ASSERT_EQ(kt->get_children(9), children9);
+    ASSERT_EQ(kt->get_children(2), children2);
+    ASSERT_EQ(kt->get_children(10), children10);
+    ASSERT_EQ(kt->get_parents(9), parents9);
+    ASSERT_EQ(kt->get_parents(7), parents7);
+
+}
+
 TEST(GetChild, twitter) {
     shared_ptr<k2tree> kt;
     utils::cost([&](){
@@ -79,7 +95,7 @@ TEST(GetChild, twitter) {
 TEST(GetChild, indochina) {
     shared_ptr<k2tree> kt;
     utils::cost([&](){
-        kt = read_indochina();
+        kt = read_indochina(4, 4, 1, 4);
     });
     utils::cost([&](){
         auto _n = 10000;
@@ -141,19 +157,6 @@ TEST(GetChild, twitter0_kl4) {
 }
 
 /*
-TEST(GetChild, test_csv) {
-
-    const string path = "./k2tree/";
-    const size_t node_num = 11;
-    libk2tree::k2tree kt(2, 2, 1, 2, node_num, path, libk2tree::read_T);
-
-    utils::cost([&](){
-    show_children(kt.get_children(9));
-      }, "us");
-    show_children(kt.get_parents(9));
-
-}
-
 TEST(GetChild, test_csv_kl4) {
 
     const string path = "./k2tree/kl4/";

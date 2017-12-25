@@ -1,0 +1,142 @@
+[
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_vector_bool.dir/test_vector_bool.cc.o -c /home/zhaocheng/K2Tree/tests/test_vector_bool.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_vector_bool.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_tree_partition.dir/test_tree_partition.cc.o -c /home/zhaocheng/K2Tree/tests/test_tree_partition.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_tree_partition.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_read_tree.dir/test_read_tree.cc.o -c /home/zhaocheng/K2Tree/tests/test_read_tree.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_read_tree.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_rank.dir/test_rank.cc.o -c /home/zhaocheng/K2Tree/tests/test_rank.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_rank.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_k2tree.dir/test_main.cc.o -c /home/zhaocheng/K2Tree/tests/test_main.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_main.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_bit_vector.dir/test_bit_vector.cc.o -c /home/zhaocheng/K2Tree/tests/test_bit_vector.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_bit_vector.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_bfs.dir/test_bfs.cc.o -c /home/zhaocheng/K2Tree/tests/test_bfs.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_bfs.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_build_from_edge_array.dir/test_build_from_edge_array.cc.o -c /home/zhaocheng/K2Tree/tests/test_build_from_edge_array.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_build_from_edge_array.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_dacs.dir/test_dacs.cc.o -c /home/zhaocheng/K2Tree/tests/test_dacs.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_dacs.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_check_link.dir/test_check_link.cc.o -c /home/zhaocheng/K2Tree/tests/test_check_link.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_check_link.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_get_child.dir/test_get_child.cc.o -c /home/zhaocheng/K2Tree/tests/test_get_child.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_get_child.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_sdsl_k2tree.dir/test_sdsl_k2tree.cc.o -c /home/zhaocheng/K2Tree/tests/test_sdsl_k2tree.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_sdsl_k2tree.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_k2tree_compressed.dir/test_k2tree_compressed.cc.o -c /home/zhaocheng/K2Tree/tests/test_k2tree_compressed.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_k2tree_compressed.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_read_compressed_tree.dir/test_read_compressed_tree.cc.o -c /home/zhaocheng/K2Tree/tests/test_read_compressed_tree.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_read_compressed_tree.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tests",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tests   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/test_merge_level.dir/test_merge_level.cc.o -c /home/zhaocheng/K2Tree/tests/test_merge_level.cc",
+  "file": "/home/zhaocheng/K2Tree/tests/test_merge_level.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/src",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/k2tree.dir/compression/hash.cc.o -c /home/zhaocheng/K2Tree/src/compression/hash.cc",
+  "file": "/home/zhaocheng/K2Tree/src/compression/hash.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/src",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/k2tree.dir/compression/vocabulary.cc.o -c /home/zhaocheng/K2Tree/src/compression/vocabulary.cc",
+  "file": "/home/zhaocheng/K2Tree/src/compression/vocabulary.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/src",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/k2tree.dir/k2tree.cc.o -c /home/zhaocheng/K2Tree/src/k2tree.cc",
+  "file": "/home/zhaocheng/K2Tree/src/k2tree.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/src",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/k2tree.dir/k2tree_compressed.cc.o -c /home/zhaocheng/K2Tree/src/k2tree_compressed.cc",
+  "file": "/home/zhaocheng/K2Tree/src/k2tree_compressed.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/src",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/k2tree.dir/k2tree_partition.cc.o -c /home/zhaocheng/K2Tree/src/k2tree_partition.cc",
+  "file": "/home/zhaocheng/K2Tree/src/k2tree_partition.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/src",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/k2tree.dir/utils/bit_vector.cc.o -c /home/zhaocheng/K2Tree/src/utils/bit_vector.cc",
+  "file": "/home/zhaocheng/K2Tree/src/utils/bit_vector.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/src",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/k2tree.dir/utils/file.cc.o -c /home/zhaocheng/K2Tree/src/utils/file.cc",
+  "file": "/home/zhaocheng/K2Tree/src/utils/file.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/src",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/k2tree.dir/utils/time.cc.o -c /home/zhaocheng/K2Tree/src/utils/time.cc",
+  "file": "/home/zhaocheng/K2Tree/src/utils/time.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/src",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/k2tree.dir/utils/utils.cc.o -c /home/zhaocheng/K2Tree/src/utils/utils.cc",
+  "file": "/home/zhaocheng/K2Tree/src/utils/utils.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tools",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tools   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/read_bin.dir/read_bin.cc.o -c /home/zhaocheng/K2Tree/tools/read_bin.cc",
+  "file": "/home/zhaocheng/K2Tree/tools/read_bin.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tools",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tools   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/csv_partition.dir/csv_partition.cc.o -c /home/zhaocheng/K2Tree/tools/csv_partition.cc",
+  "file": "/home/zhaocheng/K2Tree/tools/csv_partition.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tools",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tools   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/csv_convertor.dir/csv_convertor.cc.o -c /home/zhaocheng/K2Tree/tools/csv_convertor.cc",
+  "file": "/home/zhaocheng/K2Tree/tools/csv_convertor.cc"
+},
+{
+  "directory": "/home/zhaocheng/K2Tree/_build/tools",
+  "command": "/home/zhaocheng/local/bin/g++   -I/home/zhaocheng/K2Tree/thirdparty/gtest/include -I/home/zhaocheng/K2Tree/include -I/home/zhaocheng/K2Tree/src -I/home/zhaocheng/K2Tree/thirdparty/libsdsl/include -I/home/zhaocheng/K2Tree/thirdparty/dacs/include -I/home/zhaocheng/K2Tree/thirdparty/asyncplusplus/include -I/home/zhaocheng/K2Tree/thirdparty/boost/include -I/home/zhaocheng/K2Tree/thirdparty/gflags/include -I/home/zhaocheng/K2Tree/tools   -std=c++11 -fPIC -Ofast -O3 -DNDEBUG   -std=gnu++11 -o CMakeFiles/csv2csr.dir/csv2csr.cc.o -c /home/zhaocheng/K2Tree/tools/csv2csr.cc",
+  "file": "/home/zhaocheng/K2Tree/tools/csv2csr.cc"
+}
+]

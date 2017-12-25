@@ -1,6 +1,7 @@
 //
 // Created by inFinity on 2017/11/7.
 //
+
 #include <k2tree.h>
 #include <utils/sort.h>
 #include <utils/file.h>
@@ -10,6 +11,7 @@
 #include <atomic>
 #include <boost/sort/sort.hpp>
 #include <algorithm>
+#include <queue>
 
 using std::ifstream;
 using std::ofstream;
@@ -602,3 +604,40 @@ vector<size_t> k2tree::get_parents(size_t q) {
     return parents;
 }
 
+void libk2tree::k2tree::BFS(size_t node) {
+    if (node == -1) {
+        node = std::rand()%node_num_ + 1;
+    }
+    std::vector<bool> is_visited(node_num_, false);
+    std::queue<size_t> q;
+
+    for (int i = 0; i < node_num_; ++i) {
+
+        auto s = i+node;
+        if (s > node_num_) s -= node_num_;
+        if (is_visited[s-1]) continue;
+        is_visited[s-1] = true;
+        q.push(s);
+
+        while(!q.empty()) {
+            s = q.front();
+            q.pop();
+
+            auto adj = get_children(s);
+            for (auto child: adj) {
+                if (!is_visited[child-1]) {
+                    is_visited[child-1] = true;
+                    q.push(child);
+                }
+            }
+        }
+    }
+
+    std::cerr << "Unvisited: ";
+    for (int i = 0; i < node_num_; ++i) {
+        if (!is_visited[i])
+            std::cerr << i+1 << " ";
+    }
+    std::cerr << std::endl;
+
+}
