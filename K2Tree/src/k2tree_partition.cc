@@ -9,6 +9,8 @@
 #include <utils/file.h>
 #include <unordered_map>
 #include <algorithm>
+#include <async++.h>
+#include <iostream>
 
 using std::cout;
 using std::endl;
@@ -115,3 +117,40 @@ void libk2tree::k2tree_partition::merge_part_tree_bitmap() {
     part_tree_bitmap_.shrink_to_fit();
 
 }
+
+libk2tree::k2tree_edge_partition::k2tree_edge_partition(int k0, vector<config> configures):k0_(k0) {
+    assert(configures.size() == k0*k0);
+    k2tree_parts.resize(k0_*k0_);
+    for (int i = 0; i < k0*k0; ++i) {
+        k2tree_parts[i] = std::make_shared<k2tree>(
+                std::get<0>(configures[i]),
+                std::get<1>(configures[i]),
+                std::get<2>(configures[i]),
+                std::get<3>(configures[i]),
+                std::get<4>(configures[i]),
+                std::get<5>(configures[i])
+        );
+    }
+}
+
+libk2tree::k2tree_edge_partition::k2tree_edge_partition(int k0, vector<shared_ptr<k2tree>> kp)
+    :k0_(k0), k2tree_parts(kp) {
+}
+
+
+void libk2tree::k2tree_edge_partition::build_from_edge_arrays(vector<int(*)[2]> edge_lists,
+        vector<uint64_t> size_list) {
+    assert(edge_lists.size() == k0_*k0_);
+    assert(size_list.size() == k0_*k0_);
+    /*
+    for (int i = 0; i < k0_*k0_; ++i) {
+        std::cerr << "=========build " << i << "=========";
+        k2tree_parts[i]->build_from_edge_array_csv(edge_lists[i], size_list[i]);
+    }
+    */
+    async::parallel_for(async::irange(0, k0_*k0_), [&](int i){
+        std::cerr << "=========build " << i << "=========" << std::endl;
+        k2tree_parts[i]->build_from_edge_array_csv(edge_lists[i], size_list[i]);
+    });
+}
+

@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
     size_t node_num, edge_num;
     int k0;
     if (argc <= 2) {
-        path = TWITTER_PATH + "../k2tree_partition/";
+        path = TWITTER_PATH + "../partition/";
         filename = TWITTER_FILE;
         out_file = path + "twitter";
         node_num = TWITTER_NODE_NUM;
@@ -45,8 +45,8 @@ int main(int argc, char** argv) {
         vector<int> fouts_line_num(k0 * k0, 0);
 
         for (int i = 0; i < k0; ++i) {
-            string of = out_file + std::to_string(i) + ".csv";
-            fouts[i].open(of, std::ios::out | std::ios::trunc);
+            string of = out_file + std::to_string(i) + ".bin";
+            fouts[i].open(of, ofstream::binary);
             assert(!fouts[i].fail());
         }
 
@@ -73,7 +73,7 @@ int main(int argc, char** argv) {
                 for (int i = last_block_row * k0; i < u / cell * k0; ++i) {
                     fouts[i].close();
                     if (i + k0 < k0 * k0) {
-                        string of = out_file + std::to_string(i + k0) + ".csv";
+                        string of = out_file + std::to_string(i + k0) + ".bin";
                         fouts[i + k0].open(of, std::ios::out);
                         assert(!fouts[i + k0].fail());
                     }
@@ -81,7 +81,9 @@ int main(int argc, char** argv) {
             }
             last_block_row = u / cell;
 
-            fouts[idx] << new_u << "\t" << new_v << endl;
+            //fouts[idx] << new_u << "\t" << new_v << endl;
+            fouts[idx].write((char*)&new_u, sizeof(new_u));
+            fouts[idx].write((char*)&new_v, sizeof(new_v));
             fouts_line_num[idx]++;
 
             if (!((size_t) line_num % 1000000)) {

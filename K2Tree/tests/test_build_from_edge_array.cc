@@ -31,6 +31,7 @@ TEST(BuildFromEdgeArray, test1) {
       data = static_cast<int(*)[2]>(ptr);
 
       cnt = fileSize / 8;
+      close(fd);
       in.close();
   });
   k2tree tree(k1, k2, k1_levels, kL, node_num, edge_num);

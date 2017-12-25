@@ -6,6 +6,7 @@
 #define K2TREE_K2TREE_PARTITION_H
 
 #include <k2tree.h>
+#include <tuple>
 
 namespace libk2tree {
     class k2tree_partition: public k2tree {
@@ -30,6 +31,20 @@ namespace libk2tree {
 
         vector<vector<bit_vector> > part_tree_bitmap_;
 
+    };
+
+    using config=std::tuple<int, int, int, int, size_t, size_t>;
+
+    class k2tree_edge_partition {
+    public:
+        k2tree_edge_partition(int k0, vector<config> configures);
+
+        k2tree_edge_partition(int k0, vector<std::shared_ptr<k2tree>> kp);
+
+        void build_from_edge_arrays(vector<int (*)[2]> edge_lists, vector<uint64_t> size_list);
+    private:
+        int k0_;
+        vector<std::shared_ptr<k2tree> > k2tree_parts;
     };
 }
 

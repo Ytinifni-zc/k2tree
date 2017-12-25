@@ -31,6 +31,9 @@ namespace libk2tree {
 
     class k2tree {
     public:
+
+        friend class k2tree_parts;
+
         /**
          * Constructor of the basic infomation of k2tree.
          * @param k1_
@@ -366,6 +369,13 @@ namespace libk2tree {
          * @param node Start node of BFS, -1 means BFS starts from a random node.
          */
         void BFS(size_t node=1);
+
+        /**
+         *
+         * DFS of this graph. Node label start from 1.
+         * @param node Start node of DFS, -1 means BFS starts from a random node.
+         */
+        void DFS(size_t node=1);
 
         /**
          * Using the rank function from sdsl::rank_support_v.
