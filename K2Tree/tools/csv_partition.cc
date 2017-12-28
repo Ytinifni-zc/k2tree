@@ -1,19 +1,18 @@
 //
 // Created by inFinity on 2017/11/16.
 //
-#include <stdlib.h>
+#include <cstdlib>
 #include <fstream>
 #include <vector>
 #include <cmath>
 #include <cassert>
 #include <utils/time.h>
 #include <utils/time.cc>
-#include <stdio.h>
+#include <cstdio>
+#include <k2tree.h>
 #include "config.h"
 
-using ::std::ifstream;
-using ::std::ofstream;
-using ::std::vector;
+using namespace std;
 
 int main(int argc, char** argv) {
 
@@ -100,6 +99,58 @@ int main(int argc, char** argv) {
 
     };
 
-    libk2tree::utils::cost(part);
+    //libk2tree::utils::cost(part);
+
+    auto part_from_bin = [=]() {
+        int (*data)[2];
+        long cnt = 0;
+        utils::cost([&](){
+            std::cerr << "Load edge array from bin: ";
+            std::string filename = TWITTER_PATH + "../twitter-2010-2.bin";
+            std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
+            long fileSize = in.tellg();
+            int fd = open(filename.c_str(), O_RDONLY, 0);
+            if (fd == -1) {
+                perror("open failed.");
+                exit(1);
+            }
+            void* ptr = mmap(0, fileSize, PROT_READ, MAP_PRIVATE, fd, 0);
+            if (ptr == MAP_FAILED) {
+                perror("mmap failed.");
+                exit(1);
+            }
+            data = static_cast<int(*)[2]>(ptr);
+
+            cnt = fileSize / 8;
+            close(fd);
+            in.close();
+        });
+        std::cerr << "Count of twitter: " << cnt << endl;
+
+        int k0 = 128;
+        auto cell = static_cast<int>(ceil(
+                static_cast<double>(node_num) / k0)
+        );
+        vector<vector<pair<int, int>>> part_array;
+        part_array.resize(k0*k0);
+        for (int i = 0; i < cnt; ++i) {
+            auto u = data[i][0] - 1, v = data[i][1] -1;
+            if (u == 2 && v == -1) continue;
+            auto part = u/cell*k0+v/cell;
+            part_array[part].push_back({u%cell+1, v%cell+1});
+        }
+
+        for (int i = 0; i < k0*k0; ++i) {
+            string of = out_file + std::to_string(i) + ".bin";
+            ofstream out(of, ofstream::binary);
+            for (auto p: part_array[i]) {
+                out.write((char*)&p.first, sizeof(p.first));
+                out.write((char*)&p.second, sizeof(p.second));
+            }
+            out.close();
+        }
+    };
+
+    libk2tree::utils::cost(part_from_bin);
     return 0;
 }

@@ -3,6 +3,7 @@
 //
 
 #include <gtest/gtest.h>
+#include <algorithm>
 #include "tests_utils.h"
 
 using namespace libk2tree;
@@ -15,20 +16,67 @@ void show_children(const vector<size_t> &children) {
     cout << endl;
 }
 
-TEST(GetChild, test_csv) {
+//TEST(GetChild, test_csv) {
+//
+//    auto kt = read_test_graph();
+//    const vector<size_t> children9 = {7, 10};
+//    const vector<size_t> children2 = {3, 4, 5};
+//    const vector<size_t> children10 = {7, 9, 11};
+//    const vector<size_t> parents9 = {10};
+//    const vector<size_t> parents7 = {8, 9, 10, 11};
+//    ASSERT_EQ(kt->get_children(9), children9);
+//    ASSERT_EQ(kt->get_children(2), children2);
+//    ASSERT_EQ(kt->get_children(10), children10);
+//    ASSERT_EQ(kt->get_parents(9), parents9);
+//    ASSERT_EQ(kt->get_parents(7), parents7);
+//
+//}
 
-    auto kt = read_test_graph();
-    const vector<size_t> children9 = {7, 10};
-    const vector<size_t> children2 = {3, 4, 5};
-    const vector<size_t> children10 = {7, 9, 11};
-    const vector<size_t> parents9 = {10};
-    const vector<size_t> parents7 = {8, 9, 10, 11};
-    ASSERT_EQ(kt->get_children(9), children9);
-    ASSERT_EQ(kt->get_children(2), children2);
-    ASSERT_EQ(kt->get_children(10), children10);
-    ASSERT_EQ(kt->get_parents(9), parents9);
-    ASSERT_EQ(kt->get_parents(7), parents7);
+TEST(GetChild, twitter_partition) {
+    shared_ptr<k2tree_edge_partition> kep;
+    utils::cost([&](){
+        std::cerr << "Load partition twitter dataset: ";
+        kep = read_k2tree_partition();
+    });
 
+    utils::cost([=]() {
+        auto most_degree = 5000000;
+        std::cerr << most_degree << "=> { ";
+        std::cerr << kep->get_children(most_degree) << " } \t";
+    }, "us");
+
+    utils::cost([=]() {
+        auto most_degree = 100000;
+        std::cerr << most_degree << "=> { ";
+        std::cerr << kep->get_children(most_degree) << " } \t";
+    }, "us");
+
+    utils::cost([=]() {
+        auto most_degree = 23934134;
+        std::cerr << most_degree << "=> {...}.size(): ";
+        std::cerr << kep->get_children(most_degree).size() << "\t";
+    }, "us");
+
+    shared_ptr<node_bucket> nb;
+    utils::cost([&]() {
+        std::cerr << "Load node bucket: ";
+        nb = read_node_bucket();
+    });
+
+    auto find_children = [=](int num, int len) {
+        num = std::min(num, (int)(*nb)[len].size()-1);
+        std::cerr << "Find " << num << "(" << len << ")'s children: ";
+        for (int i = 0; i < num; ++i) {
+            auto p = (*nb)[len][i];
+            //if (len == 1) std::cerr << "#[" << p << "]# ";
+            kep->get_children(p);
+        }
+    };
+
+    utils::cost(std::bind(find_children, 10000, 1));
+    utils::cost(std::bind(find_children, 10000, 10));
+    utils::cost(std::bind(find_children, 10000, 100));
+    utils::cost(std::bind(find_children, 10000, 1000));
 }
 
 TEST(GetChild, twitter) {
@@ -44,7 +92,7 @@ TEST(GetChild, twitter) {
     }, "us");
 
     utils::cost([=]() {
-        auto most_degree = 100000;
+        auto most_degree = 1;
         std::cerr << most_degree << "=> { ";
         std::cerr << kt->get_children(most_degree) << " } \t";
     }, "us");
@@ -55,41 +103,27 @@ TEST(GetChild, twitter) {
         std::cerr << kt->get_children(most_degree).size() << "\t";
     }, "us");
 
-    auto rand_size = 100000;
-    auto r100 = 100;
-    vector<int> rand_100, rand_10000;
+    shared_ptr<node_bucket> nb;
     utils::cost([&]() {
-        std::cerr << "Generate rand node vector(100 and 10000). \t";
-        rand_100.resize(r100);
-        rand_10000.resize(rand_size);
-        for (int i = 0; i < rand_size; ++i) {
-          if(i < r100) rand_100[i] = std::rand() % TWITTER_NODE_NUM;
-          rand_10000[i] = std::rand() % TWITTER_NODE_NUM;
-        }
+        std::cerr << "Load node bucket: ";
+        nb = read_node_bucket();
     });
 
-    auto size_100 = 0, size_10000 = 0;
-    utils::cost([&]() {
-        std::cerr << "Find 100 node's children. \t";
-        for (auto _n : rand_100)
-          kt->get_children(_n);
-          //size_100 += kt->get_children(_n).size();
-    });
-    //bit_vector ttt;
-    //utils::cost([&](){
-    //        std::cerr << "ttt = kt.T_ \t";
-    //        ttt = kt->T();
-    //        });
-    /*
-    utils::cost([&]() {
-        //int cnt = 0;
-        std::cerr << "Find " << rand_size << " node's children. \t";
-        for (auto _n : rand_10000)
-          kt->get_children(_n);
-          //(ttt[_n]==1);
-          //size_10000 += kt->get_children(_n).size();
-    });
-    */
+    auto find_children = [=](int num, int len) {
+        num = std::min(num, (int)(*nb)[len].size()-1);
+        std::cerr << "Find " << num << "(" << len << ")'s children: ";
+        for (int i = 0; i < num; ++i) {
+            auto p = (*nb)[len][i];
+            if (len == 1000) std::cerr << "#[" << p << "]# ";
+            kt->get_children(p);
+        }
+    };
+
+    utils::cost(std::bind(find_children, 10000, 1));
+    utils::cost(std::bind(find_children, 10000, 10));
+    utils::cost(std::bind(find_children, 10000, 100));
+    utils::cost(std::bind(find_children, 10000, 1000));
+
 }
 
 TEST(GetChild, indochina) {
@@ -134,12 +168,14 @@ TEST(GetChild, indochina) {
           kt->get_children(_n);
           //size_100 += kt->get_children(_n).size();
     });
+    /*
     utils::cost([&]() {
         std::cerr << "Find " << rand_size << " node's children. \t";
         for (auto _n : rand_10000)
           kt->get_children(_n);
           //size_10000 += kt->get_children(_n).size();
     });
+    */
 }
 
 TEST(GetChild, twitter0_kl4) {

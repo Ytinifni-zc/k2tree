@@ -32,7 +32,7 @@ namespace libk2tree {
     class k2tree {
     public:
 
-        friend class k2tree_parts;
+        friend class k2tree_edge_partition;
 
         /**
          * Constructor of the basic infomation of k2tree.
@@ -352,8 +352,8 @@ namespace libk2tree {
 
         /**
          * Return children array of node p.
-         * @param p
-         * @return
+         * @param p Start from 1.
+         * @return Array of children.
          */
         vector<size_t> get_children(size_t p);
 
@@ -429,6 +429,11 @@ namespace libk2tree {
          * Length of each level in T, aka Tl.
          */
         vector<llong> level_pos;
+
+        /**
+         * Skip List of each node.
+         */
+        vector<vector<uint32_t>> skip_list;
     };
 }
 

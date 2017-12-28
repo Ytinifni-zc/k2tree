@@ -48,6 +48,7 @@ else()
 endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -Ofast")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ")#-Wall -Wconversion -Wsign-conversion")
 

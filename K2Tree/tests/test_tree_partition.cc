@@ -33,11 +33,12 @@ TEST(partition_k2tree, build) {
     vector<int(*)[2]> edge_lists(k0*k0);
     vector<uint64_t> size_list(k0*k0);
     vector<libk2tree::config> configures(k0*k0);
+    std::string path = TWITTER_PARTITION_PATH;
 
     for (int i = 0; i < k0*k0; ++i)
         utils::cost([&](){
             std::cerr << "Load edge lists from bin " << i << ": ";
-            std::string filename = TWITTER_PATH + "../partition/twitter"
+            std::string filename = path + "../twitter"
                     + std::to_string(i) + ".bin";
             std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
             long fileSize = in.tellg();
@@ -63,5 +64,9 @@ TEST(partition_k2tree, build) {
     libk2tree::k2tree_edge_partition kep(k0, configures);
     utils::cost([&](){
         kep.build_from_edge_arrays(edge_lists, size_list);
+    });
+    utils::cost([&](){
+        std::cerr << "Store to file." << std::endl;
+        kep.save(path);
     });
 }

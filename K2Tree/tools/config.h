@@ -25,6 +25,7 @@ const string TWITTER_PATH = "/mnt/disk1/zhaocheng/dataset/twitter-2010/k2tree/";
 const string TWITTER_FILE = TWITTER_PATH + "../twitter-2010.csv";
 const size_t TWITTER_NODE_NUM = 41652230;
 const size_t TWITTER_EDGE_NUM = 1468365182;
+const string TWITTER_PARTITION_PATH = TWITTER_PATH + "../partition/k2tree/";
 
 const string INDOCHINA_PATH = "/mnt/disk1/zhaocheng/dataset/indochina-2004/k2tree/";
 const string INDOCHINA_FILE = TWITTER_PATH + "../indochina-2004.csv";

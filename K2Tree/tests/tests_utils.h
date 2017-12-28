@@ -6,11 +6,14 @@
 #define K2TREE_TESTS_UTILS_H
 
 #include <k2tree_compressed.h>
+#include <k2tree_partition.h>
+#include <unordered_map>
 #include <utils/time.h>
 #include <utils/time.cc>
 #include "../tools/config.h"
 
 using namespace libk2tree;
+using ::std::unordered_map;
 
 const uint64_t TWITTER_P_NODE_NUM = 325409;
 const uint64_t TWITTER_P0_EDGE_NUM = 578756;
@@ -105,6 +108,32 @@ shared_ptr<k2tree> read_test_graph(int k1=2, int k2=2, int k1_levels=1, int kL=2
     shared_ptr<k2tree> tree = std::make_shared<k2tree>(k1, k2, k1_levels, kL, node_num, edge_num);
     tree->build_from_edge_array_csv(test_graph_edges, edge_num);
     return tree;
+}
+
+shared_ptr<k2tree_edge_partition> read_k2tree_partition(const string &path=TWITTER_PARTITION_PATH) {
+    return std::make_shared<k2tree_edge_partition>(path);
+}
+
+// K-V: <length of successor list, node list>
+typedef unordered_map<int, vector<int>> node_bucket;
+const string node_bucket_path = TWITTER_PATH + "../succs/";
+
+shared_ptr<node_bucket> read_node_bucket(const string &path=node_bucket_path) {
+    auto ret = std::make_shared<node_bucket>();
+    vector<int> lengths = {1, 2, 3, 4, 5, 10, 30, 100, 1000, 10000};
+    for (auto l: lengths){
+        string filename = path+"succs"+std::to_string(l)+".txt";
+        vector<int> v;
+        ifstream in(filename, std::ios::in);
+        for(;!in.eof();) {
+            int n = 0;
+            in >> n;
+            v.push_back(n);
+        }
+        in.close();
+        ret->insert({l, v});
+    }
+    return ret;
 }
 
 #endif //K2TREE_TESTS_UTILS_H

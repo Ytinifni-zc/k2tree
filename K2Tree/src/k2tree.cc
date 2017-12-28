@@ -32,8 +32,6 @@ libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node
         edge_num_(edge_num_), T_(T_), L_(L_)
 {
     set_tree_unit();
-    t_size_ = T_.size();
-    l_size_ = L_.size();
 }
 
 libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_, size_t node_num_,
@@ -114,8 +112,6 @@ libk2tree::k2tree::k2tree(int k1_, int k2_, int k1_levels_, int kL_,
         build_rank_support();
         split_T();
     }
-    t_size_ = T_.size();
-    l_size_ = L_.size();
     //edge_num_ = l_rank(L_.size());
 }
 
@@ -256,8 +252,6 @@ void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const uint64_
         build_rank_support();
     });
     std::cerr << level_pos << std::endl;
-    t_size_ = T_.size();
-    l_size_ = L_.size();
 }
 
 void libk2tree::k2tree::build_from_edge_array_csv(const string &csv_f, const string &path, const int &write_flag) {
@@ -425,7 +419,7 @@ void libk2tree::k2tree::merge_tree_bitmap() {
 }
 
 void k2tree::split_T() {
-    std::cerr << "rank(T_).size(): " << t_rank.size() << std::endl;
+    //std::cerr << "rank(T_).size(): " << t_rank.size() << std::endl;
     level_pos.resize(height_-1);
     level_pos[0] = k1_*k1_;
     // Run start from level 2.
@@ -442,6 +436,8 @@ void k2tree::split_T() {
 
 void k2tree::build_rank_support() {
     assert(T_.size() != 0);
+    t_size_ = T_.size();
+    l_size_ = L_.size();
     t_rank = rank_support_v<1>(&T_);
 }
 

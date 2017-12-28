@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <async++.h>
 #include <iostream>
+#include <fstream>
 
 using std::cout;
 using std::endl;
@@ -118,7 +119,8 @@ void libk2tree::k2tree_partition::merge_part_tree_bitmap() {
 
 }
 
-libk2tree::k2tree_edge_partition::k2tree_edge_partition(int k0, vector<config> configures):k0_(k0) {
+libk2tree::k2tree_edge_partition::k2tree_edge_partition(int k0, vector<config> configures):
+    k0_(k0), configures_(configures) {
     assert(configures.size() == k0*k0);
     k2tree_parts.resize(k0_*k0_);
     for (int i = 0; i < k0*k0; ++i) {
@@ -133,8 +135,8 @@ libk2tree::k2tree_edge_partition::k2tree_edge_partition(int k0, vector<config> c
     }
 }
 
-libk2tree::k2tree_edge_partition::k2tree_edge_partition(int k0, vector<shared_ptr<k2tree>> kp)
-    :k0_(k0), k2tree_parts(kp) {
+libk2tree::k2tree_edge_partition::k2tree_edge_partition(int k0, vector<config> configures, vector<shared_ptr<k2tree>> kp)
+    :k0_(k0), configures_(configures), k2tree_parts(kp) {
 }
 
 
@@ -154,3 +156,60 @@ void libk2tree::k2tree_edge_partition::build_from_edge_arrays(vector<int(*)[2]> 
     });
 }
 
+vector<size_t> libk2tree::k2tree_edge_partition::get_children(size_t p) {
+    vector<size_t> ret;
+    vector<vector<size_t>> rets;
+    rets.resize(k0_);
+    auto cell = std::get<4>(configures_.front());
+    auto row = p/cell;
+    auto part_pos = (p-1)%cell+1; // Start from 1.
+    async::parallel_for(async::irange(row*k0_, (row+1)*k0_), [&](int i) {
+        rets[i-row*k0_] = k2tree_parts[i]->get_children(part_pos);
+    });
+
+    for (int i = 0; i < k0_; ++i) {
+        for (int j = 0; j < rets[i].size(); ++j) {
+            rets[i][j] += cell*i;
+        }
+        ret.insert(ret.end(), rets[i].begin(), rets[i].end());
+    }
+    return ret;
+}
+
+void libk2tree::k2tree_edge_partition::save(std::string path) {
+    std::ofstream out(path+"configure", std::ofstream::binary);
+    out.write((char*)&k0_, sizeof(k0_));
+    for (auto c: configures_)
+        out.write((char*)&c, sizeof(c));
+    out.close();
+
+    for (int i = 0; i < k2tree_parts.size(); ++i) {
+        sdsl::store_to_file(k2tree_parts[i]->T(), path+"T"+std::to_string(i)+".bin");
+        sdsl::store_to_file(k2tree_parts[i]->L(), path+"L"+std::to_string(i)+".bin");
+    }
+}
+
+libk2tree::k2tree_edge_partition::k2tree_edge_partition(const std::string &path) {
+    auto config_filename = path+"configure";
+    std::ifstream in(config_filename, std::ifstream::binary);
+    in.read((char*)&k0_, sizeof(k0_));
+    configures_.resize(k0_*k0_);
+    k2tree_parts.resize(k0_*k0_);
+
+    for (int i = 0; i < k0_*k0_; ++i) {
+        in.read((char*)&configures_[i], sizeof(configures_[i]));
+        k2tree_parts[i] = std::make_shared<k2tree>(
+            std::get<0>(configures_[i]),
+            std::get<1>(configures_[i]),
+            std::get<2>(configures_[i]),
+            std::get<3>(configures_[i]),
+            std::get<4>(configures_[i]),
+            std::get<5>(configures_[i])
+        );
+        sdsl::load_from_file(k2tree_parts[i]->T_, path+"T"+std::to_string(i)+".bin");
+        sdsl::load_from_file(k2tree_parts[i]->L_, path+"L"+std::to_string(i)+".bin");
+        k2tree_parts[i]->build_rank_support();
+        k2tree_parts[i]->split_T();
+    }
+    in.close();
+}
