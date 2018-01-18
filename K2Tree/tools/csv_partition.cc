@@ -99,8 +99,6 @@ int main(int argc, char** argv) {
 
     };
 
-    //libk2tree::utils::cost(part);
-
     auto part_from_bin = [=]() {
         int (*data)[2];
         long cnt = 0;
@@ -151,6 +149,7 @@ int main(int argc, char** argv) {
         }
     };
 
-    libk2tree::utils::cost(part_from_bin);
+    libk2tree::utils::cost(part);
+    //libk2tree::utils::cost(part_from_bin);
     return 0;
 }

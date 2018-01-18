@@ -136,4 +136,51 @@ shared_ptr<node_bucket> read_node_bucket(const string &path=node_bucket_path) {
     return ret;
 }
 
+shared_ptr<k2tree> build_k2tree_from_edge_array(const string &dataset, const int &k1=8,
+        const int &k2=8, const int &k1_levels=1, const int &kL=8) {
+    assert(dataset=="twitter" || dataset=="indochina");
+
+    int node_num = INDOCHINA_NODE_NUM, edge_num = INDOCHINA_EDGE_NUM;
+    string filename = INDOCHINA_PATH + "../indochina-2004.bin";
+    string save_t = INDOCHINA_PATH, save_l = INDOCHINA_PATH;
+    if (dataset == "twitter") {
+        node_num = TWITTER_NODE_NUM, edge_num = TWITTER_EDGE_NUM;
+        filename = TWITTER_PATH + "../twitter-2010-2.bin";
+        save_t = TWITTER_PATH;
+        save_l = TWITTER_PATH;
+    }
+    save_t += std::to_string(k1) + std::to_string(k2) + std::to_string(kL) + ".bin";
+    save_l += std::to_string(k1) + std::to_string(k2) + std::to_string(kL) + ".bin";
+    int (*data)[2];
+    long cnt;
+    utils::cost([&](){
+        std::cerr << "Load edge array from bin: ";
+        std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
+        long fileSize = in.tellg();
+        int fd = open(filename.c_str(), O_RDONLY, 0);
+        if (fd == -1) {
+            perror("open failed.");
+            exit(1);
+        }
+        void* ptr = mmap(0, fileSize, PROT_READ, MAP_PRIVATE, fd, 0);
+        if (ptr == MAP_FAILED) {
+            perror("mmap failed.");
+            exit(1);
+        }
+        data = static_cast<int(*)[2]>(ptr);
+
+        cnt = fileSize / 8;
+        close(fd);
+        in.close();
+    });
+    auto ret = std::make_shared<k2tree>(k1, k2, k1_levels, kL, node_num, edge_num);
+    ret->build_from_edge_array_csv(data, cnt);
+    utils::cost([&](){
+        std::cerr << "Store to file." << std::endl;
+        sdsl::store_to_file(ret->T(), save_t);
+        sdsl::store_to_file(ret->L(), save_l);
+    });
+    return ret;
+}
+
 #endif //K2TREE_TESTS_UTILS_H

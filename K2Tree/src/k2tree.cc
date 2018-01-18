@@ -608,7 +608,6 @@ void libk2tree::k2tree::BFS(size_t node) {
     std::queue<size_t> q;
 
     for (int i = 0; i < node_num_; ++i) {
-
         auto s = i+node;
         if (s > node_num_) s -= node_num_;
         if (is_visited[s-1]) continue;

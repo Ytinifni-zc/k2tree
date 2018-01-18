@@ -58,7 +58,7 @@ TEST(partition_k2tree, build) {
             close(fd);
             in.close();
 
-            configures[i] = std::make_tuple(8, 8, 1, 8, 325409, size_list[i]);
+            configures[i] = std::make_tuple(2, 2, 1, 8, 325409, size_list[i]);
         });
 
     libk2tree::k2tree_edge_partition kep(k0, configures);

@@ -68,7 +68,6 @@ TEST(GetChild, twitter_partition) {
         std::cerr << "Find " << num << "(" << len << ")'s children: ";
         for (int i = 0; i < num; ++i) {
             auto p = (*nb)[len][i];
-            //if (len == 1) std::cerr << "#[" << p << "]# ";
             kep->get_children(p);
         }
     };
@@ -77,6 +76,7 @@ TEST(GetChild, twitter_partition) {
     utils::cost(std::bind(find_children, 10000, 10));
     utils::cost(std::bind(find_children, 10000, 100));
     utils::cost(std::bind(find_children, 10000, 1000));
+    utils::cost(std::bind(find_children, 10000, 10000));
 }
 
 TEST(GetChild, twitter) {
@@ -114,7 +114,6 @@ TEST(GetChild, twitter) {
         std::cerr << "Find " << num << "(" << len << ")'s children: ";
         for (int i = 0; i < num; ++i) {
             auto p = (*nb)[len][i];
-            if (len == 1000) std::cerr << "#[" << p << "]# ";
             kt->get_children(p);
         }
     };
@@ -123,6 +122,7 @@ TEST(GetChild, twitter) {
     utils::cost(std::bind(find_children, 10000, 10));
     utils::cost(std::bind(find_children, 10000, 100));
     utils::cost(std::bind(find_children, 10000, 1000));
+    utils::cost(std::bind(find_children, 10000, 10000));
 
 }
 

@@ -995,6 +995,7 @@ class int_vector_iterator : public int_vector_iterator_base<t_int_vector>
 
         reference operator[](difference_type i) const
         {
+            std::cerr << "[###find###]" << std::endl;
             return *(*this + i);
         }
 
