@@ -8,6 +8,7 @@ _build/*
 #libsdsl/*
 .DS_Store
 cmake-build-debug/*
+tags
 
 # Prerequisites
 *.d

@@ -5,6 +5,7 @@ build/*
 _build/*
 .DS_Store
 cmake-build-debug/*
+tags
 
 # Prerequisites
 *.d
