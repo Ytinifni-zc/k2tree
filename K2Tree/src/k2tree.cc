@@ -149,7 +149,7 @@ void libk2tree::k2tree::build_from_edge_array_csv(int (*edges)[2], const uint64_
         std::atomic<int> max_label;
         max_label = 0;
         async::parallel_for(async::irange(0ul, size), [&](int i) {
-            int local_max = std::max(edges[i][0], edges[i][1]);
+        int local_max = std::max(edges[i][0], edges[i][1]);
             int global_max = max_label.load(std::memory_order_relaxed);
             do {
                 if (global_max >= local_max) break;

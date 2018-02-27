@@ -12,6 +12,7 @@ TEST(BuildFromEdgeArray, indochina) {
     ASSERT_EQ(tree->get_children(10000), children10000);
 }
 
+/*
 TEST(BuildFromEdgeArray, twitter2214) {
     auto tree = build_k2tree_from_edge_array("twitter", 2, 2, 1, 4);
     const vector<size_t> children1 = {41652230};
@@ -27,3 +28,4 @@ TEST(BuildFromEdgeArray, twitter2218) {
     ASSERT_EQ(tree->get_children(1), children1);
     ASSERT_EQ(tree->get_children(5000000), children5000000);
 }
+*/

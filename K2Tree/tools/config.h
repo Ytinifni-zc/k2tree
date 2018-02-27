@@ -32,6 +32,9 @@ const string INDOCHINA_FILE = TWITTER_PATH + "../indochina-2004.csv";
 const size_t INDOCHINA_NODE_NUM = 7414866;
 const size_t INDOCHINA_EDGE_NUM = 194109311;
 
+const string UK2007_PATH = "/mnt/disk3/zhaocheng/uk-2007-05/";
+const size_t UK2007_NODE_NUM = 105896555;
+const size_t UK2007_EDGE_NUM = 3738733648;
 
 
 tuple<string, string, size_t, size_t, int, int, int, int> get_args(int argc, char** argv) {

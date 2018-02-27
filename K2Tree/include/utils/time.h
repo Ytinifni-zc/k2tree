@@ -11,7 +11,7 @@ namespace libk2tree {
     namespace utils {
         /**
          * Calculate runtime of a function
-         * @tparam L lambda expression
+         * @param L lambda expression
          * @param lambda lambda expression
          * @param unit computation unit. Must be ms or s.
          */
